@@ -30,6 +30,43 @@ const ball = {
 const el_ball = document.getElementById("ball")
 
 
+const block = [
+    [0, 4, 4],                           [ 0, 8, 4], [ 0, 9, 4], [ 0,10, 4],    [ 0,12, 4],
+    [1, 4, 4],                           [ 1, 8, 4], [ 1, 9, 4], [ 1,10, 4],    [ 1,12, 4],
+    [2, 4, 4],                           [ 2, 8, 4], [ 2, 9, 4], [ 2,10, 4],    [ 2,12, 4],
+    [3, 4, 4],            [ 3, 6, 4],    [ 3, 8, 4],             [ 3,10, 4],    [ 3,12, 4],             [ 3,14, 4],
+    [4, 4, 4],            [ 4, 6, 4],    [ 4, 8, 4],             [ 4,10, 4],    [ 4,12, 4],             [ 4,14, 4],
+    [5, 4, 4],            [ 5, 6, 4],    [ 5, 8, 4],             [ 5,10, 4],    [ 5,12, 4],             [ 5,14, 4],
+    [6, 4, 4], [6, 5, 4], [ 6, 6, 4],    [ 6, 8, 4],             [ 6,10, 4],    [ 6,12, 4], [ 6,13, 4], [ 6,14, 4],
+    [7, 4, 4], [7, 5, 4], [ 7, 6, 4],    [ 7, 8, 4],             [ 7,10, 4],    [ 7,12, 4], [ 7,13, 4], [ 7,14, 4],
+    [8, 4, 4], [8, 5, 4], [ 8, 6, 4],    [ 8, 8, 4],             [ 8,10, 4],    [ 8,12, 4], [ 8,13, 4], [ 8,14, 4],
+                          [ 9, 6, 4],    [ 9, 8, 4],             [ 9,10, 4],                            [ 9,14, 4],
+                          [10, 6, 4],    [10, 8, 4],             [10,10, 4],                            [10,14, 4],
+                          [11, 6, 4],    [11, 8, 4],             [11,10, 4],                            [11,14, 4],
+                          [12, 6, 4],    [12, 8, 4], [12, 9, 4], [12,10, 4],                            [12,14, 4],
+                          [13, 6, 4],    [13, 8, 4], [13, 9, 4], [13,10, 4],                            [13,14, 4],
+                          [14, 6, 4],    [14, 8, 4], [14, 9, 4], [14,10, 4],                            [14,14, 4],
+    
+    ]
+    
+    let id = 0;
+    block.forEach( bl => {
+        const el = document.createElement("div");
+        bl[3] = id;
+        el.id = id
+        id++;
+        el.style.top = bl[0]*15+150 + "px";
+        el.style.left = bl[1]*50 + "px";
+        let color;
+        if (bl[2] == 1) color = "yellow";
+        if (bl[2] == 2) color = "green";
+        if (bl[2] == 3) color = "red";
+        if (bl[2] == 4) color = "blue";
+        el.classList.add("block", color);
+        el_playfield.appendChild(el);
+        
+    })
+
 
 function collision() {
 
@@ -61,38 +98,28 @@ function collision() {
             ) {
                 ball.speedY = Math.abs(ball.speedY) * -1;
             }
+
+
+            for (let i = 0; i < block.length; i++){
+                if (                    
+                    ball.topEdge <= block[i][0]*15+165 &&
+                    ball.topEdge >= block[i][0]*15+150 - ball.size &&
+                    ball.leftEdge >= block[i][1]*50 - ball.size    &&
+                    ball.leftEdge <= block[i][1]*50
+                ){
+                    block[i][2]--;
+                    let color;
+                    if (block[i][2] == 1) color = "yellow";
+                    if (block[i][2] == 2) color = "green";
+                    if (block[i][2] == 3) color = "red";
+                    if (block[i][2] == 4) color = "blue";
+                    document.getElementById(block[i][3]).classList.add(color)
+                }
+            }
         
 }
 
-const block = [
-[0, 4, "blue"],                                  [ 0, 8, "blue"],  [ 0, 9, "blue"], [ 0,10, "blue"], [ 0,12, "blue"],
-[1, 4, "blue"],                                  [ 1, 8, "blue"],  [ 1, 9, "blue"], [ 1,10, "blue"], [ 1,12, "blue"],
-[2, 4, "blue"],                                  [ 2, 8, "blue"],  [ 2, 9, "blue"], [ 2,10, "blue"], [ 2,12, "blue"],
-[3, 4, "blue"],                 [ 3, 6, "blue"], [ 3, 8, "blue"],                   [ 3,10, "blue"], [ 3,12, "blue"],                  [ 3,14, "blue"],
-[4, 4, "blue"],                 [ 4, 6, "blue"], [ 4, 8, "blue"],                   [ 4,10, "blue"], [ 4,12, "blue"],                  [ 4,14, "blue"],
-[5, 4, "blue"],                 [ 5, 6, "blue"], [ 5, 8, "blue"],                   [ 5,10, "blue"], [ 5,12, "blue"],                  [ 5,14, "blue"],
-[6, 4, "blue"], [6, 5, "blue"], [ 6, 6, "blue"], [ 6, 8, "blue"],                   [ 6,10, "blue"], [ 6,12, "blue"], [ 6,13, "blue"], [ 6,14, "blue"],
-[7, 4, "blue"], [7, 5, "blue"], [ 7, 6, "blue"], [ 7, 8, "blue"],                   [ 7,10, "blue"], [ 7,12, "blue"], [ 7,13, "blue"], [ 7,14, "blue"],
-[8, 4, "blue"], [8, 5, "blue"], [ 8, 6, "blue"], [ 8, 8, "blue"],                   [ 8,10, "blue"], [ 8,12, "blue"], [ 8,13, "blue"], [ 8,14, "blue"],
-                                [ 9, 6, "blue"], [ 9, 8, "blue"],                   [ 9,10, "blue"],                                   [ 9,14, "blue"],
-                                [10, 6, "blue"], [10, 8, "blue"],                   [10,10, "blue"],                                   [10,14, "blue"],
-                                [11, 6, "blue"], [11, 8, "blue"],                   [11,10, "blue"],                                   [11,14, "blue"],
-                                [12, 6, "blue"], [12, 8, "blue"],  [12, 9, "blue"], [12,10, "blue"],                                   [12,14, "blue"],
-                                [13, 6, "blue"], [13, 8, "blue"],  [13, 9, "blue"], [13,10, "blue"],                                   [13,14, "blue"],
-                                [14, 6, "blue"], [14, 8, "blue"],  [14, 9, "blue"], [14,10, "blue"],                                   [14,14, "blue"],
 
-]
-
-
-block.forEach( bl => {
-    console.log(bl)
-    const el = document.createElement("div");
-    el.classList.add("block", bl[2]);
-
-    el.style.top = bl[0]*15+50 + "px";
-    el.style.left = bl[1]*50 + "px";
-    el_playfield.appendChild(el);
-})
 
 
 

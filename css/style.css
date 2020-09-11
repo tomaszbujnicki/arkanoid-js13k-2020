@@ -14,7 +14,7 @@ body {
 #game {
 	width: 1280px;
 	height: 720px;
-	background-color: lightgoldenrodyellow;
+	background-color: black;
 	border-style: double;
 	border-color: blue;
 	border-width: 10px;
@@ -61,9 +61,9 @@ body {
 .red{
 	background-color:red
 }
-.yellow{
-	background-color:yellow
-}
 .green{
 	background-color:green
+}
+.yellow{
+	background-color:yellow
 }
