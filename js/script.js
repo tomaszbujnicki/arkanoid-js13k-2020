@@ -8,9 +8,9 @@ const playfield = {
 const el_playfield = document.getElementById("playfield");
 
 const paddle = {
-    speed: 10,
+    speed: 20,
     height: 10,
-    width: 100,
+    width: 200,
     topEdge: 670,
     leftEdge: 500
 }
@@ -20,10 +20,10 @@ const el_paddle = document.getElementById("paddle")
 
 
 const ball = {
-    speedX: 5,
-    speedY: 5,
+    speedX: -2,
+    speedY: 3,
     size: 10,
-    topEdge: 200,
+    topEdge: 100,
     leftEdge: 200
 }
 
@@ -97,23 +97,60 @@ function collision() {
                 ball.leftEdge <= paddle.leftEdge + paddle.width
             ) {
                 ball.speedY = Math.abs(ball.speedY) * -1;
+                if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) console.log("skrajna lewa");
+                else {
+                    if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) console.log("lewa");
+                    else {
+                        if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) console.log("skrajna prawa");
+                        else {
+                            if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) console.log("prawa");
+                            else {
+                                console.log("środek")
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+                
+                
+                
             }
 
-
             for (let i = 0; i < block.length; i++){
+                if (block[i] == undefined) continue;
                 if (                    
                     ball.topEdge <= block[i][0]*15+165 &&
-                    ball.topEdge >= block[i][0]*15+150 - ball.size &&
-                    ball.leftEdge >= block[i][1]*50 - ball.size    &&
-                    ball.leftEdge <= block[i][1]*50
+                    ball.topEdge + ball.size >= block[i][0]*15+150 &&
+                    ball.leftEdge + ball.size >= block[i][1]*50    &&
+                    ball.leftEdge <= block[i][1]*50 + 50
                 ){
+                    if (ball.leftEdge + ball.size - ball.speedX < block[i][1]*50     ) ball.speedX *= -1;
+                    else{if (ball.leftEdge - ball.speedX             > block[i][1]*50 + 50) ball.speedX *= -1;
+                        else{if (ball.topEdge - ball.speedY              > block[i][0]*15+165 ) ball.speedY *= -1;
+                            else{if (ball.topEdge + ball.size - ball.speedY  < block[i][0]*15+150 ) ball.speedY *= -1;
+                            }
+                        }
+                    }
+                    
+                    
+                    
+
                     block[i][2]--;
-                    let color;
-                    if (block[i][2] == 1) color = "yellow";
-                    if (block[i][2] == 2) color = "green";
-                    if (block[i][2] == 3) color = "red";
-                    if (block[i][2] == 4) color = "blue";
-                    document.getElementById(block[i][3]).classList.add(color)
+                    if (block[i][2] <= 0) {
+                        document.getElementById(block[i][3]).remove();
+                        delete block[i]
+                    }
+                    else{
+                        let color;
+                        if (block[i][2] == 1) color = "yellow";
+                        if (block[i][2] == 2) color = "green";
+                        if (block[i][2] == 3) color = "red";
+                        if (block[i][2] == 4) color = "blue";
+                        document.getElementById(block[i][3]).classList.add(color)
+                    }
+                    break;
                 }
             }
         
