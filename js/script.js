@@ -1,153 +1,54 @@
-const playfield = {
-    left: 5,
-    top: 5,
-    height: 700,
-    width: 1000,
-    rowHeight: 15,
-    columnWidth:50,
-    topPadding: 150
-}
-
-const el_playfield = document.getElementById("playfield");
+const playfield = {},
+      paddle = {},
+      ball = {},
+      el_playfield = document.getElementById("playfield"),
+      el_paddle = document.getElementById("paddle"),
+      el_ball = document.getElementById("ball");
 
 
 
-const paddle = {
-    speed: 10,
-    height: 10,
-    width: 200,
-    topEdge: 670,
-    leftEdge: 500
-}
-
-const el_paddle = document.getElementById("paddle")
-
-
-
-const ball = {
-    speedX: -2,
-    speedY: 2.5,
-    size: 10,
-    topEdge: 100,
-    leftEdge: 200,
-    maxSpeed: 10
-}
-
-const el_ball = document.getElementById("ball")
-
-function wallsCollisions (){
-        
-    if (ball.leftEdge > playfield.width - ball.size) {
-        ball.leftEdge = playfield.width - ball.size;
-        ball.speedX *= -1;
+function damageBlock(block, blockIndex) {
+    block.power--;
+    if ( block.power <= 0 ) {
+        removeBlock(block, blockIndex)
     }
-
-    if (ball.leftEdge < 0) {
-        ball.leftEdge = 0;
-        ball.speedX *= -1;
-    }
-
-    if (ball.topEdge < 0) {
-        ball.topEdge = 0;
-        ball.speedY *= -1;
-    }
-
-    if (ball.topEdge > playfield.height - ball.size) {
-        gameOver()
+    else{
+        const element = document.getElementById("block_" + block.id);
+        element.classList.add(getColor(block.power));
     }
 }
 
-function paddleCollisions() {
-    if (
-        ball.speedY > 0 &&
-        ball.topEdge  >= paddle.topEdge  - ball.size     &&
-        ball.topEdge  <= paddle.topEdge  + paddle.height &&
-        ball.leftEdge >= paddle.leftEdge - ball.size    &&
-        ball.leftEdge <= paddle.leftEdge + paddle.width
-    ) {
-        let a = 0;
-        
-        if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) {
-            a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4;               
-        }
-        else {
-            if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) {
-                a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8;   
-            }
-            else {
-                if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) {
-                    a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4 * -1;   
-                }
-                else {
-                    if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) {
-                    }
-                }
-            }
-        }
-        if (ball.speedX > 0) {
-            ball.speedY += a;
-            ball.speedX -= a
-        }
-        else{
-            ball.speedY -= a
-            ball.speedX -= a
-        }
-
-        if (ball.speedY < 1){
-            ball.speedY = 1;
-        }
-        if (ball.speedX < 0.2 && ball.speedX > -0.2){
-            ball.speedX < 0 ? ball.speedX = -0.2 : ball.speedX = 0.2
-        }
-         
-        ball.speedY = Math.abs(ball.speedY) * -1;
-        
-    }
+function removeBlock(block, blockIndex) {
+    const element = document.getElementById("block_" + block.id);
+    element.remove();
+    blocks.splice(blockIndex,1)
 }
 
-function blockCollisions() {
-    
-    let blockIndex = 0;
-
-    for ( const block of blocks){
-        if (                    
-            ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
+function isBlockHit(block) {
+    return (ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
             ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
             ball.leftEdge + ball.size >= block.column * playfield.columnWidth    &&
-            ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth
-        ){
-            if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
-            else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
-                else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
-                    else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
-                    }
-                }
-            }
+            ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth)
+}
 
-
-            block.power--;
-            if ( block.power <= 0 ) {
-                console.log(block)
-                const element = document.getElementById("block_" + block.id);
-                element.remove();
-                blocks.splice(blockIndex,1)
-                console.log(blocks)
+function bounceBall(block) {
+    if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
+    else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
+        else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+            else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
             }
-            else{
-                const element = document.getElementById("block_" + block.id);
-                element.classList.add(getColor(block.power));
-            }
-            break;
         }
-        blockIndex++
     }
 }
+
     
 function increaseBallSpeed() {
+
     ball.speedY += 0.001
 } 
 
 function limitBallSpeed() {
+
     if (ball.speedX > ball.maxSpeed) ball.speedX = ball.maxSpeed;
     if (ball.speedX < -ball.maxSpeed) ball.speedX = -ball.maxSpeed;
     if (ball.speedY < -ball.maxSpeed) ball.speedY = -ball.maxSpeed;
@@ -155,25 +56,19 @@ function limitBallSpeed() {
     
 
 
-function collisions() {
 
-    wallsCollisions()
-    paddleCollisions()
-    blockCollisions()
-
-
-    
-}
             
 
 document.getElementById("start").addEventListener("click", gameStart, false)
 document.getElementById("restart").addEventListener("click", gameStart, false)
 
-function gameOver(){
+function gameOver() {
+
     document.getElementById("gameOver").classList.remove("none")
     document.getElementById("playfield").classList.add("none")
     pause = true;
 }
+
 const map_01 = [
     [0, 4, 4],                           [ 0, 8, 4], [ 0, 9, 4], [ 0,10, 4],    [ 0,12, 4],
     [1, 4, 4],                           [ 1, 8, 4], [ 1, 9, 4], [ 1,10, 4],    [ 1,12, 4],
@@ -193,6 +88,7 @@ const map_01 = [
     
 ]
 function getColor(number){
+
     switch(number) {
         case 0:
             return "none";
@@ -212,9 +108,12 @@ function getColor(number){
 let blocks = []
 
 function clearBlocks() {
+
     blocks = []
 }
+
 function fillBlocks() {
+
     for( let i = 0; i < map_01.length; i++ ){
         blocks[i] = {};
         blocks[i].id = i;
@@ -224,12 +123,14 @@ function fillBlocks() {
 	}
 }
 function clearPlayfield() {
+
     const elements_block = document.getElementsByClassName("block");
     for ( let i = 0; i < elements_block.length; i){
         elements_block[i].remove();
     }
 }
 function fillPlayfield() {
+
     for ( const block of blocks){
         const element = document.createElement("div");
         element.id = "block_" + block.id;
@@ -244,29 +145,16 @@ function fillPlayfield() {
 
 
 function gameStart() { 
+
     clearBlocks()
-    fillBlocks()
     clearPlayfield()
+    setInitialValue()
+    fillBlocks()
     fillPlayfield()
-
-    ball.speedX= -2;
-    ball.speedY= 3;
-    ball.size= 10;
-    ball.topEdge= 100;
-    ball.leftEdge= 200;
-
-    paddle.leftEdge= 500;
 
     document.getElementById("header").textContent="GAME OVER";
     
-    el_paddle.style.top   = paddle.topEdge  + "px";
-    el_paddle.style.width   = paddle.width  + "px";
-    el_paddle.style.height   = paddle.height  + "px";
-    el_paddle.style.left   = paddle.leftEdge  + "px";
-    el_ball.style.top      = ball.topEdge + "px";
-    el_ball.style.left     = ball.leftEdge + "px";
-    el_ball.style.width     = ball.size + "px";
-    el_ball.style.height     = ball.size + "px";
+    draw()
 
     document.getElementById("playfield").classList.remove("none")
     document.getElementById("menu").classList.add("none")
@@ -326,11 +214,38 @@ function moveBall() {
 
 function draw() {
 
+    el_paddle.style.top     = paddle.topEdge  + "px";
     el_paddle.style.width   = paddle.width  + "px";
-    el_paddle.style.left   = paddle.leftEdge  + "px";
+    el_paddle.style.height  = paddle.height  + "px";
+    el_paddle.style.left    = paddle.leftEdge  + "px";
 
-    el_ball.style.top      = ball.topEdge + "px";
-    el_ball.style.left     = ball.leftEdge + "px";
+    el_ball.style.top       = ball.topEdge + "px";
+    el_ball.style.left      = ball.leftEdge + "px";
     el_ball.style.width     = ball.size + "px";
-    el_ball.style.height     = ball.size + "px";
+    el_ball.style.height    = ball.size + "px";
+}
+
+function setInitialValue() {
+
+    ball.speedX =        -2;
+    ball.speedY =         2.7;
+    ball.size =          10;
+    ball.topEdge =      100;
+    ball.leftEdge =     200;
+    ball.maxSpeed =      10;
+
+    paddle.speed =       10;
+    paddle.height=       10;
+    paddle.width =      200;
+    paddle.topEdge =    670;
+    paddle.leftEdge =   500;
+
+    playfield.left =          5;
+    playfield.top =           5;
+    playfield.height =      700;
+    playfield.width =      1000;
+    playfield.rowHeight =    15;
+    playfield.columnWidth =  50;
+    playfield.topPadding =   150;
+    
 }
