@@ -2,7 +2,10 @@ const playfield = {
     left: 5,
     top: 5,
     height: 700,
-    width: 1000
+    width: 1000,
+    rowHeight: 15,
+    columnWidth:50,
+    topPadding: 150
 }
 
 const el_playfield = document.getElementById("playfield");
@@ -69,25 +72,17 @@ function collision() {
                 
                 if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) {
                     a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4;               
-                    console.log("skrajna lewa");
                 }
                 else {
                     if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) {
                         a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8;   
-                        console.log("lewa");
                     }
                     else {
                         if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) {
                             a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4 * -1;   
-                            console.log("skrajna prawa");
                         }
                         else {
                             if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) {
-                                a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8 * -1;   
-                                console.log("prawa");
-                            }
-                            else {
-                                console.log("środek")
                             }
                         }
                     }
@@ -106,44 +101,37 @@ function collision() {
                 if (ball.speedX < 0.2 && ball.speedX > -0.2){
                     ball.speedX < 0 ? ball.speedX = -0.2 : ball.speedX = 0.2
                 }
-                console.log(a, ball.speedX, ball.speedY)
                 ball.speedY = Math.abs(ball.speedY) * -1.01; 
                 if (ball.speedX > 10) ball.speedX = 10;
                 if (ball.speedX < -10) ball.speedX = -10;
                 if (ball.speedY < -10) ball.speedY = -10;
             }
 
-            for (let i = 0; i < block.length; i++){
-                if (block[i] == undefined) continue;
+            for ( const block of blocks){
+                console.log(block)
                 if (                    
-                    ball.topEdge <= block[i][0]*15+165 &&
-                    ball.topEdge + ball.size >= block[i][0]*15+150 &&
-                    ball.leftEdge + ball.size >= block[i][1]*50    &&
-                    ball.leftEdge <= block[i][1]*50 + 50
+                    ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
+                    ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
+                    ball.leftEdge + ball.size >= block.column * playfield.columnWidth    &&
+                    ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth
                 ){
-                    if (ball.leftEdge + ball.size - ball.speedX < block[i][1]*50     ) ball.speedX *= -1;
-                    else{if (ball.leftEdge - ball.speedX             > block[i][1]*50 + 50) ball.speedX *= -1;
-                        else{if (ball.topEdge - ball.speedY              > block[i][0]*15+165 ) ball.speedY *= -1;
-                            else{if (ball.topEdge + ball.size - ball.speedY  < block[i][0]*15+150 ) ball.speedY *= -1;
+                    if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
+                    else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
+                        else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+                            else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
                             }
                         }
                     }
-                    
-                    
-                    
 
-                    block[i][2]--;
-                    if (block[i][2] <= 0) {
-                        document.getElementById(block[i][3]).classList.add("none");
-                        delete block[i]
+                    block.power--;
+                    if ( block.power <= 0 ) {
+                        const element = document.getElementById("block_" + block.id);
+                        element.remove();
+                        delete block
                     }
                     else{
-                        let color;
-                        if (block[i][2] == 1) color = "yellow";
-                        if (block[i][2] == 2) color = "green";
-                        if (block[i][2] == 3) color = "red";
-                        if (block[i][2] == 4) color = "blue";
-                        document.getElementById(block[i][3]).classList.add(color)
+                        const element = document.getElementById("block_" + block.id);
+                        element.classList.add(getColor(block.power));
                     }
                     break;
                 }
@@ -159,7 +147,7 @@ function gameOver(){
     document.getElementById("playfield").classList.add("none")
     pause = true;
 }
-let block = [
+const map_01 = [
     [0, 4, 4],                           [ 0, 8, 4], [ 0, 9, 4], [ 0,10, 4],    [ 0,12, 4],
     [1, 4, 4],                           [ 1, 8, 4], [ 1, 9, 4], [ 1,10, 4],    [ 1,12, 4],
     [2, 4, 4],                           [ 2, 8, 4], [ 2, 9, 4], [ 2,10, 4],    [ 2,12, 4],
@@ -176,89 +164,66 @@ let block = [
                           [13, 6, 4],    [13, 8, 4], [13, 9, 4], [13,10, 4],                            [13,14, 4],
                           [14, 6, 4],    [14, 8, 4], [14, 9, 4], [14,10, 4],                            [14,14, 4],
     
-    ] 
-    let id = 0;
-    block.forEach( bl => {
-        const el = document.createElement("div");
-        bl[3] = id;
-        el.id = id
-        id++;
-        el.style.top = bl[0]*15+150 + "px";
-        el.style.left = bl[1]*50 + "px";
-        let color;
-        if (bl[2] == 1) color = "yellow";
-        if (bl[2] == 2) color = "green";
-        if (bl[2] == 3) color = "red";
-        if (bl[2] == 4) color = "blue";
-        el.classList.add("block", color);
-        el_playfield.appendChild(el);
-        
-    })
-    let blockCopy = [
-        [0, 4, 4],                           [ 0, 8, 4], [ 0, 9, 4], [ 0,10, 4],    [ 0,12, 4],
-        [1, 4, 4],                           [ 1, 8, 4], [ 1, 9, 4], [ 1,10, 4],    [ 1,12, 4],
-        [2, 4, 4],                           [ 2, 8, 4], [ 2, 9, 4], [ 2,10, 4],    [ 2,12, 4],
-        [3, 4, 4],            [ 3, 6, 4],    [ 3, 8, 4],             [ 3,10, 4],    [ 3,12, 4],             [ 3,14, 4],
-        [4, 4, 4],            [ 4, 6, 4],    [ 4, 8, 4],             [ 4,10, 4],    [ 4,12, 4],             [ 4,14, 4],
-        [5, 4, 4],            [ 5, 6, 4],    [ 5, 8, 4],             [ 5,10, 4],    [ 5,12, 4],             [ 5,14, 4],
-        [6, 4, 4], [6, 5, 4], [ 6, 6, 4],    [ 6, 8, 4],             [ 6,10, 4],    [ 6,12, 4], [ 6,13, 4], [ 6,14, 4],
-        [7, 4, 4], [7, 5, 4], [ 7, 6, 4],    [ 7, 8, 4],             [ 7,10, 4],    [ 7,12, 4], [ 7,13, 4], [ 7,14, 4],
-        [8, 4, 4], [8, 5, 4], [ 8, 6, 4],    [ 8, 8, 4],             [ 8,10, 4],    [ 8,12, 4], [ 8,13, 4], [ 8,14, 4],
-                              [ 9, 6, 4],    [ 9, 8, 4],             [ 9,10, 4],                            [ 9,14, 4],
-                              [10, 6, 4],    [10, 8, 4],             [10,10, 4],                            [10,14, 4],
-                              [11, 6, 4],    [11, 8, 4],             [11,10, 4],                            [11,14, 4],
-                              [12, 6, 4],    [12, 8, 4], [12, 9, 4], [12,10, 4],                            [12,14, 4],
-                              [13, 6, 4],    [13, 8, 4], [13, 9, 4], [13,10, 4],                            [13,14, 4],
-                              [14, 6, 4],    [14, 8, 4], [14, 9, 4], [14,10, 4],                            [14,14, 4],
-    ];
+]
+function getColor(number){
+    switch(number) {
+        case 0:
+            return "none";
+        case 1:
+            return "yellow";
+        case 2:
+            return "green";
+        case 3:
+            return "red";  
+        case 4:
+            return "blue";
+        default:
+            return "none";
+      } 
+}
 
-	
-	for(let i=0; i < block.length; i++){
-        blockCopy[i][3] = block[i][3];
+let blocks = []
+
+function clearBlocks() {
+    blocks = []
+}
+function fillBlocks() {
+    for( let i = 0; i < map_01.length; i++ ){
+        blocks[i] = {};
+        blocks[i].id = i;
+        blocks[i].row =  map_01[i][0];
+        blocks[i].column =  map_01[i][1];
+        blocks[i].power =  map_01[i][2];
 	}
+}
+function clearPlayfield() {
+    const elements_block = document.getElementsByClassName("block");
+    for ( const element of elements_block){
+        element.remove();
+    }
+}
+function fillPlayfield() {
+    for ( const block of blocks){
+        const element = document.createElement("div");
+        element.id = "block_" + block.id;
+        element.style.top = block.row*playfield.rowHeight+playfield.topPadding + "px";
+        element.style.left = block.column*playfield.columnWidth + "px";
+        element.classList.add("block", getColor(block.power));
+        el_playfield.appendChild(element);
+    }
+}
 
 
 
 
 function gameStart() { 
-    block = [
-        [0, 4, 4],                           [ 0, 8, 4], [ 0, 9, 4], [ 0,10, 4],    [ 0,12, 4],
-        [1, 4, 4],                           [ 1, 8, 4], [ 1, 9, 4], [ 1,10, 4],    [ 1,12, 4],
-        [2, 4, 4],                           [ 2, 8, 4], [ 2, 9, 4], [ 2,10, 4],    [ 2,12, 4],
-        [3, 4, 4],            [ 3, 6, 4],    [ 3, 8, 4],             [ 3,10, 4],    [ 3,12, 4],             [ 3,14, 4],
-        [4, 4, 4],            [ 4, 6, 4],    [ 4, 8, 4],             [ 4,10, 4],    [ 4,12, 4],             [ 4,14, 4],
-        [5, 4, 4],            [ 5, 6, 4],    [ 5, 8, 4],             [ 5,10, 4],    [ 5,12, 4],             [ 5,14, 4],
-        [6, 4, 4], [6, 5, 4], [ 6, 6, 4],    [ 6, 8, 4],             [ 6,10, 4],    [ 6,12, 4], [ 6,13, 4], [ 6,14, 4],
-        [7, 4, 4], [7, 5, 4], [ 7, 6, 4],    [ 7, 8, 4],             [ 7,10, 4],    [ 7,12, 4], [ 7,13, 4], [ 7,14, 4],
-        [8, 4, 4], [8, 5, 4], [ 8, 6, 4],    [ 8, 8, 4],             [ 8,10, 4],    [ 8,12, 4], [ 8,13, 4], [ 8,14, 4],
-                              [ 9, 6, 4],    [ 9, 8, 4],             [ 9,10, 4],                            [ 9,14, 4],
-                              [10, 6, 4],    [10, 8, 4],             [10,10, 4],                            [10,14, 4],
-                              [11, 6, 4],    [11, 8, 4],             [11,10, 4],                            [11,14, 4],
-                              [12, 6, 4],    [12, 8, 4], [12, 9, 4], [12,10, 4],                            [12,14, 4],
-                              [13, 6, 4],    [13, 8, 4], [13, 9, 4], [13,10, 4],                            [13,14, 4],
-                              [14, 6, 4],    [14, 8, 4], [14, 9, 4], [14,10, 4],                            [14,14, 4],
-        
-        ] 
-        for(let i=0; i < blockCopy.length; i++){
-            block[i][3] = blockCopy[i][3];
-        }
-
-        block.forEach( bl => {
-            document.getElementById(bl[3]).classList.remove("none");
-            document.getElementById(bl[3]).classList.remove("blue");
-            document.getElementById(bl[3]).classList.remove("red");
-            document.getElementById(bl[3]).classList.remove("yellow");
-            document.getElementById(bl[3]).classList.remove("green");
-            let color;
-            if (bl[2] == 1) color = "yellow";
-            if (bl[2] == 2) color = "green";
-            if (bl[2] == 3) color = "red";
-            if (bl[2] == 4) color = "blue";
-            document.getElementById(bl[3]).classList.add(color);
-        })
+    clearBlocks()
+    fillBlocks()
+    clearPlayfield()
+    fillPlayfield()
 
     ball.speedX= -2;
-    ball.speedY= 10.5;
+    ball.speedY= 3;
     ball.size= 10;
     ball.topEdge= 100;
     ball.leftEdge= 200;
@@ -278,7 +243,6 @@ function gameStart() {
     document.getElementById("playfield").classList.remove("none")
     document.getElementById("menu").classList.add("none")
     document.getElementById("gameOver").classList.add("none")
-
     pause = false;
     gameLoop()
 }
@@ -316,7 +280,7 @@ function gameLoop() {
 }
 
 function end(){
-    for (x in block) return;
+    for (x in blocks) return;
     document.getElementById("header").textContent="Theme not found";
     gameOver()
 }
