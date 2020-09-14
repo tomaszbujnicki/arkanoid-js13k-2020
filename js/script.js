@@ -13,7 +13,7 @@ const el_playfield = document.getElementById("playfield");
 
 
 const paddle = {
-    speed: 20,
+    speed: 10,
     height: 10,
     width: 200,
     topEdge: 670,
@@ -30,113 +30,141 @@ const ball = {
     size: 10,
     topEdge: 100,
     leftEdge: 200,
+    maxSpeed: 10
 }
 
 const el_ball = document.getElementById("ball")
 
+function wallsCollisions (){
+        
+    if (ball.leftEdge > playfield.width - ball.size) {
+        ball.leftEdge = playfield.width - ball.size;
+        ball.speedX *= -1;
+    }
 
+    if (ball.leftEdge < 0) {
+        ball.leftEdge = 0;
+        ball.speedX *= -1;
+    }
 
-    
-    
+    if (ball.topEdge < 0) {
+        ball.topEdge = 0;
+        ball.speedY *= -1;
+    }
 
+    if (ball.topEdge > playfield.height - ball.size) {
+        gameOver()
+    }
+}
 
-function collision() {
-
-        if (ball.leftEdge > playfield.width - ball.size) {
-            ball.leftEdge = playfield.width - ball.size;
-            ball.speedX *= -1.01;
+function paddleCollisions() {
+    if (
+        ball.speedY > 0 &&
+        ball.topEdge  >= paddle.topEdge  - ball.size     &&
+        ball.topEdge  <= paddle.topEdge  + paddle.height &&
+        ball.leftEdge >= paddle.leftEdge - ball.size    &&
+        ball.leftEdge <= paddle.leftEdge + paddle.width
+    ) {
+        let a = 0;
+        
+        if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) {
+            a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4;               
         }
-
-        if (ball.leftEdge < 0) {
-            ball.leftEdge = 0;
-            ball.speedX *= -1.01;
-        }
-
-        if (ball.topEdge < 0) {
-            ball.topEdge = 0;
-            ball.speedY *= -1.01;
-        }
-
-        if (ball.topEdge > playfield.height - ball.size) {
-            gameOver()
-        }
-
-            if (
-                ball.speedY > 0 &&
-                ball.topEdge  >= paddle.topEdge  - ball.size     &&
-                ball.topEdge  <= paddle.topEdge  + paddle.height &&
-                ball.leftEdge >= paddle.leftEdge - ball.size    &&
-                ball.leftEdge <= paddle.leftEdge + paddle.width
-            ) {
-                let a = 0;
-                
-                if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) {
-                    a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4;               
+        else {
+            if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) {
+                a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8;   
+            }
+            else {
+                if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) {
+                    a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4 * -1;   
                 }
                 else {
-                    if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) {
-                        a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8;   
+                    if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) {
                     }
-                    else {
-                        if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) {
-                            a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4 * -1;   
-                        }
-                        else {
-                            if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) {
-                            }
-                        }
-                    }
-                }
-                if (ball.speedX > 0) {
-                    ball.speedY += a;
-                    ball.speedX -= a
-                }
-                else{
-                    ball.speedY -= a
-                    ball.speedX -= a
-                }
-                if (ball.speedY < 1){
-                    ball.speedY = 1;
-                }
-                if (ball.speedX < 0.2 && ball.speedX > -0.2){
-                    ball.speedX < 0 ? ball.speedX = -0.2 : ball.speedX = 0.2
-                }
-                ball.speedY = Math.abs(ball.speedY) * -1.01; 
-                if (ball.speedX > 10) ball.speedX = 10;
-                if (ball.speedX < -10) ball.speedX = -10;
-                if (ball.speedY < -10) ball.speedY = -10;
-            }
-
-            for ( const block of blocks){
-                if (                    
-                    ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
-                    ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
-                    ball.leftEdge + ball.size >= block.column * playfield.columnWidth    &&
-                    ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth
-                ){
-                    if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
-                    else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
-                        else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
-                            else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
-                            }
-                        }
-                    }
-
-                    block.power--;
-                    if ( block.power <= 0 ) {
-                        const element = document.getElementById("block_" + block.id);
-                        element.remove();
-                        delete block
-                    }
-                    else{
-                        const element = document.getElementById("block_" + block.id);
-                        element.classList.add(getColor(block.power));
-                    }
-                    break;
                 }
             }
+        }
+        if (ball.speedX > 0) {
+            ball.speedY += a;
+            ball.speedX -= a
+        }
+        else{
+            ball.speedY -= a
+            ball.speedX -= a
+        }
+
+        if (ball.speedY < 1){
+            ball.speedY = 1;
+        }
+        if (ball.speedX < 0.2 && ball.speedX > -0.2){
+            ball.speedX < 0 ? ball.speedX = -0.2 : ball.speedX = 0.2
+        }
+         
+        ball.speedY = Math.abs(ball.speedY) * -1;
         
+    }
 }
+
+function blockCollisions() {
+    
+    let blockIndex = 0;
+
+    for ( const block of blocks){
+        if (                    
+            ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
+            ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
+            ball.leftEdge + ball.size >= block.column * playfield.columnWidth    &&
+            ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth
+        ){
+            if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
+            else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
+                else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+                    else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+                    }
+                }
+            }
+
+
+            block.power--;
+            if ( block.power <= 0 ) {
+                console.log(block)
+                const element = document.getElementById("block_" + block.id);
+                element.remove();
+                blocks.splice(blockIndex,1)
+                console.log(blocks)
+            }
+            else{
+                const element = document.getElementById("block_" + block.id);
+                element.classList.add(getColor(block.power));
+            }
+            break;
+        }
+        blockIndex++
+    }
+}
+    
+function increaseBallSpeed() {
+    ball.speedY += 0.001
+} 
+
+function limitBallSpeed() {
+    if (ball.speedX > ball.maxSpeed) ball.speedX = ball.maxSpeed;
+    if (ball.speedX < -ball.maxSpeed) ball.speedX = -ball.maxSpeed;
+    if (ball.speedY < -ball.maxSpeed) ball.speedY = -ball.maxSpeed;
+}
+    
+
+
+function collisions() {
+
+    wallsCollisions()
+    paddleCollisions()
+    blockCollisions()
+
+
+    
+}
+            
 
 document.getElementById("start").addEventListener("click", gameStart, false)
 document.getElementById("restart").addEventListener("click", gameStart, false)
@@ -192,7 +220,7 @@ function fillBlocks() {
         blocks[i].id = i;
         blocks[i].row =  map_01[i][0];
         blocks[i].column =  map_01[i][1];
-        blocks[i].power =  map_01[i][2];
+        blocks[i].power =  1;//map_01[i][2];
 	}
 }
 function clearPlayfield() {
@@ -237,7 +265,8 @@ function gameStart() {
     el_paddle.style.left   = paddle.leftEdge  + "px";
     el_ball.style.top      = ball.topEdge + "px";
     el_ball.style.left     = ball.leftEdge + "px";
-
+    el_ball.style.width     = ball.size + "px";
+    el_ball.style.height     = ball.size + "px";
 
     document.getElementById("playfield").classList.remove("none")
     document.getElementById("menu").classList.add("none")
@@ -247,7 +276,31 @@ function gameStart() {
 }
 
 let pause = false;
+
 function gameLoop() {
+
+    movePaddle()
+    moveBall()
+    collisions()
+    
+    draw()
+ 
+    increaseBallSpeed()
+
+    end()
+
+    if(pause) return;
+    window.requestAnimationFrame(gameLoop);
+}
+
+function end(){
+
+    for (x in blocks) return;
+    document.getElementById("header").textContent="Theme not found";
+    gameOver()
+}
+
+function movePaddle() {
 
     if (player1_left){
         paddle.leftEdge -= paddle.speed;
@@ -263,24 +316,21 @@ function gameLoop() {
             paddle.leftEdge = playfield.width - paddle.width;
         }
     }
+}
+
+function moveBall() {
+
     ball.leftEdge += ball.speedX;
     ball.topEdge  += ball.speedY;
+}
 
-    collision()
-    
+function draw() {
+
+    el_paddle.style.width   = paddle.width  + "px";
     el_paddle.style.left   = paddle.leftEdge  + "px";
+
     el_ball.style.top      = ball.topEdge + "px";
     el_ball.style.left     = ball.leftEdge + "px";
-
-    end()
-
-    if(pause) return;
-    window.requestAnimationFrame(gameLoop);
+    el_ball.style.width     = ball.size + "px";
+    el_ball.style.height     = ball.size + "px";
 }
-
-function end(){
-    for (x in blocks) return;
-    document.getElementById("header").textContent="Theme not found";
-    gameOver()
-}
-
