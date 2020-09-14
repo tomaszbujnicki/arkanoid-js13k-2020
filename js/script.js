@@ -108,7 +108,6 @@ function collision() {
             }
 
             for ( const block of blocks){
-                console.log(block)
                 if (                    
                     ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
                     ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
@@ -198,8 +197,8 @@ function fillBlocks() {
 }
 function clearPlayfield() {
     const elements_block = document.getElementsByClassName("block");
-    for ( const element of elements_block){
-        element.remove();
+    for ( let i = 0; i < elements_block.length; i){
+        elements_block[i].remove();
     }
 }
 function fillPlayfield() {
