@@ -36,43 +36,12 @@ function paddleCollisions() {
         ball.leftEdge >= paddle.leftEdge - ball.size    &&
         ball.leftEdge <= paddle.leftEdge + paddle.width
     ) {
-        let a = 0;
-        
-        if (paddle.leftEdge + paddle.width / 5 > ball.leftEdge + 5) {
-            a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4;               
-        }
-        else {
-            if (paddle.leftEdge + paddle.width / 5 * 2 > ball.leftEdge + 5) {
-                a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/8;   
-            }
-            else {
-                if (paddle.leftEdge + paddle.width / 5 * 4 < ball.leftEdge + 5) {
-                    a = (Math.abs(ball.speedX) + Math.abs(ball.speedY))/4 * -1;   
-                }
-                else {
-                    if (paddle.leftEdge + paddle.width / 5 * 3 < ball.leftEdge + 5) {
-                    }
-                }
-            }
-        }
-        if (ball.speedX > 0) {
-            ball.speedY += a;
-            ball.speedX -= a
-        }
-        else{
-            ball.speedY -= a
-            ball.speedX -= a
-        }
 
-        if (ball.speedY < 1){
-            ball.speedY = 1;
-        }
-        if (ball.speedX < 0.2 && ball.speedX > -0.2){
-            ball.speedX < 0 ? ball.speedX = -0.2 : ball.speedX = 0.2
-        }
-         
-        ball.speedY = Math.abs(ball.speedY) * -1;
-        
+        const offset =  1.8 * ( (ball.leftEdge + (ball.size/2)) - (paddle.leftEdge + (paddle.width/2)) ) / paddle.width;
+        const speed = Math.sqrt ( ball.speedX * ball.speedX + ball.speedY * ball.speedY )
+        ball.speedX = speed * offset;
+        ball.speedY = -1 * Math.sqrt ( speed * speed - ball.speedX * ball.speedX );
+        console.log(speed)
     }
 }
 
@@ -90,5 +59,39 @@ function blockCollisions() {
             break;
         }
         blockIndex++
+    }
+}
+
+function damageBlock(block, blockIndex) {
+    block.power--;
+    if ( block.power <= 0 ) {
+        removeBlock(block, blockIndex)
+    }
+    else{
+        const element = document.getElementById("block_" + block.id);
+        element.classList.add(getColor(block.power));
+    }
+}
+
+function removeBlock(block, blockIndex) {
+    const element = document.getElementById("block_" + block.id);
+    element.remove();
+    blocks.splice(blockIndex,1)
+}
+
+function isBlockHit(block) {
+    return (ball.topEdge <= ( block.row +1 ) * playfield.rowHeight + playfield.topPadding &&
+            ball.topEdge + ball.size >= block.row * playfield.rowHeight + playfield.topPadding &&
+            ball.leftEdge + ball.size >= block.column * playfield.columnWidth    &&
+            ball.leftEdge <= ( block.column + 1 ) * playfield.columnWidth)
+}
+
+function bounceBall(block) {
+    if (ball.leftEdge + ball.size - ball.speedX <  block.column * playfield.columnWidth     ) ball.speedX *= -1;
+    else{if (ball.leftEdge - ball.speedX             > ( block.column + 1 ) * playfield.columnWidth ) ball.speedX *= -1;
+        else{if (ball.topEdge - ball.speedY              > ( block.row + 1 ) * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+            else{if (ball.topEdge + ball.size - ball.speedY  < block.row * playfield.rowHeight + playfield.topPadding ) ball.speedY *= -1;
+            }
+        }
     }
 }
