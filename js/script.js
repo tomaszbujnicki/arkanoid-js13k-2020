@@ -44,7 +44,8 @@ function bounceBall(block) {
     
 function increaseBallSpeed() {
 
-    ball.speedY += 0.001
+    ball.speedY > 0 ? ball.speedY += 0.001 : ball.speedY -= 0.001
+    console.log(ball.speedY)
 } 
 
 function limitBallSpeed() {
