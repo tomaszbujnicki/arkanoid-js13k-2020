@@ -15,10 +15,6 @@
 <body>
 
 	<div id="game">
-		<div id="playfield" class="playfield none">
-			<div id="ball"></div>
-			<div id="paddle"></div>
-		</div>
 		<div id="gameOver" class="menu none">
 			<h2 id="header">GAME OVER</h2>
 			<button id="restart">Start new game</button>
@@ -27,12 +23,17 @@
 			<h2>Arkanoid 404</h2>
 			<button id="start">Start new game</button>
 		</div>
+		<div class="score"></div>
 	</div>
 
-	<script src="js/control.js"></script>
-	<script src="js/levels.js"></script>
-	<script src="js/collisions.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/Ball.js">		</script>
+	<script src="js/Block.js">		</script>
+	<script src="js/Paddle.js">		</script>
+	<script src="js/control.js">	</script>
+	<script src="js/levels.js">		</script>
+	<script src="js/collisions.js">	</script>
+	<script src="js/gameStart.js">	</script>
+	<script src="js/script.js">		</script>
 
 </body>
 

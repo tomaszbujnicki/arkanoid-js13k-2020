@@ -11,7 +11,13 @@ body {
 	background-color: gray;
 }
 
+div {
+	box-sizing: border-box;
+}
+
 #game {
+	min-width: 1280px;
+	min-height: 720px;
 	width: 1280px;
 	height: 720px;
 	background-color: black;
@@ -19,22 +25,23 @@ body {
 	border-color: blue;
 	border-width: 10px;
 	position: relative;
-	box-sizing: border-box;
 }
 
 .playfield {
-	width: 1000px;
-	height: 700px;
 	background-color: black;
-	position: relative;
-	border-style: solid;
-	border-color: blue;
-	border-width: 0 4px 0 0 ;
+	position: absolute;
+}
+.score {
+	width: 260px;
+	border-left: solid blue 4px;
+	position: absolute;
+	height: 100%;
+	right: 0;
+	background-color: skyblue;
 }
 
 #paddle {
 	background-color: white;
-	box-sizing: border-box;
 	position: absolute;
 }
 
@@ -50,7 +57,6 @@ body {
 
 .block{
 	background-color: white;
-	box-sizing: border-box;
 	border: solid silver 1px;
 	width: 50px;
 	height: 15px;
@@ -71,8 +77,8 @@ body {
 
 .menu{
 	position: absolute;
-	height: 720px;
-	width: 1280px;
+	height: 700px;
+	width: 1000px;
 	top: 0;
 	left: 0;
 	display: flex;
@@ -80,7 +86,7 @@ body {
 	align-items: center;
 	justify-content: space-between;
 	padding: 200px 0;
-	box-sizing: border-box;
+	background-color: black;
 
 }
 .none{
