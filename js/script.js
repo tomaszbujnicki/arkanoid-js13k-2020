@@ -40,12 +40,6 @@ function getColor(number){
       } 
 }
 
-
-/* const clearBlocks = () => { blocks = [] } 
-const clearBalls  = () => { balls  = [] }  */
-
-
-
 let gameObject = {}
 
 
@@ -90,6 +84,7 @@ function moveBall() {
 }
 
 function draw(object) {
+    console.log("draw" + object)
 
 
     if (!object) return
@@ -102,27 +97,6 @@ function draw(object) {
 
 const el_playfield = document.getElementById("playfield"),
       el_paddle = document.getElementById("paddle");
-
-
-
-
-
-/* 
-const ball_1 = new Ball(-2, 2.7, 10, 20, 500, 400);
-balls.push(ball_1);
-ball_1.element     = document.getElementById("ball_" + 1)
-
- */
-
-
-
-
-function createBlockElement(block) {
-
-}
-
-
-
 
 
 function damageBlock(block, blockIndex) {

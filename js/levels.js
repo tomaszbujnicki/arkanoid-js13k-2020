@@ -28,6 +28,15 @@ const level_1 = {
             top :      500,
             left :     400,
             maxSpeed :      20  
+        },
+        {
+            id:              1,
+            speedX :        2,
+            speedY :         -3,
+            size :          20,
+            top :      100,
+            left :     600,
+            maxSpeed :      20  
         }
     ],
 
@@ -49,32 +58,3 @@ const level_1 = {
         left :   200
     }
 }
-
-
-
-
-
-/* 
-const level_1_initialValue = {
-    ball.speedX =        -2;
-    ball.speedY =         2.7;
-    ball.size =          10;
-    ball.top =      100;
-    ball.left =     200;
-    ball.maxSpeed =      10;
-
-    paddle.speed =       10;
-    paddle.height=       10;
-    paddle.width =      200;
-    paddle.top =    670;
-    paddle.left =   500;
-
-    playfield.left =          5;
-    playfield.top =           5;
-    playfield.height =      700;
-    playfield.width =      1000;
-    playfield.rowHeight =    15;
-    playfield.columnWidth =  50;
-    playfield.paddingTop =   150;
-}
- */

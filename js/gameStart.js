@@ -1,23 +1,26 @@
 function gameStart(level) {
 
+    document.getElementById("menu").classList.add("none")
+
     clearPlayfield();
 
     const playfield = Object.create(level.playfield);
     playfield.element = createPlayfieldElement(playfield);
 
-
-    
-
     const paddle = loadPaddle(level.paddle, level.playfield);
     paddle.element = createPaddleElement(paddle);
     
     const blockArray = loadBlocks(level.blocks, level.playfield);
-    
-
-    const balls = [];
+    blockArray.forEach(createBlockElement)
+ 
+    const ballArray = loadBalls(level.balls, level.playfield);
+    for ( const ball of ballArray){
+        ball.element = createBallElement(ball)
+    }
 
     draw(playfield);
     draw(paddle);
+    ballArray.forEach(draw);
 
     gameObject = {
         playfield: playfield,
@@ -66,7 +69,8 @@ function createPlayfieldElement(playfield) {
     element.style.left = playfield.left + "px";
     element.classList.add("playfield");
     document.getElementById("game").appendChild(element);
-    return element
+
+    return element;
 }
 
 function createPaddleElement(paddle) {
@@ -77,7 +81,8 @@ function createPaddleElement(paddle) {
     element.style.left = paddle.left + "px";
     element.classList.add("paddle");
     document.getElementById("playfield").appendChild(element);
-    return element
+
+    return element;
 }
 
 function createBallElement(ball) {
@@ -87,17 +92,21 @@ function createBallElement(ball) {
     element.style.top = ball.top + "px";
     element.style.left = ball.left + "px";
     element.classList.add("ball");
-    el_playfield.appendChild(element);
+    document.getElementById("playfield").appendChild(element);
+
+    return element;
 }
 
 function createBlockElement(block) {
 
     const element = document.createElement("div");
     element.id = "block_" + block.id;
-    element.style.top = block.row * playfield.rowHeight + playfield.paddingTop + "px";
-    element.style.left = block.column * playfield.columnWidth + "px";
+    element.style.top = block.top + "px";
+    element.style.left = block.left + "px";
     element.classList.add("block", getColor(block.power));
-    el_playfield.appendChild(element);
+    document.getElementById("playfield").appendChild(element);
+
+    return element;
 }
 
 function loadPaddle(paddle, playfield) {
@@ -135,21 +144,24 @@ function loadBlocks(blocks, playfield) {
     return blockArray;
 }
 
+function loadBalls(balls) {
+    const ballArray = [];
 
+    for (const ball of balls) {
+        const item = new Ball(
+            ball.id,
+            ball.speedX,
+            ball.speedY,
+            ball.maxSpeed,
+            ball.size,
+            ball.top,
+            ball.left
+        );
 
-
-
-
-
-function fillPlayfield() {
-
-    for ( const block of blocks){
-        createBlockElement(block)
+        ballArray.push(item);
     }
 
-    for ( const ball of balls){
-        createBallElement(ball)
-    }
+    return ballArray;
 }
 
 
