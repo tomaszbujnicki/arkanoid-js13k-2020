@@ -15,7 +15,7 @@ div {
 	box-sizing: border-box;
 }
 
-#game {
+.game {
 	min-width: 1280px;
 	min-height: 720px;
 	width: 1280px;
@@ -40,12 +40,12 @@ div {
 	background-color: skyblue;
 }
 
-#paddle {
+.paddle {
 	background-color: white;
 	position: absolute;
 }
 
-#ball {
+.ball {
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
