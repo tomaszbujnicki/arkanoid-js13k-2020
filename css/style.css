@@ -46,33 +46,15 @@ div {
 }
 
 .ball {
-	width: 10px;
-	height: 10px;
 	border-radius: 50%;
 	background-color: white;
 	position: absolute;
-	top: 500px;
-	left: 500px;
 }
 
 .block{
 	background-color: white;
 	border: solid silver 1px;
-	width: 50px;
-	height: 15px;
 	position: absolute;
-}
-.blue{
-	background-color:blue
-}
-.red{
-	background-color:red
-}
-.green{
-	background-color:green
-}
-.yellow{
-	background-color:yellow
 }
 
 .menu{

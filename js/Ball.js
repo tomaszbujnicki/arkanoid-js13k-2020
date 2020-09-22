@@ -1,7 +1,8 @@
 class Ball {
-    constructor(id, speedX, speedY, maxSpeed, size, top, left) {
+    constructor(speedX, speedY, maxSpeed, size, top, left) {
 
-        this.id       = id;
+        this.id = uniqueId();
+        this.type = "ball";
 
         this.speedX   = speedX;
         this.speedY   = speedY;

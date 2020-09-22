@@ -4,35 +4,51 @@ function gameStart(level) {
 
     clearPlayfield();
 
+
     const playfield = Object.create(level.playfield);
     playfield.element = createPlayfieldElement(playfield);
 
-    const paddle = loadPaddle(level.paddle, level.playfield);
-    paddle.element = createPaddleElement(paddle);
-    
-    const blockArray = loadBlocks(level.blocks, level.playfield);
-    blockArray.forEach(createBlockElement)
- 
-    const ballArray = loadBalls(level.balls, level.playfield);
-    for ( const ball of ballArray){
-        ball.element = createBallElement(ball)
-    }
 
-    draw(playfield);
+    const paddle = newPaddle(level.paddle, level.playfield);
+
+    const blockArray = [];
+    level.blocks.forEach(item => {
+        let block = newBlock(item, level.playfield)
+        blockArray.push(block)
+    })
+
+    const ballArray = [];
+    level.balls.forEach(item => {
+        let ball = newBall(item)
+        ballArray.push(ball)
+    })
+
+
+    createElement(paddle);
+
+    blockArray.forEach(createElement)
+
+    ballArray.forEach(createElement)
+ 
+
     draw(paddle);
-    ballArray.forEach(draw);
+
+    blockArray.forEach(draw)
+    blockArray.forEach(changeColor)
+
+    ballArray.forEach(draw)
+
+
+
 
     gameObject = {
         playfield: playfield,
         paddle: paddle,
-        blockArray: blockArray
+        blockArray: blockArray,
+        ballArray: ballArray
     };
 
-    //console.log(playfield.element, paddle.element) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/* 
-
-    const blocks = [];
-    
+/*  
 
     setInitialValues(level);
 
@@ -73,43 +89,17 @@ function createPlayfieldElement(playfield) {
     return element;
 }
 
-function createPaddleElement(paddle) {
+function createElement(object) {
 
     const element = document.createElement("div");
-    element.id = "paddle";
-    element.style.top = paddle.top + "px";
-    element.style.left = paddle.left + "px";
-    element.classList.add("paddle");
+    element.id = object.id;
+    element.classList.add(object.type);
     document.getElementById("playfield").appendChild(element);
 
     return element;
 }
 
-function createBallElement(ball) {
-
-    const element = document.createElement("div");
-    element.id = "ball_" + ball.id;
-    element.style.top = ball.top + "px";
-    element.style.left = ball.left + "px";
-    element.classList.add("ball");
-    document.getElementById("playfield").appendChild(element);
-
-    return element;
-}
-
-function createBlockElement(block) {
-
-    const element = document.createElement("div");
-    element.id = "block_" + block.id;
-    element.style.top = block.top + "px";
-    element.style.left = block.left + "px";
-    element.classList.add("block", getColor(block.power));
-    document.getElementById("playfield").appendChild(element);
-
-    return element;
-}
-
-function loadPaddle(paddle, playfield) {
+function newPaddle(paddle, playfield) {
 
     const item = new Paddle(
         paddle.top,
@@ -124,44 +114,34 @@ function loadPaddle(paddle, playfield) {
     return item;
 }
 
-function loadBlocks(blocks, playfield) {
+function newBlock(block, playfield) {
 
-    const blockArray = []
+    const item = new Block(
+        block[0],
+        block[1],
+        block[2],
+        playfield.rowHeight,
+        playfield.columnWidth,
+        playfield.paddingTop
+    );
 
-    for (const i in blocks) {
-        const block = new Block(
-            i,
-            blocks[i][0],
-            blocks[i][1],
-            blocks[i][2],
-            playfield.rowHeight,
-            playfield.columnWidth,
-            playfield.paddingTop
-        );
-        blockArray.push(block)
-    }
-
-    return blockArray;
+    return item;
 }
+const blockArray = []
 
-function loadBalls(balls) {
-    const ballArray = [];
+function newBall(ball) {
 
-    for (const ball of balls) {
-        const item = new Ball(
-            ball.id,
-            ball.speedX,
-            ball.speedY,
-            ball.maxSpeed,
-            ball.size,
-            ball.top,
-            ball.left
-        );
+    const item = new Ball(
+        ball.id,
+        ball.speedX,
+        ball.speedY,
+        ball.maxSpeed,
+        ball.size,
+        ball.top,
+        ball.left
+    );
 
-        ballArray.push(item);
-    }
-
-    return ballArray;
+    return item;
 }
 
 

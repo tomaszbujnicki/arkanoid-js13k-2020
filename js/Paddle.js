@@ -1,6 +1,9 @@
 class Paddle {
     constructor(top, left, height, width, speedX, leftRange, rightRange) {
 
+        this.id = uniqueId();
+        this.type = "paddle";
+
         this.top     = top;
         this.left    = left;
         this.height  = height;

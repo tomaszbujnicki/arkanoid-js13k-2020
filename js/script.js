@@ -1,4 +1,9 @@
 let currentLevel = 0;
+let IdCounter = 0;
+
+function uniqueId() {
+    return IdCounter++
+}
 
 document.getElementById("start").addEventListener( "click", () =>	gameStart(level_1), false )
 document.getElementById("restart").addEventListener( "click", () =>	gameStart(levels[currentLevel]), false )
@@ -22,22 +27,33 @@ function gameOver() {
 }
 
 
-function getColor(number){
+function changeColor(object){
 
-    switch(number) {
-        case 0:
-            return "none";
+    if (!object) return
+
+    let element = document.getElementById(object.id)
+
+    let color = "pink"
+
+    switch(object.power) {
         case 1:
-            return "yellow";
+            color = "white";
+            break;
         case 2:
-            return "green";
+            color = "green";
+            break;
         case 3:
-            return "red";  
+            color = "red";  
+            break;
         case 4:
-            return "blue";
+            color = "blue";
+            break;
         default:
-            return "none";
-      } 
+            color = "pink";
+            break;
+      }
+
+      element.style.backgroundColor = color;
 }
 
 let gameObject = {}
@@ -46,7 +62,7 @@ let gameObject = {}
 function gameLoop() {
 
     draw(gameObject.paddle)
-
+    gameObject.ballArray.forEach(draw)
     movePaddle(gameObject.paddle)
  /*    moveBall()
     collisions()
@@ -84,14 +100,16 @@ function moveBall() {
 }
 
 function draw(object) {
-    console.log("draw" + object)
-
 
     if (!object) return
-    object.element.style.top       = object.top       + "px";
-    object.element.style.left      = object.left      + "px";
-    object.element.style.height    = object.height    + "px";
-    object.element.style.width     = object.width     + "px";
+
+    let element = document.getElementById(object.id)
+    
+    element.style.top       = object.top       + "px";
+    element.style.left      = object.left      + "px";
+    element.style.height    = object.height    + "px";
+    element.style.width     = object.width     + "px";
+    //element.style.backgroundColor = changeColor(object.power);
 }
 
 
@@ -106,7 +124,7 @@ function damageBlock(block, blockIndex) {
     }
     else{
         const element = document.getElementById("block_" + block.id);
-        element.classList.add(getColor(block.power));
+        element.classList.add(changeColor(block.power));
     }
 }
 
