@@ -1,11 +1,11 @@
-function collisions() {
+function collisions(ball) {
 
-    wallsCollisions()
-    paddleCollisions()
-    blockCollisions()
+    wallsCollisions(ball)
+    paddleCollisions(ball)
+    blockCollisions(ball)
 }
 
-function wallsCollisions () {
+function wallsCollisions (ball) {
         
     if (ball.left > playfield.width - ball.size) {
         ball.left = playfield.width - ball.size;
@@ -27,7 +27,7 @@ function wallsCollisions () {
     }
 }
 
-function paddleCollisions() {
+function paddleCollisions(ball) {
 
     if (
         ball.speedY > 0 &&
@@ -45,11 +45,11 @@ function paddleCollisions() {
     }
 }
 
-function blockCollisions() {
-    
+function blockCollisions(ball) {
+
     let blockIndex = 0;
 
-    for ( const block of blocks){
+    for ( const block of blockArray){
 
         if ( isBlockHit(block) ){
 
@@ -60,23 +60,24 @@ function blockCollisions() {
         }
         blockIndex++
     }
-}
 
-
-
-function isBlockHit(block) {
-    return (ball.top <= block.bottomEdge &&
-            ball.top + ball.size >= block.top &&
-            ball.left + ball.size >= block.left    &&
-            ball.left <= block.rightEdge)
-}
-
-function bounceBall(block) {
-    if (ball.left + ball.size - ball.speedX <  block.left     ) ball.speedX *= -1;
-    else{if (ball.left - ball.speedX             >  block.rightEdge ) ball.speedX *= -1;
-        else{if (ball.top - ball.speedY              >  block.bottomEdge ) ball.speedY *= -1;
-            else{if (ball.top + ball.size - ball.speedY  < block.top ) ball.speedY *= -1;
+    function isBlockHit(block) {
+        return (ball.top <= block.bottomEdge &&
+                ball.top + ball.size >= block.top &&
+                ball.left + ball.size >= block.left    &&
+                ball.left <= block.rightEdge)
+    }
+    
+    function bounceBall(block) {
+        if (ball.left + ball.size - ball.speedX <  block.left     ) ball.speedX *= -1;
+        else{if (ball.left - ball.speedX             >  block.rightEdge ) ball.speedX *= -1;
+            else{if (ball.top - ball.speedY              >  block.bottomEdge ) ball.speedY *= -1;
+                else{if (ball.top + ball.size - ball.speedY  < block.top ) ball.speedY *= -1;
+                }
             }
         }
     }
 }
+
+
+

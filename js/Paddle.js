@@ -29,5 +29,19 @@ class Paddle {
             this.left = this.rightRange - this.width;
         }
     }
+}
 
+function newPaddle(paddle, playfield) {
+
+    const item = new Paddle(
+        paddle.top,
+        paddle.left,
+        paddle.height,
+        paddle.width,
+        paddle.speedX,
+        playfield.left,
+        playfield.left + playfield.width
+    );
+
+    return item;
 }

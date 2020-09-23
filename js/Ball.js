@@ -28,6 +28,18 @@ class Ball {
             this.speedY > 0 ? this.speedY += 0.001 : this.speedY -= 0.001;
         }
     }
-
 }
 
+function newBall(ball) {
+
+    const item = new Ball(
+        ball.speedX,
+        ball.speedY,
+        ball.maxSpeed,
+        ball.size,
+        ball.top,
+        ball.left
+    );
+
+    return item;
+}

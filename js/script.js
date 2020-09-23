@@ -1,21 +1,52 @@
-let currentLevel = 0;
+let playfield,
+    paddle,
+    blockArray,
+    ballArray;
+
+let pause = true;
+
+let currentLevel = 1;
 let IdCounter = 0;
+
 
 function uniqueId() {
     return IdCounter++
 }
 
-document.getElementById("start").addEventListener( "click", () =>	gameStart(level_1), false )
-document.getElementById("restart").addEventListener( "click", () =>	gameStart(levels[currentLevel]), false )
+document.getElementById("start").addEventListener( "click", () =>	gameStart(), false )
+document.getElementById("restart").addEventListener( "click", () =>	gameStart(), false )
 
+
+function draw(object) {
+
+    if (!object) return
+
+    let element = document.getElementById(object.id)
+    
+    element.style.top       = object.top       + "px";
+    element.style.left      = object.left      + "px";
+    element.style.height    = object.height    + "px";
+    element.style.width     = object.width     + "px";
+}
+
+function createElement(object) {
+
+    const element = document.createElement("div");
+    element.id = object.id;
+    element.classList.add(object.type);
+    document.getElementById("playfield").appendChild(element);
+}
+
+function closeMenu() {
+    document.getElementById("menu").classList.add("none")
+}
 
 
 function increaseBallSpeed() {
 
     for ( const ball of balls){
         ball.speedUp()
-    }
-      
+    }     
 } 
 
 
@@ -56,61 +87,18 @@ function changeColor(object){
       element.style.backgroundColor = color;
 }
 
-let gameObject = {}
-
-
-function gameLoop() {
-
-    draw(gameObject.paddle)
-    gameObject.ballArray.forEach(draw)
-    movePaddle(gameObject.paddle)
- /*    moveBall()
-    collisions()
-     */
-    
-
-
- 
-/*     increaseBallSpeed() */
-
-    //end()
-
-    //if(pause) return;
-    window.requestAnimationFrame(gameLoop);
-}
-
 function end(){
 
-    for (x in blocks) return;
+    for (x in blockArray) return;
     document.getElementById("header").textContent="Theme not found";
     gameOver()
 }
 
-function movePaddle(paddle) {
 
-    if (player1_left)  paddle.moveLeft()
-    if (player1_right) paddle.moveRight()
-}
 
-function moveBall() {
 
-    for (let ball of ballArr){
-        ball.move()
-    }
-}
 
-function draw(object) {
 
-    if (!object) return
-
-    let element = document.getElementById(object.id)
-    
-    element.style.top       = object.top       + "px";
-    element.style.left      = object.left      + "px";
-    element.style.height    = object.height    + "px";
-    element.style.width     = object.width     + "px";
-    //element.style.backgroundColor = changeColor(object.power);
-}
 
 
 const el_playfield = document.getElementById("playfield"),
@@ -123,13 +111,12 @@ function damageBlock(block, blockIndex) {
         removeBlock(block, blockIndex)
     }
     else{
-        const element = document.getElementById("block_" + block.id);
-        element.classList.add(changeColor(block.power));
+        changeColor(block);
     }
 }
 
 function removeBlock(block, blockIndex) {
-    const element = document.getElementById("block_" + block.id);
+    const element = document.getElementById(block.id);
     element.remove();
-    blocks.splice(blockIndex,1)
+    blockArray.splice( blockIndex, 1 )
 }
