@@ -1,74 +1,62 @@
 function gameStart() {
+  closeMenu();
 
-    closeMenu();
+  clearLevel();
 
-    clearLevel();
+  createLevelObjects(levelArray[currentLevel]);
 
-    createLevelObjects(levelArray[currentLevel]);
+  createLevelElements();
 
-    createLevelElements();
+  drawLevelElements();
 
-    drawLevelElements();
+  pause = false;
 
-    pause = false;
-    
-    gameLoop()
+  gameLoop();
 }
-
 
 function clearLevel() {
+  blockArray = [];
+  ballArray = [];
 
-    blockArray = [];
-    ballArray = [];
-
-    const playfield = document.getElementById("playfield")
-    if (playfield) playfield.remove();
+  const playfield = document.getElementById('playfield');
+  if (playfield) playfield.remove();
 }
-
 
 function createPlayfieldElement() {
-
-    const element = document.createElement("div");
-    element.id = "playfield";
-    element.style.top = playfield.top + "px";
-    element.style.left = playfield.left + "px";
-    element.classList.add("playfield");
-    document.getElementById("game").appendChild(element);
+  const element = document.createElement('div');
+  element.id = 'playfield';
+  element.style.top = playfield.top + 'px';
+  element.style.left = playfield.left + 'px';
+  element.classList.add('playfield');
+  document.getElementById('game').appendChild(element);
 }
 
-
 function createLevelObjects(level) {
+  playfield = Object.create(level.playfield);
 
-    playfield = Object.create(level.playfield);
+  paddle = newPaddle(level.paddle, level.playfield);
 
-    paddle = newPaddle(level.paddle, level.playfield);
+  level.blocks.forEach((item) => {
+    blockArray.push(newBlock(item, level.playfield));
+  });
 
-    level.blocks.forEach( item => {
-
-        blockArray.push( newBlock( item, level.playfield ))
-    })
-
-    level.balls.forEach( item => {
-  
-        ballArray.push( newBall( item ) )
-    })
-    
+  level.balls.forEach((item) => {
+    ballArray.push(newBall(item));
+  });
 }
 
 function createLevelElements() {
-
-    createPlayfieldElement();
-    createElement(paddle);
-    blockArray.forEach(createElement)
-    ballArray.forEach(createElement)
+  createPlayfieldElement();
+  createElement(paddle);
+  blockArray.forEach(createElement);
+  ballArray.forEach(createElement);
 }
 
-
 function drawLevelElements() {
-    draw(paddle);
+  draw(paddle);
 
-    blockArray.forEach(draw)
-    blockArray.forEach(changeColor)
+  blockArray.forEach(draw);
+  blockArray.forEach(changeColor);
 
-    ballArray.forEach(draw)
+  ballArray.forEach(draw);
 }

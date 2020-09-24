@@ -1,45 +1,41 @@
 class Ball {
-    constructor(speedX, speedY, maxSpeed, size, top, left) {
+  constructor(speedX, speedY, maxSpeed, size, top, left) {
+    this.id = uniqueId();
+    this.type = 'ball';
+    this.speedX = speedX;
+    this.speedY = speedY;
+    this.maxSpeed = maxSpeed;
+    this.size = size;
+    this.top = top;
+    this.left = left;
+    this.height = size;
+    this.width = size;
+  }
 
-        this.id = uniqueId();
-        this.type = "ball";
+  move() {
+    this.left += this.speedX;
+    this.top += this.speedY;
+  }
 
-        this.speedX   = speedX;
-        this.speedY   = speedY;
-        this.maxSpeed = maxSpeed;
-        this.size    = size;
-
-        this.top    = top;
-        this.left   = left;
-        this.height = size;
-        this.width  = size;
-
+  speedUp() {
+    const speed = Math.sqrt(
+      this.speedX * this.speedX + this.speedY * this.speedY
+    );
+    if (speed < this.maxSpeed) {
+      this.speedY > 0 ? (this.speedY += 0.001) : (this.speedY -= 0.001);
     }
-
-    move() {
-        this.left += this.speedX;
-        this.top  += this.speedY;
-    }
-
-    speedUp() {
-        const speed = Math.sqrt( this.speedX * this.speedX + this.speedY * this.speedY );
-        if ( speed < this.maxSpeed ){
-            
-            this.speedY > 0 ? this.speedY += 0.001 : this.speedY -= 0.001;
-        }
-    }
+  }
 }
 
 function newBall(ball) {
+  const item = new Ball(
+    ball.speedX,
+    ball.speedY,
+    ball.maxSpeed,
+    ball.size,
+    ball.top,
+    ball.left
+  );
 
-    const item = new Ball(
-        ball.speedX,
-        ball.speedY,
-        ball.maxSpeed,
-        ball.size,
-        ball.top,
-        ball.left
-    );
-
-    return item;
+  return item;
 }
