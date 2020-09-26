@@ -2,7 +2,7 @@ let playfield, paddle, blockArray, ballArray;
 
 let pause = true;
 
-let currentLevel = 1;
+let currentLevel = 0;
 let IdCounter = 0;
 
 function uniqueId() {
@@ -39,9 +39,7 @@ function closeMenu() {
 }
 
 function increaseBallSpeed() {
-  for (const ball of balls) {
-    ball.speedUp();
-  }
+  ballArray.forEach((ball) => ball.speedUp());
 }
 
 function gameOver() {
@@ -87,17 +85,12 @@ function end() {
 const el_playfield = document.getElementById('playfield'),
   el_paddle = document.getElementById('paddle');
 
-function damageBlock(block, blockIndex) {
-  block.power--;
-  if (block.power <= 0) {
-    removeBlock(block, blockIndex);
-  } else {
-    changeColor(block);
-  }
+function deleteBlock(block) {
+  const index = blockArray.findIndex((e) => e === block);
+  blockArray.splice(index, 1);
 }
 
-function removeBlock(block, blockIndex) {
-  const element = document.getElementById(block.id);
-  element.remove();
-  blockArray.splice(blockIndex, 1);
+function deleteBall(ball) {
+  const index = ballArray.findIndex((e) => e === ball);
+  ballArray.splice(index, 1);
 }

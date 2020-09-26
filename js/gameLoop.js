@@ -7,7 +7,8 @@ function gameLoop() {
 
   ballArray.forEach(collisions);
 
-  /*     increaseBallSpeed() */
+  increaseBallSpeed();
+
   //  end()
   if (pause) return;
   window.requestAnimationFrame(gameLoop);

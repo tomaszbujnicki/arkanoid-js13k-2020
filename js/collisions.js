@@ -21,7 +21,9 @@ function wallsCollisions(ball) {
   }
 
   if (ball.top > playfield.height - ball.size) {
-    gameOver();
+    document.getElementById(ball.id).remove();
+    deleteBall(ball);
+    if (ballArray.length == 0) gameOver();
   }
 }
 
@@ -51,16 +53,18 @@ function paddleCollisions(ball) {
 }
 
 function blockCollisions(ball) {
-  let blockIndex = 0;
-
   for (const block of blockArray) {
     if (isBlockHit(block)) {
-      damageBlock(block, blockIndex);
       bounceBall(block);
-
+      block.damage();
+      if (block.power <= 0) {
+        document.getElementById(block.id).remove();
+        deleteBlock(block);
+      } else {
+        changeColor(block);
+      }
       break;
     }
-    blockIndex++;
   }
 
   function isBlockHit(block) {
