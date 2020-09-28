@@ -77,13 +77,17 @@ function blockCollisions(ball) {
   }
 
   function bounceBall(block) {
-    if (ball.left + ball.size - ball.speedX < block.left) ball.speedX *= -1;
+    if (ball.left + ball.size - ball.speedX < block.left)
+      ball.speedX = Math.abs(ball.speedX) * -1;
     else {
-      if (ball.left - ball.speedX > block.rightEdge) ball.speedX *= -1;
+      if (ball.left - ball.speedX > block.rightEdge)
+        ball.speedX = Math.abs(ball.speedX);
       else {
-        if (ball.top - ball.speedY > block.bottomEdge) ball.speedY *= -1;
+        if (ball.top - ball.speedY > block.bottomEdge)
+          ball.speedY = Math.abs(ball.speedY);
         else {
-          if (ball.top + ball.size - ball.speedY < block.top) ball.speedY *= -1;
+          if (ball.top + ball.size - ball.speedY < block.top)
+            ball.speedY = Math.abs(ball.speedY) * -1;
         }
       }
     }
