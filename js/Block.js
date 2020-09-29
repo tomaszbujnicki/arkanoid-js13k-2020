@@ -2,7 +2,8 @@ class Block {
   constructor(row, column, power, height, width, paddingTop) {
     this.id = uniqueId();
     this.type = 'block';
-
+    this.row = row;
+    this.column = column;
     this.left = column * width;
     this.top = row * height + paddingTop;
     this.width = width;

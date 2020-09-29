@@ -54,8 +54,7 @@ function paddleCollisions(ball) {
 
 function blockCollisions(ball) {
   for (const block of blockArray) {
-    if (isBlockHit(block)) {
-      bounceBall(block);
+    if (isBlockHit(block) && bounceBall(block)) {
       block.damage();
       if (block.power <= 0) {
         document.getElementById(block.id).remove();
@@ -63,7 +62,6 @@ function blockCollisions(ball) {
       } else {
         changeColor(block);
       }
-      break;
     }
   }
 
@@ -77,19 +75,36 @@ function blockCollisions(ball) {
   }
 
   function bounceBall(block) {
-    if (ball.left + ball.size - ball.speedX < block.left)
-      ball.speedX = Math.abs(ball.speedX) * -1;
-    else {
-      if (ball.left - ball.speedX > block.rightEdge)
-        ball.speedX = Math.abs(ball.speedX);
-      else {
-        if (ball.top - ball.speedY > block.bottomEdge)
-          ball.speedY = Math.abs(ball.speedY);
-        else {
-          if (ball.top + ball.size - ball.speedY < block.top)
-            ball.speedY = Math.abs(ball.speedY) * -1;
-        }
-      }
+  let hasHit = false; 
+
+    const neighborLeft = blockArray.find(item => item.row === block.row && item.column === block.column -1 );
+    const neighborRight = blockArray.find(item => item.row === block.row && item.column === block.column +1 );
+    const neighborBottom = blockArray.find(item => item.column === block.column && item.row === block.row +1 );
+    const neighborTop = blockArray.find(item => item.column === block.column && item.row === block.row -1 );
+
+    if (ball.left + ball.size - ball.speedX < block.left && neighborLeft === undefined ){
+      ball.speedX = Math.abs(ball.speedX) * -1; 
+      hasHit = true;
     }
+    else {
+      if (ball.left - ball.speedX > block.rightEdge && neighborRight === undefined ){
+        ball.speedX = Math.abs(ball.speedX);
+        hasHit = true;
+      }
+        
+    }
+
+    if (ball.top - ball.speedY > block.bottomEdge && neighborBottom === undefined ){
+      ball.speedY = Math.abs(ball.speedY);
+      hasHit = true;
+    }
+    else {
+      if (ball.top + ball.size - ball.speedY < block.top && neighborTop === undefined ){
+        ball.speedY = Math.abs(ball.speedY) * -1;
+        hasHit = true;
+      }
+        
+    }
+    return hasHit
   }
 }
