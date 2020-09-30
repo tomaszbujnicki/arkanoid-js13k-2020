@@ -19,14 +19,24 @@ class Block {
 }
 
 function newBlock(block, playfield) {
-  const item = new Block(
-    block[0],
-    block[1],
-    block[2],
-    playfield.rowHeight,
-    playfield.columnWidth,
-    playfield.paddingTop
-  );
+  const row = block[0],
+    column = block[1],
+    power = block[2],
+    height = playfield.rowHeight,
+    width = playfield.columnWidth,
+    paddingTop = playfield.paddingTop;
+
+  const canCreateBlock =
+    column * width >= 0 &&
+    (column + 1) * width <= playfield.width &&
+    row * height + paddingTop >= 0 &&
+    (row + 1) * height + paddingTop <= playfield.height &&
+    power > 0 &&
+    power < 10;
+
+  if (!canCreateBlock) return false;
+
+  const item = new Block(row, column, power, height, width, paddingTop);
 
   return item;
 }

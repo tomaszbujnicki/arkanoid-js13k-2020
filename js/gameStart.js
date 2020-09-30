@@ -34,10 +34,13 @@ function createPlayfieldElement() {
 function createLevelObjects(level) {
   playfield = Object.create(level.playfield);
 
-  paddle = newPaddle(level.paddle, level.playfield);
+  paddle = newPaddle(level.paddle, playfield);
 
   level.blocks.forEach((item) => {
-    blockArray.push(newBlock(item, level.playfield));
+    const block = newBlock(item, playfield)
+    if (block) {
+      blockArray.push(block);
+    }
   });
 
   level.balls.forEach((item) => {
