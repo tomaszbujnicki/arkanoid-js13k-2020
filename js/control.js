@@ -10,6 +10,12 @@ function press(e) {
   if (e.keyCode === 37) {
     player1_left = true;
   }
+  if (e.keyCode === 80) {
+    pause = !pause;
+    if (pause === false && playfield) {
+      gameLoop();
+    }
+  }
 }
 
 document.addEventListener('keyup', release);
