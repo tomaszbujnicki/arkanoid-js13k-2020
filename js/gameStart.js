@@ -37,7 +37,7 @@ function createLevelObjects(level) {
   paddle = newPaddle(level.paddle, playfield);
 
   level.blocks.forEach((item) => {
-    const block = newBlock(item, playfield)
+    const block = newBlock(item, playfield);
     if (block) {
       blockArray.push(block);
     }
