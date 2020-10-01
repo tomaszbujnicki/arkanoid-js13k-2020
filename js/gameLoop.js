@@ -9,7 +9,9 @@ function gameLoop() {
 
   increaseBallSpeed();
 
-  //  end()
+  win();
+  loss();
+
   if (pause) return;
   window.requestAnimationFrame(gameLoop);
 }

@@ -1,9 +1,11 @@
-let playfield, paddle, blockArray, ballArray;
-
-let pause = true;
-
-let currentLevel = 0;
-let IdCounter = 0;
+let playfield,
+  paddle,
+  blockArray,
+  ballArray,
+  pause = true,
+  lives = 0,
+  currentLevel = 0,
+  IdCounter = 0;
 
 function uniqueId() {
   return IdCounter++;
@@ -42,12 +44,6 @@ function increaseBallSpeed() {
   ballArray.forEach((ball) => ball.speedUp());
 }
 
-function gameOver() {
-  document.getElementById('gameOver').classList.remove('none');
-  document.getElementById('playfield').classList.add('none');
-  pause = true;
-}
-
 function changeColor(object) {
   if (!object) return;
 
@@ -76,10 +72,37 @@ function changeColor(object) {
   element.style.backgroundColor = color;
 }
 
-function end() {
-  for (x in blockArray) return;
+function win() {
+  if (blockArray.length === 0) {
+    levelPassed();
+  }
+}
+function loss() {
+  if (ballArray.length === 0) {
+    levelFailed();
+  }
+}
+
+function levelPassed() {
+  pause = true;
+  /* 
+    is it last level ? gameEnd() : nextLevel()
+   */
+}
+
+function levelFailed() {
+  pause = true;
+  lives -= 1;
+  /* 
+    lives <= 0 ? gameOver() : startLevel()
+   */
+}
+
+function gameOver() {
   document.getElementById('header').textContent = 'Theme not found';
-  gameOver();
+  document.getElementById('gameOver').classList.remove('none');
+  document.getElementById('playfield').classList.add('none');
+  pause = true;
 }
 
 const el_playfield = document.getElementById('playfield'),
@@ -93,4 +116,23 @@ function deleteBlock(block) {
 function deleteBall(ball) {
   const index = ballArray.findIndex((e) => e === ball);
   ballArray.splice(index, 1);
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomlyCreateNewBall() {
+  if (random(1, 100) <= 1) {
+    const ball = new Ball(
+      0,
+      0,
+      15,
+      random(5, 50),
+      random(0, playfield.height - 150),
+      random(0, playfield.width - 50)
+    );
+    ballArray.push(ball);
+    createElement(ball);
+  }
 }
