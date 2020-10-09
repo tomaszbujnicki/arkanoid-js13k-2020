@@ -64,7 +64,7 @@ const levelArray = [
     ],
     // prettier-ignore
     blocks: [
-                            [14, 6, 1],    [14, 8, 1], [14, 9, 1], [14,10, 1],                            [14,14, 1],   
+                                                  [14,14, 1],   
     ],
   },
   {
@@ -83,44 +83,12 @@ const levelArray = [
     paddle: {
       speedX: 10,
       height: 10,
-      width: 600,
+      width: 60,
       top: 650,
       left: 200,
     },
 
     balls: [
-      {
-        speedX: -2,
-        speedY: 2.7,
-        size: 10,
-        top: 500,
-        left: 400,
-        maxSpeed: 20,
-      },
-      {
-        speedX: 2,
-        speedY: -3,
-        size: 30,
-        top: 100,
-        left: 600,
-        maxSpeed: 20,
-      },
-      {
-        speedX: 3,
-        speedY: -4,
-        size: 30,
-        top: 100,
-        left: 600,
-        maxSpeed: 20,
-      },
-      {
-        speedX: 4,
-        speedY: 5,
-        size: 30,
-        top: 100,
-        left: 600,
-        maxSpeed: 20,
-      },
       {
         speedX: 2,
         speedY: 5,
@@ -551,4 +519,278 @@ const levelArray = [
       [8, 0, 1],      [8, 5, 1],      [8, 10, 1],      [8, 15, 1],      [8, 20, 1],       [8, 25, 1], 
     ],
   },
+  {
+    name: 'test',
+
+    playfield: {
+      height: 700,
+      width: 1000,
+      rowHeight: 15,
+      columnWidth: 50,
+      paddingTop: 150,
+      top: 0,
+      left: 0,
+    },
+
+    paddle: {
+      speedX: 10,
+      height: 10,
+      width: 600,
+      top: 650,
+      left: 200,
+    },
+
+    balls: [
+      {
+        speedX: -2,
+        speedY: 2.7,
+        size: 10,
+        top: 500,
+        left: 400,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: -3,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 3,
+        speedY: -4,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 4,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+    ],
+    // prettier-ignore
+    blocks: [
+                                                  [14,14, 1],   
+    ],
+  },
+  {
+    name: 'test',
+
+    playfield: {
+      height: 700,
+      width: 1000,
+      rowHeight: 15,
+      columnWidth: 50,
+      paddingTop: 150,
+      top: 0,
+      left: 0,
+    },
+
+    paddle: {
+      speedX: 10,
+      height: 10,
+      width: 600,
+      top: 650,
+      left: 200,
+    },
+
+    balls: [
+      {
+        speedX: -2,
+        speedY: 2.7,
+        size: 10,
+        top: 500,
+        left: 400,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: -3,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 3,
+        speedY: -4,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 4,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+    ],
+    // prettier-ignore
+    blocks: [
+                                                  [14,14, 1],   
+    ],
+    
+  },
+  {
+    name: 'test',
+
+    playfield: {
+      height: 700,
+      width: 1000,
+      rowHeight: 15,
+      columnWidth: 50,
+      paddingTop: 150,
+      top: 0,
+      left: 0,
+    },
+
+    paddle: {
+      speedX: 10,
+      height: 10,
+      width: 600,
+      top: 650,
+      left: 200,
+    },
+
+    balls: [
+      {
+        speedX: -2,
+        speedY: 2.7,
+        size: 10,
+        top: 500,
+        left: 400,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: -3,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 3,
+        speedY: -4,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 4,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+    ],
+    // prettier-ignore
+    blocks: [
+                                                  [14,14, 1],   
+    ],
+  },
+  {
+    name: 'test',
+
+    playfield: {
+      height: 700,
+      width: 1000,
+      rowHeight: 15,
+      columnWidth: 50,
+      paddingTop: 150,
+      top: 0,
+      left: 0,
+    },
+
+    paddle: {
+      speedX: 10,
+      height: 10,
+      width: 600,
+      top: 650,
+      left: 200,
+    },
+
+    balls: [
+      {
+        speedX: -2,
+        speedY: 2.7,
+        size: 10,
+        top: 500,
+        left: 400,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: -3,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 3,
+        speedY: -4,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 4,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: 5,
+        size: 30,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+    ],
+    // prettier-ignore
+    blocks: [
+                                                  [14,14, 1],   
+    ],
+  },
+  
 ];
