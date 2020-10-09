@@ -9,10 +9,17 @@ function gameLoop() {
 
   increaseBallSpeed();
 
-  win();
-  loss();
+  if (isLevelPassed()) {
+    nextLevel();
+    return;
+  }
 
-  if (pause) return;
+  if (isLevelFailed()) {
+    loseLife();
+    return;
+  }
+
+  if (isPause) return;
   window.requestAnimationFrame(gameLoop);
 }
 
