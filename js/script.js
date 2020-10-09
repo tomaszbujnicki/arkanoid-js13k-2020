@@ -2,8 +2,8 @@ let playfield,
   paddle,
   blockArray,
   ballArray,
-  pause = true,
-  lives = 0,
+  isPause = true,
+  lives = 2,
   currentLevel = 0,
   IdCounter = 0;
 
@@ -72,37 +72,34 @@ function changeColor(object) {
   element.style.backgroundColor = color;
 }
 
-function win() {
-  if (blockArray.length === 0) {
-    levelPassed();
-  }
-}
-function loss() {
-  if (ballArray.length === 0) {
-    levelFailed();
-  }
+function isLevelPassed() {
+  return blockArray.length === 0;
 }
 
-function levelPassed() {
-  pause = true;
-  /* 
-    is it last level ? gameEnd() : nextLevel()
-   */
+function isLevelFailed() {
+  return ballArray.length === 0;
 }
 
-function levelFailed() {
-  pause = true;
-  lives -= 1;
-  /* 
-    lives <= 0 ? gameOver() : startLevel()
-   */
+function nextLevel() {
+  isPause = true;
+  currentLevel++;
+  levelArray.length <= currentLevel ? gameEnd() : gameStart();
+}
+
+function gameEnd() {} // game won, passed all levels
+// split gameStart() to levelStart()
+
+function loseLife() {
+  isPause = true;
+  lives--;
+  lives <= 0 ? gameOver() : gameStart();
 }
 
 function gameOver() {
   document.getElementById('header').textContent = 'Theme not found';
   document.getElementById('gameOver').classList.remove('none');
   document.getElementById('playfield').classList.add('none');
-  pause = true;
+  isPause = true;
 }
 
 const el_playfield = document.getElementById('playfield'),
