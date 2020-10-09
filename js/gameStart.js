@@ -9,7 +9,7 @@ function gameStart() {
 
   drawLevelElements();
 
-  pause = false;
+  isPause = false;
 
   gameLoop();
 }
