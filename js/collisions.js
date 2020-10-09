@@ -23,7 +23,6 @@ function wallsCollisions(ball) {
   if (ball.top > playfield.height - ball.size) {
     document.getElementById(ball.id).remove();
     deleteBall(ball);
-    if (ballArray.length == 0) gameOver();
   }
 }
 
