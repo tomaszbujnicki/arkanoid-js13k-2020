@@ -1,5 +1,5 @@
 function gameStart() {
-  closeMenu();
+  closeCards();
 
   clearLevel();
 

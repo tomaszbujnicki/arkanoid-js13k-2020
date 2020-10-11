@@ -9,10 +9,37 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: gray;
+	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
 }
 
 div {
 	box-sizing: border-box;
+}
+
+button {
+	cursor: pointer;
+	font-size: 24px;
+	color: white;
+	background-color: blue;
+	padding: 5px 10px;
+	border: 2px solid blue;
+	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+}
+
+button:hover {
+	background-color: black;
+}
+
+.disabled {
+	background-color: gray;
+	border-color: gray;
+}
+
+.highlighted {
+	background-color: yellow;
+	border-color: yellow;
+	color: red;
+	font-weight: 700;
 }
 
 .game {
@@ -38,7 +65,7 @@ div {
 	position: absolute;
 	height: 100%;
 	right: 0;
-	background-color: skyblue;
+	background-color: black;
 }
 
 .paddle {
@@ -58,7 +85,7 @@ div {
 	position: absolute;
 }
 
-.menu {
+.game-card {
 	position: absolute;
 	height: 700px;
 	width: 1000px;
@@ -67,10 +94,7 @@ div {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	padding: 200px 0;
 	background-color: black;
-
 }
 
 .none {
@@ -80,9 +104,32 @@ div {
 h2 {
 	font-size: 48px;
 	color: white;
+	margin: 100px 0;
 }
 
-button {
-	font-size: 24px;
-	color: blue;
+p {
+	font-size: 14px;
+	color: white;
+	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+	margin-bottom: 50px;
+}
+
+p.big{
+	font-size: 20px;
+}
+
+a {
+	text-decoration: none;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: lightblue
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+li {
+	margin-bottom: 20px
 }

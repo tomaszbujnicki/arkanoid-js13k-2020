@@ -2,41 +2,54 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" />
 	<title>Arkanoid 404</title>
 	<link rel="shortcut icon" href="favicon.ico" />
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	
 
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-
 	<div id="game" class="game">
-		<div id="gameOver" class="menu none">
-			<h2 id="header">GAME OVER</h2>
-			<button id="restart">Start new game</button>
-		</div>
-		<div id="menu" class="menu">
+		<div id="menu" class="game-card">
 			<h2>Arkanoid 404</h2>
-			<button id="start">Start new game</button>
+			<ul>
+				<li><button id="start-button">Start new game</button></li>
+				<li><button id="continue-button" disabled class="highlighted">Continue game</button></li>
+				<li><button id="high-score-button">High Score</button></li>
+				<li><button id="credits-button">Credits</button></li>
+			</ul>
 		</div>
-		<div class="credits none">Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
+		<div id="gameOver" class="game-card none">
+			<h2 id="header">GAME OVER</h2>
+			<button id="restart-button">Start new game</button>
+		</div>
+		<div id="high-score" class="game-card none">
+			<h2>High Score</h2>
+		</div>
+		<div id="credits" class="game-card none">
+			<h2>Credits</h2>
+			<p class="big">game made by <a href="https://github.com/tomaszbujnicki">Tomasz Bujnicki</a></p>
+			<p>favicon made by 
+				<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+					href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a></p>
+			
+		</div>
 		<div class="score"></div>
 	</div>
 
-	<script src="js/Ball.js"> </script>
-	<script src="js/Block.js"> </script>
-	<script src="js/Paddle.js"> </script>
-	<script src="js/control.js"> </script>
-	<script src="js/levels.js"> </script>
-	<script src="js/collisions.js"> </script>
-	<script src="js/gameStart.js"> </script>
-	<script src="js/gameLoop.js"> </script>
-	<script src="js/script.js"> </script>
-
+	<script src="js/Ball.js"></script>
+	<script src="js/Block.js"></script>
+	<script src="js/Paddle.js"></script>
+	<script src="js/control.js"></script>
+	<script src="js/levels.js"></script>
+	<script src="js/collisions.js"></script>
+	<script src="js/gameStart.js"></script>
+	<script src="js/gameLoop.js"></script>
+	<script src="js/script.js"></script>
 </body>
 
 </html>

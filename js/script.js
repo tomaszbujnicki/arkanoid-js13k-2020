@@ -12,11 +12,25 @@ function uniqueId() {
 }
 
 document
-  .getElementById('start')
+  .getElementById('start-button')
   .addEventListener('click', () => gameStart(), false);
 document
-  .getElementById('restart')
+  .getElementById('continue-button')
+  .addEventListener('click', () => continueGame(), false);
+document
+  .getElementById('high-score-button')
+  .addEventListener('click', () => openCard('high-score'), false);
+document
+  .getElementById('credits-button')
+  .addEventListener('click', () => openCard('credits'), false);
+document
+  .getElementById('restart-button')
   .addEventListener('click', () => gameStart(), false);
+
+function openCard(id) {
+  closeCards();
+  document.getElementById(id).classList.remove('none');
+}
 
 function draw(object) {
   if (!object) return;
@@ -36,8 +50,10 @@ function createElement(object) {
   document.getElementById('playfield').appendChild(element);
 }
 
-function closeMenu() {
+function closeCards() {
   document.getElementById('menu').classList.add('none');
+  document.getElementById('gameOver').classList.add('none');
+  document.getElementById('credits').classList.add('none');
 }
 
 function increaseBallSpeed() {
