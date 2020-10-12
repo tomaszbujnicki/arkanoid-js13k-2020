@@ -9,6 +9,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: gray;
+	color: white;
 	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
 }
 
@@ -17,9 +18,9 @@ div {
 }
 
 button {
+	color: white;
 	cursor: pointer;
 	font-size: 24px;
-	color: white;
 	background-color: blue;
 	padding: 5px 10px;
 	border: 2px solid blue;
@@ -97,19 +98,14 @@ button:hover {
 	background-color: black;
 }
 
-.none {
-	display: none;
-}
 
 h2 {
 	font-size: 48px;
-	color: white;
 	margin: 100px 0;
 }
 
 p {
 	font-size: 14px;
-	color: white;
 	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
 	margin-bottom: 50px;
 }
@@ -128,8 +124,31 @@ ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	list-style: none;
 }
 
 li {
 	margin-bottom: 20px
+}
+
+table {
+	width: 40%;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+
+td:nth-child(even), th:nth-child(even) {
+  text-align: right;
+}
+
+.back-button {
+	margin-top:100px;
+}
+
+.none {
+	display: none;
 }
