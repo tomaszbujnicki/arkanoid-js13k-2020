@@ -26,11 +26,12 @@ document
 document
   .getElementById('restart-button')
   .addEventListener('click', () => gameStart(), false);
+document
+  .querySelectorAll('.back-button')
+  .forEach((button) => button.addEventListener('click', () => {
+    openCard('menu');
+  }, false));
 
-function openCard(id) {
-  closeCards();
-  document.getElementById(id).classList.remove('none');
-}
 
 function draw(object) {
   if (!object) return;
@@ -50,10 +51,15 @@ function createElement(object) {
   document.getElementById('playfield').appendChild(element);
 }
 
+function openCard(id) {
+  closeCards();
+  document.getElementById(id).classList.remove('none');
+}
+
 function closeCards() {
-  document.getElementById('menu').classList.add('none');
-  document.getElementById('gameOver').classList.add('none');
-  document.getElementById('credits').classList.add('none');
+  document
+    .querySelectorAll('#game div.game-card')
+    .forEach((element) => element.classList.add('none'));
 }
 
 function increaseBallSpeed() {
