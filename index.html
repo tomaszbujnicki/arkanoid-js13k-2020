@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/style.css" />
-	
+
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -18,7 +18,7 @@
 			<h2>Arkanoid 404</h2>
 			<ul>
 				<li><button id="start-button">Start new game</button></li>
-				<li><button id="continue-button" disabled class="highlighted">Continue game</button></li>
+				<li><button id="continue-button" disabled class="disabled">Continue game</button></li>
 				<li><button id="high-score-button">High Score</button></li>
 				<li><button id="credits-button">Credits</button></li>
 			</ul>
@@ -29,14 +29,41 @@
 		</div>
 		<div id="high-score" class="game-card none">
 			<h2>High Score</h2>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Score</th>
+				</tr>
+				<tr>
+					<td>Amy</td>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>Bart</td>
+					<td>4</td>
+				</tr>
+				<tr>
+					<td>Cecile</td>
+					<td>3</td>
+				</tr>
+				<tr>
+					<td>Derrek</td>
+					<td>2</td>
+				</tr>
+				<tr>
+					<td>Emily</td>
+					<td>1</td>
+				</tr>
+			</table>
+			<button class="back-button zioem">back</button>
 		</div>
 		<div id="credits" class="game-card none">
 			<h2>Credits</h2>
 			<p class="big">game made by <a href="https://github.com/tomaszbujnicki">Tomasz Bujnicki</a></p>
-			<p>favicon made by 
+			<p>favicon made by
 				<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
 					href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a></p>
-			
+			<button class="back-button">back</button>
 		</div>
 		<div class="score"></div>
 	</div>
