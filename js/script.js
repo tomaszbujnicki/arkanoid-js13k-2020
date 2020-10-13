@@ -5,7 +5,37 @@ let playfield,
   isPause = true,
   lives = 2,
   currentLevel = 0,
-  IdCounter = 0;
+  IdCounter = 0,
+  playerName,
+  highScoreListMaxLength = 5,
+  highScoreList = [
+    { player: 'Amy', score: 5 },
+    { player: 'Bart', score: 4 },
+    { player: 'Cecile', score: 3 },
+    { player: 'Derrek', score: 2 },
+    { player: 'Emily', score: 1 },
+  ];
+
+function refreshHighScoreList() {
+  highScoreList.sort(function (a, b) {
+    return b.score - a.score;
+  });
+
+  while (highScoreList.length > highScoreListMaxLength) {
+    highScoreList.pop();
+  }
+
+  let highscore__table = document.querySelectorAll('#high-score__table td');
+  for (let i = 0; i < highScoreList.length; i++) {
+    let name = highscore__table[i * 2];
+    let score = highscore__table[i * 2 + 1];
+    if (!name || !score) break;
+    name.textContent = highScoreList[i].player;
+    score.textContent = highScoreList[i].score;
+  }
+}
+
+refreshHighScoreList();
 
 function uniqueId() {
   return IdCounter++;
@@ -26,12 +56,15 @@ document
 document
   .getElementById('restart-button')
   .addEventListener('click', () => gameStart(), false);
-document
-  .querySelectorAll('.back-button')
-  .forEach((button) => button.addEventListener('click', () => {
-    openCard('menu');
-  }, false));
-
+document.querySelectorAll('.back-button').forEach((button) =>
+  button.addEventListener(
+    'click',
+    () => {
+      openCard('menu');
+    },
+    false
+  )
+);
 
 function draw(object) {
   if (!object) return;
