@@ -31,16 +31,18 @@ button:hover {
 	background-color: black;
 }
 
-.disabled {
-	background-color: gray;
-	border-color: gray;
-}
-
 .highlighted {
 	background-color: yellow;
 	border-color: yellow;
 	color: red;
 	font-weight: 700;
+}
+
+.disabled {
+	background-color: gray;
+	border-color: gray;
+	color: white;
+	font-weight: normal;
 }
 
 .game {

@@ -1,12 +1,12 @@
-let playfield,
-  paddle,
-  blockArray,
-  ballArray,
+let playfield = {},
+  paddle = {},
+  blockArray = [],
+  ballArray = [],
   isPause = true,
   lives = 2,
   currentLevel = 0,
   IdCounter = 0,
-  playerName,
+  playerName = 'Player',
   highScoreListMaxLength = 5,
   highScoreList = [
     { player: 'Amy', score: 5 },
@@ -53,9 +53,6 @@ document
 document
   .getElementById('credits-button')
   .addEventListener('click', () => openCard('credits'), false);
-document
-  .getElementById('restart-button')
-  .addEventListener('click', () => gameStart(), false);
 document.querySelectorAll('.main-menu-button').forEach((button) =>
   button.addEventListener(
     'click',
@@ -127,6 +124,26 @@ function changeColor(object) {
   element.style.backgroundColor = color;
 }
 
+function pauseGame() {
+  isPause = true;
+  playfieldElement = document.getElementById('playfield');
+  if (playfieldElement) {
+    playfieldElement.classList.add('none');
+    continueButtonElement = document.getElementById('continue-button');
+    continueButtonElement.disabled = false;
+    continueButtonElement.classList.remove('disabled');
+  }
+  openCard('menu');
+}
+
+function continueGame() {
+  isPause = false;
+  if (playfield) {
+    openCard('playfield');
+    gameLoop();
+  }
+}
+
 function isLevelPassed() {
   return blockArray.length === 0;
 }
@@ -136,7 +153,6 @@ function isLevelFailed() {
 }
 
 function nextLevel() {
-  isPause = true;
   currentLevel++;
   levelArray.length <= currentLevel ? gameEnd() : gameStart();
 }
@@ -153,7 +169,10 @@ function loseLife() {
 function gameOver() {
   document.getElementById('header').textContent = 'Theme not found';
   document.getElementById('gameOver').classList.remove('none');
-  document.getElementById('playfield').classList.add('none');
+  continueButtonElement = document.getElementById('continue-button');
+  continueButtonElement.disabled = true;
+  continueButtonElement.classList.add('disabled');
+  clearLevel();
   isPause = true;
 }
 

@@ -11,10 +11,7 @@ function press(e) {
     player1_left = true;
   }
   if (e.keyCode === 80) {
-    isPause = !isPause;
-    if (isPause === false && playfield) {
-      gameLoop();
-    }
+    pauseGame();
   }
 }
 

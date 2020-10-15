@@ -15,11 +15,13 @@ function gameStart() {
 }
 
 function clearLevel() {
+  playfield = {};
+  paddle = {};
   blockArray = [];
   ballArray = [];
 
-  const playfield = document.getElementById('playfield');
-  if (playfield) playfield.remove();
+  const playfieldElement = document.getElementById('playfield');
+  if (playfieldElement) playfieldElement.remove();
 }
 
 function createPlayfieldElement() {
