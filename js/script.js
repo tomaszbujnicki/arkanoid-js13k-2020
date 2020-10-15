@@ -56,7 +56,7 @@ document
 document
   .getElementById('restart-button')
   .addEventListener('click', () => gameStart(), false);
-document.querySelectorAll('.back-button').forEach((button) =>
+document.querySelectorAll('.main-menu-button').forEach((button) =>
   button.addEventListener(
     'click',
     () => {
