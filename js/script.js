@@ -7,35 +7,43 @@ let playfield = {},
   currentLevel = 0,
   IdCounter = 0,
   playerName = 'Player',
-  highScoreListMaxLength = 5,
+  score = 0;
+
+const highScoreListMaxLength = 5,
   highScoreList = [
-    { player: 'Amy', score: 5 },
-    { player: 'Bart', score: 4 },
-    { player: 'Cecile', score: 3 },
-    { player: 'Derrek', score: 2 },
-    { player: 'Emily', score: 1 },
+    { player: 'Mike', score: 2 },
+    { player: 'Derrek', score: 20 },
+    { player: 'Emily', score: 10 },
+    { player: 'Bart', score: 40 },
+    { player: 'Sally', score: 1 },
+    { player: 'Cecile', score: 30 },
+    { player: 'Jack', score: 4 },
+    { player: 'Roland', score: 5 },
+    { player: 'Amy', score: 50 },
+    { player: 'Bob', score: 3 },
   ];
 
-function refreshHighScoreList() {
+function updateHighScoreList() {
   highScoreList.sort(function (a, b) {
     return b.score - a.score;
   });
 
-  while (highScoreList.length > highScoreListMaxLength) {
-    highScoreList.pop();
-  }
+  highScoreList.length = highScoreListMaxLength;
+}
 
-  let highscore__table = document.querySelectorAll('#high-score__table td');
-  for (let i = 0; i < highScoreList.length; i++) {
-    let name = highscore__table[i * 2];
-    let score = highscore__table[i * 2 + 1];
+function showHighScoreList() {
+  for (const index in highScoreList) {
+    let name = document.getElementById('high-score-name-' + index);
+    let score = document.getElementById('high-score-score-' + index);
     if (!name || !score) break;
-    name.textContent = highScoreList[i].player;
-    score.textContent = highScoreList[i].score;
+    name.textContent = highScoreList[index].player;
+    score.textContent = highScoreList[index].score;
   }
 }
 
-refreshHighScoreList();
+updateHighScoreList();
+
+function updateScore() {}
 
 function uniqueId() {
   return IdCounter++;
@@ -47,9 +55,14 @@ document
 document
   .getElementById('continue-button')
   .addEventListener('click', () => continueGame(), false);
-document
-  .getElementById('high-score-button')
-  .addEventListener('click', () => openCard('high-score'), false);
+document.getElementById('high-score-button').addEventListener(
+  'click',
+  () => {
+    showHighScoreList();
+    openCard('high-score');
+  },
+  false
+);
 document
   .getElementById('credits-button')
   .addEventListener('click', () => openCard('credits'), false);
