@@ -43,7 +43,21 @@ function showHighScoreList() {
 
 updateHighScoreList();
 
-function updateScore() {}
+function updateScore(points) {
+  if (Number.isInteger(points)) {
+    score += points;
+    document.getElementById('score').textContent = score;
+  }
+}
+
+function showInfoPanel() {
+  document.getElementById('info-panel').classList.remove('none');
+  document.getElementById('level-name').textContent =
+    levelArray[currentLevel].name;
+  document.getElementById('level-number').textContent = currentLevel + 1;
+  document.getElementById('lives').textContent = lives;
+  document.getElementById('score').textContent = score;
+}
 
 function uniqueId() {
   return IdCounter++;

@@ -1,6 +1,6 @@
 const levelArray = [
   {
-    name: 'test',
+    name: 'Black Hole',
 
     playfield: {
       height: 700,

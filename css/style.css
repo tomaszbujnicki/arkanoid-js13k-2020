@@ -62,13 +62,27 @@ button:hover {
 	position: absolute;
 }
 
-.score {
+.right-panel {
 	width: 260px;
 	border-left: solid blue 4px;
 	position: absolute;
 	height: 100%;
 	right: 0;
 	background-color: black;
+	padding: 20px;
+}
+
+#info-panel li {
+	font-family: 'Courier New', Courier, monospace;
+	width: 100%;
+	color: blue;
+	font-size: 16px;
+}
+
+#info-panel li span {
+	font-size: 18px;
+	font-weight: 700;
+	color: white;
 }
 
 .paddle {
@@ -112,7 +126,7 @@ p {
 	margin-bottom: 50px;
 }
 
-p.big{
+p.big {
 	font-size: 20px;
 }
 
@@ -137,18 +151,20 @@ table {
 	width: 40%;
 }
 
-td, th {
-  text-align: left;
-  padding: 8px;
+td,
+th {
+	text-align: left;
+	padding: 8px;
 }
 
 
-td:nth-child(even), th:nth-child(even) {
-  text-align: right;
+td:nth-child(even),
+th:nth-child(even) {
+	text-align: right;
 }
 
 .main-menu-button {
-	margin-top:100px;
+	margin-top: 100px;
 }
 
 .none {
