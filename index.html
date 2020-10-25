@@ -23,12 +23,12 @@
 				<li><button id="credits-button">Credits</button></li>
 			</ul>
 		</div>
-		<div id="gameOver" class="game-card none">
+		<div id="gameOver" class="game-card hide">
 			<h2 id="header">GAME OVER</h2>
 			<h3>Score: </h3>
 			<button class="main-menu-button">main menu</button>
 		</div>
-		<div id="high-score" class="game-card none">
+		<div id="high-score" class="game-card hide">
 			<h2>High Score</h2>
 			<table id="high-score__table">
 				<tr>
@@ -58,7 +58,7 @@
 			</table>
 			<button class="main-menu-button">back</button>
 		</div>
-		<div id="credits" class="game-card none">
+		<div id="credits" class="game-card hide">
 			<h2>Credits</h2>
 			<p class="big">game made by <a href="https://github.com/tomaszbujnicki">Tomasz Bujnicki</a></p>
 			<p>favicon made by
@@ -67,7 +67,7 @@
 			<button class="main-menu-button">back</button>
 		</div>
 		<div class="right-panel">
-			<ul id="info-panel" class="none">
+			<ul id="info-panel" class="hide">
 				<li><span id="level-name"></span></li>
 				<li>level: <span id="level-number"></span></li>
 				<li>lives: <span id="lives"></span></li>
@@ -82,7 +82,7 @@
 	<script src="js/control.js"></script>
 	<script src="js/levels.js"></script>
 	<script src="js/collisions.js"></script>
-	<script src="js/gameStart.js"></script>
+	<script src="js/startLevel.js"></script>
 	<script src="js/gameLoop.js"></script>
 	<script src="js/script.js"></script>
 </body>

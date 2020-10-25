@@ -167,6 +167,6 @@ th:nth-child(even) {
 	margin-top: 100px;
 }
 
-.none {
+.hide {
 	display: none;
 }

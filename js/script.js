@@ -23,6 +23,18 @@ const highScoreListMaxLength = 5,
     { player: 'Bob', score: 3 },
   ];
 
+function startNewGame() {
+  // ask for player name
+  setInitialValues();
+  startLevel();
+}
+
+function setInitialValues() {
+  lives = 2;
+  currentLevel = 0;
+  score = 0;
+}
+
 function updateHighScoreList() {
   highScoreList.sort(function (a, b) {
     return b.score - a.score;
@@ -51,7 +63,14 @@ function updateScore(points) {
 }
 
 function showInfoPanel() {
-  document.getElementById('info-panel').classList.remove('none');
+  document.getElementById('info-panel').classList.remove('hide');
+}
+
+function hideInfoPanel() {
+  document.getElementById('info-panel').classList.add('hide');
+}
+
+function updateInfoPanel() {
   document.getElementById('level-name').textContent =
     levelArray[currentLevel].name;
   document.getElementById('level-number').textContent = currentLevel + 1;
@@ -65,7 +84,7 @@ function uniqueId() {
 
 document
   .getElementById('start-button')
-  .addEventListener('click', () => gameStart(), false);
+  .addEventListener('click', () => startNewGame(), false);
 document
   .getElementById('continue-button')
   .addEventListener('click', () => continueGame(), false);
@@ -110,13 +129,13 @@ function createElement(object) {
 
 function openCard(id) {
   closeCards();
-  document.getElementById(id).classList.remove('none');
+  document.getElementById(id).classList.remove('hide');
 }
 
 function closeCards() {
   document
     .querySelectorAll('#game div.game-card')
-    .forEach((element) => element.classList.add('none'));
+    .forEach((element) => element.classList.add('hide'));
 }
 
 function increaseBallSpeed() {
@@ -155,17 +174,19 @@ function pauseGame() {
   isPause = true;
   playfieldElement = document.getElementById('playfield');
   if (playfieldElement) {
-    playfieldElement.classList.add('none');
+    playfieldElement.classList.add('hide');
     continueButtonElement = document.getElementById('continue-button');
     continueButtonElement.disabled = false;
     continueButtonElement.classList.remove('disabled');
   }
+  hideInfoPanel();
   openCard('menu');
 }
 
 function continueGame() {
   isPause = false;
   if (playfield) {
+    showInfoPanel();
     openCard('playfield');
     gameLoop();
   }
@@ -181,21 +202,21 @@ function isLevelFailed() {
 
 function nextLevel() {
   currentLevel++;
-  levelArray.length <= currentLevel ? gameEnd() : gameStart();
+  levelArray.length <= currentLevel ? gameEnd() : startLevel();
 }
 
 function gameEnd() {} // game won, passed all levels
-// split gameStart() to levelStart()
 
 function loseLife() {
   isPause = true;
   lives--;
-  lives <= 0 ? gameOver() : gameStart();
+  updateInfoPanel();
+  lives <= 0 ? gameOver() : startLevel();
 }
 
 function gameOver() {
   document.getElementById('header').textContent = 'Theme not found';
-  document.getElementById('gameOver').classList.remove('none');
+  document.getElementById('gameOver').classList.remove('hide');
   continueButtonElement = document.getElementById('continue-button');
   continueButtonElement.disabled = true;
   continueButtonElement.classList.add('disabled');

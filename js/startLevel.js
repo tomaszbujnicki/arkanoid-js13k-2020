@@ -1,4 +1,4 @@
-function gameStart() {
+function startLevel() {
   closeCards();
 
   clearLevel();
@@ -8,6 +8,9 @@ function gameStart() {
   createLevelElements();
 
   drawLevelElements();
+
+  updateInfoPanel();
+  showInfoPanel();
 
   isPause = false;
 
@@ -19,6 +22,7 @@ function clearLevel() {
   paddle = {};
   blockArray = [];
   ballArray = [];
+  IdCounter = 0;
 
   const playfieldElement = document.getElementById('playfield');
   if (playfieldElement) playfieldElement.remove();
