@@ -249,7 +249,7 @@ const levelArray = [
     ],
   },
   {
-    name: '404 / 2',
+    name: 'Tiny Squares',
 
     playfield: {
       height: 700,
@@ -264,22 +264,22 @@ const levelArray = [
     paddle: {
       speedX: 10,
       height: 10,
-      width: 600,
+      width: 60,
       top: 650,
       left: 200,
     },
 
     balls: [
       {
-        speedX: 1,
-        speedY: -3,
+        speedX: 11,
+        speedY: -7,
         size: 5,
         top: 100,
         left: 600,
         maxSpeed: 20,
       },
       {
-        speedX: 3,
+        speedX: 13,
         speedY: -3,
         size: 5,
         top: 100,
@@ -295,7 +295,7 @@ const levelArray = [
         maxSpeed: 20,
       },
       {
-        speedX: 1.5,
+        speedX: 4,
         speedY: -3,
         size: 5,
         top: 100,
@@ -304,7 +304,7 @@ const levelArray = [
       },
       {
         speedX: 2.5,
-        speedY: -3,
+        speedY: 7,
         size: 5,
         top: 100,
         left: 600,
@@ -312,7 +312,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: -2,
+        speedY: 6,
         size: 5,
         top: 100,
         left: 600,
@@ -320,7 +320,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: -1,
+        speedY: -5,
         size: 5,
         top: 100,
         left: 600,
@@ -336,7 +336,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: 0,
+        speedY: 8,
         size: 5,
         top: 100,
         left: 600,
@@ -344,7 +344,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: 1,
+        speedY: 4,
         size: 5,
         top: 100,
         left: 600,
@@ -352,7 +352,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: 2,
+        speedY: 3,
         size: 5,
         top: 100,
         left: 600,

@@ -24,7 +24,8 @@ const highScoreListMaxLength = 5,
   ];
 
 function startNewGame() {
-  // ask for player name
+  playerName = document.getElementById('playerName_Field').value;
+  console.log(playerName);
   setInitialValues();
   startLevel();
 }
@@ -62,12 +63,12 @@ function updateScore(points) {
   }
 }
 
-function showInfoPanel() {
-  document.getElementById('info-panel').classList.remove('hide');
+function hideElement(id) {
+  document.getElementById(id).classList.add('hide');
 }
 
-function hideInfoPanel() {
-  document.getElementById('info-panel').classList.add('hide');
+function displayElement(id) {
+  document.getElementById(id).classList.remove('hide');
 }
 
 function updateInfoPanel() {
@@ -82,8 +83,16 @@ function uniqueId() {
   return IdCounter++;
 }
 
+document.getElementById('start-button').addEventListener(
+  'click',
+  () => {
+    openCard('playerName');
+    document.getElementById('playerName_Field').focus();
+  },
+  false
+);
 document
-  .getElementById('start-button')
+  .getElementById('playerName_Button')
   .addEventListener('click', () => startNewGame(), false);
 document
   .getElementById('continue-button')
@@ -171,22 +180,22 @@ function changeColor(object) {
 }
 
 function pauseGame() {
-  isPause = true;
   playfieldElement = document.getElementById('playfield');
   if (playfieldElement) {
-    playfieldElement.classList.add('hide');
-    continueButtonElement = document.getElementById('continue-button');
-    continueButtonElement.disabled = false;
-    continueButtonElement.classList.remove('disabled');
+    isPause = true;
+    hideElement('playfield');
+    continueButton = document.getElementById('continue-button');
+    continueButton.disabled = false;
+    continueButton.classList.remove('disabled');
+    hideElement('info-panel');
+    openCard('menu');
   }
-  hideInfoPanel();
-  openCard('menu');
 }
 
 function continueGame() {
   isPause = false;
   if (playfield) {
-    showInfoPanel();
+    displayElement('info-panel');
     openCard('playfield');
     gameLoop();
   }
@@ -215,11 +224,14 @@ function loseLife() {
 }
 
 function gameOver() {
-  document.getElementById('header').textContent = 'Theme not found';
-  document.getElementById('gameOver').classList.remove('hide');
-  continueButtonElement = document.getElementById('continue-button');
-  continueButtonElement.disabled = true;
-  continueButtonElement.classList.add('disabled');
+  highScoreList.push({ player: playerName, score: score });
+  updateHighScoreList();
+  displayElement('gameOver');
+  hideElement('info-panel');
+  continueButton = document.getElementById('continue-button');
+  continueButton.disabled = true;
+  continueButton.classList.add('disabled');
+  document.getElementById('gameOver__score').textContent = score;
   clearLevel();
   isPause = true;
 }
@@ -242,7 +254,7 @@ function random(min, max) {
 }
 
 function randomlyCreateNewBall() {
-  if (random(1, 100) <= 1) {
+  if (random(1, 100) <= 10) {
     const ball = new Ball(
       0,
       0,

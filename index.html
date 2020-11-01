@@ -23,9 +23,16 @@
 				<li><button id="credits-button">Credits</button></li>
 			</ul>
 		</div>
+		<div id="playerName" class="game-card hide">
+			<form id="playerName_Form" class="playerName_Form">
+				<label id="playerName_Label" for="playerName_Field">Name:</label>
+				<input id="playerName_Field" type="text" placeholder="Player" maxlength="25"></input>
+				<button id="playerName_Button" type="button">Start!</button>
+			</form>
+		</div>
 		<div id="gameOver" class="game-card hide">
 			<h2 id="header">GAME OVER</h2>
-			<h3>Score: </h3>
+			<h3>Score: <span id="gameOver__score"></span></h3>
 			<button class="main-menu-button">main menu</button>
 		</div>
 		<div id="high-score" class="game-card hide">

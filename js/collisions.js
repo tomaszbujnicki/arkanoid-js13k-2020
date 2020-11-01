@@ -46,8 +46,6 @@ function paddleCollisions(ball) {
     );
     ball.speedX = speed * offset;
     ball.speedY = -1 * Math.sqrt(speed * speed - ball.speedX * ball.speedX);
-
-    console.log(offset);
   }
 }
 
@@ -58,6 +56,7 @@ function blockCollisions(ball) {
       if (block.power <= 0) {
         document.getElementById(block.id).remove();
         deleteBlock(block);
+        updateScore(25)
       } else {
         changeColor(block);
       }

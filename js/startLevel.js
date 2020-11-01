@@ -10,7 +10,7 @@ function startLevel() {
   drawLevelElements();
 
   updateInfoPanel();
-  showInfoPanel();
+  displayElement('info-panel');
 
   isPause = false;
 
