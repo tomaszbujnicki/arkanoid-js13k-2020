@@ -2,12 +2,12 @@ let playfield = {},
   paddle = {},
   blockArray = [],
   ballArray = [],
+  IdCounter,
   isPause = true,
-  lives = 2,
-  currentLevel = 0,
-  IdCounter = 0,
-  playerName = 'Player',
-  score = 0;
+  lives,
+  currentLevel,
+  playerName,
+  score;
 
 const highScoreListMaxLength = 5,
   highScoreList = [
@@ -24,10 +24,18 @@ const highScoreListMaxLength = 5,
   ];
 
 function startNewGame() {
-  playerName = document.getElementById('playerName_Field').value;
-  console.log(playerName);
+  changePlayerName();
   setInitialValues();
   startLevel();
+}
+
+function changePlayerName() {
+  const typedName = document.getElementById('playerName_Field').value;
+  if (typedName.length > 0) {
+    playerName = typedName;
+  } else {
+    playerName = 'Player';
+  }
 }
 
 function setInitialValues() {
