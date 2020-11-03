@@ -155,7 +155,7 @@ function closeCards() {
     .forEach((element) => element.classList.add('hide'));
 }
 
-function increaseBallSpeed() {
+function increaseBallsSpeed() {
   ballArray.forEach((ball) => ball.speedUp());
 }
 

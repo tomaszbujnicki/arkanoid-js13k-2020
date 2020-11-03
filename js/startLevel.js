@@ -14,6 +14,10 @@ function startLevel() {
 
   isPause = false;
 
+  setTimeout(() => {
+    ballArray.forEach((ball) => (ball.isSticked = false));
+  }, 5000);
+
   gameLoop();
 }
 

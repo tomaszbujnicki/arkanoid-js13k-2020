@@ -10,11 +10,14 @@ class Ball {
     this.left = left;
     this.height = size;
     this.width = size;
+    this.isSticked = true;
   }
 
   move() {
-    this.left += this.speedX;
-    this.top += this.speedY;
+    if (!this.isSticked) {
+      this.left += this.speedX;
+      this.top += this.speedY;
+    }
   }
 
   speedUp() {
