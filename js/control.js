@@ -13,6 +13,11 @@ function press(e) {
   if (e.keyCode === 80) {
     pauseGame();
   }
+  if (e.keyCode === 32) {
+    unstickBalls();
+    endCountDown();
+    window.clearTimeout(unstickTimeoutId);
+  }
 }
 
 document.addEventListener('keyup', release);

@@ -14,9 +14,11 @@ function startLevel() {
 
   isPause = false;
 
-  setTimeout(() => {
-    ballArray.forEach((ball) => (ball.isSticked = false));
-  }, 5000);
+  countDown(options.countdownDelay);
+
+  unstickTimeoutId = setTimeout(() => {
+    unstickBalls();
+  }, options.countdownDelay * 1000);
 
   gameLoop();
 }

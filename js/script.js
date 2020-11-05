@@ -9,17 +9,21 @@ let playfield = {},
   playerName,
   score;
 
+const options = {
+  countdownDelay: 3,
+};
+
 const highScoreListMaxLength = 5,
   highScoreList = [
     { player: 'Mike', score: 2 },
-    { player: 'Derrek', score: 20 },
-    { player: 'Emily', score: 10 },
-    { player: 'Bart', score: 40 },
+    { player: 'Derrek', score: 22 },
+    { player: 'Emily', score: 11 },
+    { player: 'Bart', score: 44 },
     { player: 'Sally', score: 1 },
-    { player: 'Cecile', score: 30 },
+    { player: 'Cecile', score: 33 },
     { player: 'Jack', score: 4 },
     { player: 'Roland', score: 5 },
-    { player: 'Amy', score: 50 },
+    { player: 'Amy', score: 55 },
     { player: 'Bob', score: 3 },
   ];
 
@@ -207,6 +211,35 @@ function continueGame() {
     openCard('playfield');
     gameLoop();
   }
+}
+
+function countDown(delay) {
+  const countdownTimer = document.getElementById('countdownTimer');
+  countdownTimer.classList.remove('hide');
+
+  let seconds = delay;
+
+  countdownTimer.textContent = seconds;
+
+  countdownTimeoutId = setInterval(() => {
+    seconds--;
+    countdownTimer.textContent = seconds;
+    if (seconds <= 0) {
+      endCountDown();
+    }
+  }, 1000);
+}
+
+function endCountDown() {
+  const countdownTimer = document.getElementById('countdownTimer');
+
+  window.clearInterval(countdownTimeoutId);
+  countdownTimer.textContent = '';
+  countdownTimer.classList.add('hide');
+}
+
+function unstickBalls() {
+  ballArray.forEach((ball) => (ball.isSticked = false));
 }
 
 function isLevelPassed() {
