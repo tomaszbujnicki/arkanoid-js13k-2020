@@ -202,6 +202,7 @@ function pauseGame() {
     continueButton.classList.remove('disabled');
     hideElement('info-panel');
     openCard('menu');
+    hint();
   }
 }
 
@@ -215,9 +216,9 @@ function releaseGame() {
 }
 
 function countDown() {
-  const card = document.getElementById('countdownTimer');
-  const levelName = document.getElementById('countdownTimer_levelName');
-  const timer = document.getElementById('countdownTimer_numbers');
+  const card = document.getElementById('countdown');
+  const levelName = document.getElementById('countdown__levelName');
+  const timer = document.getElementById('countdown__timer');
   card.classList.remove('hide');
 
   isPause = false;
@@ -232,20 +233,34 @@ function countDown() {
     timer.textContent = seconds;
     if (seconds <= 0) {
       clearCountDown();
+      hint('Press SPACEBAR to launch ball')
       gameLoop();
     }
   }, 1000);
 }
 
 function clearCountDown() {
-  const card = document.getElementById('countdownTimer');
-  const levelName = document.getElementById('countdownTimer_levelName');
-  const timer = document.getElementById('countdownTimer_numbers');
+  const card = document.getElementById('countdown');
+  const levelName = document.getElementById('countdown__levelName');
+  const timer = document.getElementById('countdown__timer');
 
   window.clearInterval(countdownTimeoutId);
   levelName.textContent = '';
   timer.textContent = '';
   card.classList.add('hide');
+}
+
+function hint(text) {
+  const card = document.getElementById('hint');
+  const message = document.getElementById('hint-message');
+  if (!text) {
+    message.textContent = '';
+    card.classList.add('hide');
+    return
+  }
+
+  message.textContent = text;
+  card.classList.remove('hide');
 }
 
 function unstickBalls() {
