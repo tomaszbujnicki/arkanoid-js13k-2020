@@ -15,8 +15,6 @@ function press(e) {
   }
   if (e.keyCode === 32) {
     unstickBalls();
-    endCountDown();
-    window.clearTimeout(unstickTimeoutId);
   }
 }
 

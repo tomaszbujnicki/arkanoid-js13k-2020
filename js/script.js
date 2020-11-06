@@ -108,7 +108,7 @@ document
   .addEventListener('click', () => startNewGame(), false);
 document
   .getElementById('continue-button')
-  .addEventListener('click', () => continueGame(), false);
+  .addEventListener('click', () => releaseGame(), false);
 document.getElementById('high-score-button').addEventListener(
   'click',
   () => {
@@ -193,8 +193,9 @@ function changeColor(object) {
 
 function pauseGame() {
   playfieldElement = document.getElementById('playfield');
-  if (playfieldElement) {
+  if (playfieldElement && !isPause) {
     isPause = true;
+    clearCountDown();
     hideElement('playfield');
     continueButton = document.getElementById('continue-button');
     continueButton.disabled = false;
@@ -204,38 +205,47 @@ function pauseGame() {
   }
 }
 
-function continueGame() {
-  isPause = false;
-  if (playfield) {
+function releaseGame() {
+  if (playfield && isPause) {
+    updateInfoPanel();
     displayElement('info-panel');
     openCard('playfield');
-    gameLoop();
+    countDown();
   }
 }
 
-function countDown(delay) {
-  const countdownTimer = document.getElementById('countdownTimer');
-  countdownTimer.classList.remove('hide');
+function countDown() {
+  const card = document.getElementById('countdownTimer');
+  const levelName = document.getElementById('countdownTimer_levelName');
+  const timer = document.getElementById('countdownTimer_numbers');
+  card.classList.remove('hide');
 
-  let seconds = delay;
+  isPause = false;
 
-  countdownTimer.textContent = seconds;
+  let seconds = options.countdownDelay;
+
+  levelName.textContent = levelArray[currentLevel].name;
+  timer.textContent = seconds;
 
   countdownTimeoutId = setInterval(() => {
     seconds--;
-    countdownTimer.textContent = seconds;
+    timer.textContent = seconds;
     if (seconds <= 0) {
-      endCountDown();
+      clearCountDown();
+      gameLoop();
     }
   }, 1000);
 }
 
-function endCountDown() {
-  const countdownTimer = document.getElementById('countdownTimer');
+function clearCountDown() {
+  const card = document.getElementById('countdownTimer');
+  const levelName = document.getElementById('countdownTimer_levelName');
+  const timer = document.getElementById('countdownTimer_numbers');
 
   window.clearInterval(countdownTimeoutId);
-  countdownTimer.textContent = '';
-  countdownTimer.classList.add('hide');
+  levelName.textContent = '';
+  timer.textContent = '';
+  card.classList.add('hide');
 }
 
 function unstickBalls() {
@@ -252,16 +262,21 @@ function isLevelFailed() {
 
 function nextLevel() {
   currentLevel++;
-  levelArray.length <= currentLevel ? gameEnd() : startLevel();
+  isPause = true;
+  window.setTimeout(() => {
+    levelArray.length <= currentLevel ? gameEnd() : startLevel();
+  }, 2000);
 }
 
 function gameEnd() {} // game won, passed all levels
 
 function loseLife() {
-  isPause = true;
   lives--;
   updateInfoPanel();
-  lives <= 0 ? gameOver() : startLevel();
+  isPause = true;
+  window.setTimeout(() => {
+    lives <= 0 ? gameOver() : startLevel();
+  }, 2000);
 }
 
 function gameOver() {

@@ -1,6 +1,4 @@
 function startLevel() {
-  closeCards();
-
   clearLevel();
 
   createLevelObjects(levelArray[currentLevel]);
@@ -9,19 +7,9 @@ function startLevel() {
 
   drawLevelElements();
 
-  updateInfoPanel();
-  displayElement('info-panel');
-
-  isPause = false;
-
-  countDown(options.countdownDelay);
-
-  unstickTimeoutId = setTimeout(() => {
-    unstickBalls();
-  }, options.countdownDelay * 1000);
-
-  gameLoop();
+  releaseGame()
 }
+
 
 function clearLevel() {
   playfield = {};
