@@ -56,9 +56,11 @@ function blockCollisions(ball) {
       if (block.power <= 0) {
         document.getElementById(block.id).remove();
         deleteBlock(block);
-        updateScore(25)
+        updateScore(25);
+        gameSound['destroyed_' + random(1, 2)].play();
       } else {
         changeColor(block);
+        gameSound['hit_' + random(1, 5)].play();
       }
     }
   }

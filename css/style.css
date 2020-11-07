@@ -93,7 +93,7 @@ button:hover {
 .hint {
 	position: absolute;
 	z-index: 50;
-	top: 500px;
+	top: 550px;
 	width: 1000px;
 	display: flex;
 	justify-content: center;

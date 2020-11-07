@@ -44,7 +44,7 @@ function changePlayerName() {
 
 function setInitialValues() {
   lives = 2;
-  currentLevel = 0;
+  currentLevel = 2;
   score = 0;
 }
 
