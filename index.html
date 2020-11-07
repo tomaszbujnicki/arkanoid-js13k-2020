@@ -19,15 +19,15 @@
 			<ul>
 				<li><button id="start-button">Start new game</button></li>
 				<li><button id="continue-button" disabled class="highlighted disabled">Continue game</button></li>
-				<li><button id="high-score-button">High Score</button></li>
+				<li><button id="high-score-button">High Score</button></li> 
 				<li><button id="credits-button">Credits</button></li>
 			</ul>
 		</div>
 		<div id="playerName" class="game-card playerName hide">
-				<label id="playerName_Label" for="playerName_Field">Name:</label>
-				<input id="playerName_Field" type="text" placeholder="Player" maxlength="25"></input>
-				<button id="playerName_Button" type="button">Start!</button>
-
+			<label id="playerName_Label" for="playerName_Field">Name:</label>
+			<input id="playerName_Field" type="text" placeholder="Player" autocomplete="off" maxlength="25"></input>
+			<button id="playerName_Button" class="highlighted">Start!</button>
+			<button class="main-menu-button">back</button>
 		</div>
 		<div id="gameOver" class="game-card hide">
 			<h2 id="header">GAME OVER</h2>
@@ -80,6 +80,10 @@
 			<div id="hint-message" class="hint-message"></div>
 		</div>
 		<div class="right-panel">
+			<ul id="options" class="">
+				<li><button class="options__button sound-on" title="Mute / Unmute"
+					alt="mute" id="options__mute-button"></button></li>
+			</ul>
 			<ul id="info-panel" class="hide">
 				<li><span id="level-name"></span></li>
 				<li>level: <span id="level-number"></span></li>

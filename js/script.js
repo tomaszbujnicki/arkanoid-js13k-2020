@@ -7,7 +7,8 @@ let playfield = {},
   lives,
   currentLevel,
   playerName,
-  score;
+  score,
+  isMuted = false;
 
 const options = {
   countdownDelay: 3,
@@ -98,36 +99,62 @@ function uniqueId() {
 document.getElementById('start-button').addEventListener(
   'click',
   () => {
+    gameSound.mouseClick.play();
     openCard('playerName');
     document.getElementById('playerName_Field').focus();
   },
   false
 );
-document
-  .getElementById('playerName_Button')
-  .addEventListener('click', () => startNewGame(), false);
-document
-  .getElementById('continue-button')
-  .addEventListener('click', () => releaseGame(), false);
+document.getElementById('playerName_Button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    startNewGame();
+  },
+  false
+);
+document.getElementById('continue-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    releaseGame();
+  },
+  false
+);
 document.getElementById('high-score-button').addEventListener(
   'click',
   () => {
+    gameSound.mouseClick.play();
     showHighScoreList();
     openCard('high-score');
   },
   false
 );
-document
-  .getElementById('credits-button')
-  .addEventListener('click', () => openCard('credits'), false);
+document.getElementById('credits-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    openCard('credits');
+  },
+  false
+);
 document.querySelectorAll('.main-menu-button').forEach((button) =>
   button.addEventListener(
     'click',
     () => {
+      gameSound.mouseClick.play();
       openCard('menu');
     },
     false
   )
+);
+document.getElementById('options__mute-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    toggleMute();
+  },
+  false
 );
 
 function draw(object) {
@@ -150,7 +177,7 @@ function createElement(object) {
 
 function openCard(id) {
   closeCards();
-  document.getElementById(id).classList.remove('hide');
+  displayElement(id);
 }
 
 function closeCards() {
@@ -201,6 +228,7 @@ function pauseGame() {
     continueButton.disabled = false;
     continueButton.classList.remove('disabled');
     hideElement('info-panel');
+    displayElement('options');
     openCard('menu');
     hint();
   }
@@ -210,16 +238,16 @@ function releaseGame() {
   if (playfield && isPause) {
     updateInfoPanel();
     displayElement('info-panel');
+    hideElement('options');
     openCard('playfield');
     countDown();
   }
 }
 
 function countDown() {
-  const card = document.getElementById('countdown');
   const levelName = document.getElementById('countdown__levelName');
   const timer = document.getElementById('countdown__timer');
-  card.classList.remove('hide');
+  displayElement('countdown');
 
   isPause = false;
 
@@ -233,11 +261,20 @@ function countDown() {
     timer.textContent = seconds;
     if (seconds <= 0) {
       clearCountDown();
-      hint('Press SPACEBAR to launch ball')
+      if (isAnyBallSticked()) {
+        hint('Press SPACEBAR to launch ball');
+      }
       gameLoop();
     }
   }, 1000);
 }
+
+const isAnyBallSticked = () => {
+  for (const ball of ballArray) {
+    if (ball.isSticked) return true;
+  }
+  return false;
+};
 
 function clearCountDown() {
   const card = document.getElementById('countdown');
@@ -251,19 +288,19 @@ function clearCountDown() {
 }
 
 function hint(text) {
-  const card = document.getElementById('hint');
   const message = document.getElementById('hint-message');
   if (!text) {
     message.textContent = '';
-    card.classList.add('hide');
-    return
+    hideElement('hint');
+    return;
   }
 
   message.textContent = text;
-  card.classList.remove('hide');
+  displayElement('hint');
 }
 
 function unstickBalls() {
+  hint();
   ballArray.forEach((ball) => (ball.isSticked = false));
 }
 

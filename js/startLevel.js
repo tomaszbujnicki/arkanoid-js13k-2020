@@ -7,9 +7,8 @@ function startLevel() {
 
   drawLevelElements();
 
-  releaseGame()
+  releaseGame();
 }
-
 
 function clearLevel() {
   playfield = {};

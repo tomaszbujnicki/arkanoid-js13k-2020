@@ -129,6 +129,22 @@ button:hover {
 	padding: 20px;
 }
 
+.options__button {
+	background-color: transparent;
+	padding: 0;
+	border: none;
+}
+
+.sound-on {
+	background-image: url(../img/sound-on.svg);
+	width: 64px;
+	height: 64px;
+}
+
+.sound-off {
+	background-image: url(../img/sound-off.svg)
+}
+
 #info-panel li {
 	font-family: 'Courier New', Courier, monospace;
 	width: 100%;
@@ -245,7 +261,8 @@ th:nth-child(even) {
 }
 
 .main-menu-button {
-	margin-top: 100px;
+	position: absolute;
+	bottom: 100px;
 }
 
 .hide {
