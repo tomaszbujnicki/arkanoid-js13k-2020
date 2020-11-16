@@ -1,0 +1,60 @@
+document.getElementById('start-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    openCard('playerName');
+    document.getElementById('playerName_Field').focus();
+  },
+  false
+);
+document.getElementById('playerName_Button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    startNewGame();
+  },
+  false
+);
+document.getElementById('continue-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    releaseGame();
+  },
+  false
+);
+document.getElementById('high-score-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    showHighScoreList();
+    openCard('high-score');
+  },
+  false
+);
+document.getElementById('credits-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    openCard('credits');
+  },
+  false
+);
+document.querySelectorAll('.main-menu-button').forEach((button) =>
+  button.addEventListener(
+    'click',
+    () => {
+      gameSound.mouseClick.play();
+      openCard('menu');
+    },
+    false
+  )
+);
+document.getElementById('options__mute-button').addEventListener(
+  'click',
+  () => {
+    gameSound.mouseClick.play();
+    toggleMute();
+  },
+  false
+);
