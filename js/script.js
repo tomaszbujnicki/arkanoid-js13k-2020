@@ -4,14 +4,11 @@ let playfield = {},
   ballArray = [],
   IdCounter,
   isPause = true,
-  lives,
-  currentLevel,
-  playerName,
-  score,
+  player,
   isMuted = false;
 
 const options = {
-  countdownDelay: 3,
+  countdownDelay: 1, // fix it
 };
 
 const highScoreListMaxLength = 5,
@@ -29,24 +26,8 @@ const highScoreListMaxLength = 5,
   ];
 
 function startNewGame() {
-  changePlayerName();
-  setInitialValues();
+  game = new Game();
   startLevel();
-}
-
-function changePlayerName() {
-  const typedName = document.getElementById('playerName_Field').value;
-  if (typedName.length > 0) {
-    playerName = typedName;
-  } else {
-    playerName = 'Player';
-  }
-}
-
-function setInitialValues() {
-  lives = 2;
-  currentLevel = 2;
-  score = 0;
 }
 
 function updateHighScoreList() {
@@ -71,8 +52,8 @@ updateHighScoreList();
 
 function updateScore(points) {
   if (Number.isInteger(points)) {
-    score += points;
-    document.getElementById('score').textContent = score;
+    game.score += points;
+    document.getElementById('score').textContent = game.score;
   }
 }
 
@@ -86,22 +67,21 @@ function displayElement(id) {
 
 function updateInfoPanel() {
   document.getElementById('level-name').textContent =
-    levelArray[currentLevel].name;
-  document.getElementById('level-number').textContent = currentLevel + 1;
-  document.getElementById('lives').textContent = lives;
-  document.getElementById('score').textContent = score;
+    levelArray[game.level].name;
+  document.getElementById('level-number').textContent = game.level + 1;
+  document.getElementById('lives').textContent = game.lives;
+  document.getElementById('score').textContent = game.score;
 }
 
 function uniqueId() {
   return IdCounter++;
 }
 
-
-
 function draw(object) {
   if (!object) return;
 
   let element = document.getElementById(object.id);
+  if (!element) return
 
   element.style.top = object.top + 'px';
   element.style.left = object.left + 'px';
@@ -176,13 +156,11 @@ function pauseGame() {
 }
 
 function releaseGame() {
-  if (playfield && isPause) {
-    updateInfoPanel();
-    displayElement('info-panel');
-    hideElement('options');
-    openCard('playfield');
-    countDown();
-  }
+  updateInfoPanel();
+  displayElement('info-panel');
+  hideElement('options');
+  openCard('playfield');
+  countDown();
 }
 
 function countDown() {
@@ -194,7 +172,7 @@ function countDown() {
 
   let seconds = options.countdownDelay;
 
-  levelName.textContent = levelArray[currentLevel].name;
+  levelName.textContent = levelArray[game.level].name;
   timer.textContent = seconds;
 
   countdownTimeoutId = setInterval(() => {
@@ -254,39 +232,36 @@ function isLevelFailed() {
 }
 
 function nextLevel() {
-  currentLevel++;
+  game.level++;
   isPause = true;
   window.setTimeout(() => {
-    levelArray.length <= currentLevel ? gameEnd() : startLevel();
+    levelArray.length <= game.level ? gameEnd() : startLevel();
   }, 2000);
 }
 
 function gameEnd() {} // game won, passed all levels
 
 function loseLife() {
-  lives--;
+  game.lives--;
   updateInfoPanel();
   isPause = true;
   window.setTimeout(() => {
-    lives <= 0 ? gameOver() : startLevel();
+    game.lives <= 0 ? gameOver() : startLevel();
   }, 2000);
 }
 
 function gameOver() {
-  highScoreList.push({ player: playerName, score: score });
+  highScoreList.push({ player: playerName, score: game.score });
   updateHighScoreList();
   displayElement('gameOver');
   hideElement('info-panel');
   continueButton = document.getElementById('continue-button');
   continueButton.disabled = true;
   continueButton.classList.add('disabled');
-  document.getElementById('gameOver__score').textContent = score;
+  document.getElementById('gameOver__score').textContent = game.score;
   clearLevel();
   isPause = true;
 }
-
-const el_playfield = document.getElementById('playfield'),
-  el_paddle = document.getElementById('paddle');
 
 function deleteBlock(block) {
   const index = blockArray.findIndex((e) => e === block);

@@ -1,7 +1,7 @@
 function startLevel() {
   clearLevel();
 
-  createLevelObjects(levelArray[currentLevel]);
+  createLevelObjects(levelArray[game.level]);
 
   createLevelElements();
 
@@ -31,19 +31,19 @@ function createPlayfieldElement() {
 }
 
 function createLevelObjects(level) {
-  playfield = Object.create(level.playfield);
+  playfield = new Playfield(level.playfield);
 
-  paddle = newPaddle(level.paddle, playfield);
+  paddle = new Paddle(level.paddle, playfield);
 
   level.blocks.forEach((item) => {
-    const block = newBlock(item, playfield);
+    const block = new Block(item, playfield);
     if (block) {
       blockArray.push(block);
     }
   });
 
   level.balls.forEach((item) => {
-    ballArray.push(newBall(item));
+    ballArray.push(new Ball(item));
   });
 }
 
@@ -55,6 +55,8 @@ function createLevelElements() {
 }
 
 function drawLevelElements() {
+  draw(playfield);
+  console.log(playfield)
   draw(paddle);
 
   blockArray.forEach(draw);

@@ -59,7 +59,7 @@ button:hover {
 }
 
 .playfield {
-	background-color: black;
+	background-color: gray;
 	position: absolute;
 }
 

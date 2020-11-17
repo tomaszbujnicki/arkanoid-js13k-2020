@@ -67,10 +67,10 @@ function blockCollisions(ball) {
 
   function isBlockHit(block) {
     return (
-      ball.top <= block.bottomEdge &&
+      ball.top <= block.top + block.height &&
       ball.top + ball.size >= block.top &&
       ball.left + ball.size >= block.left &&
-      ball.left <= block.rightEdge
+      ball.left <= block.left + block.width
     );
   }
 
@@ -98,7 +98,7 @@ function blockCollisions(ball) {
       hasHit = true;
     } else {
       if (
-        ball.left - ball.speedX > block.rightEdge &&
+        ball.left - ball.speedX > block.left + block.width &&
         neighborRight === undefined
       ) {
         ball.speedX = Math.abs(ball.speedX);
@@ -107,7 +107,7 @@ function blockCollisions(ball) {
     }
 
     if (
-      ball.top - ball.speedY > block.bottomEdge &&
+      ball.top - ball.speedY > block.top + block.height &&
       neighborBottom === undefined
     ) {
       ball.speedY = Math.abs(ball.speedY);
