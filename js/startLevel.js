@@ -1,24 +1,40 @@
-function startLevel() {
-  clearLevel();
-
-  createLevelObjects(levelArray[game.level]);
-
-  createLevelElements();
-
-  drawLevelElements();
-
-  releaseGame();
+function startNewGame() {
+  closeCards();
+  hideElement('options');
+  displayElement('canvas');
+  const game = new Game();
+  startLevel(game.levelNumber);
 }
 
-function clearLevel() {
-  playfield = {};
-  paddle = {};
-  blockArray = [];
-  ballArray = [];
-  IdCounter = 0;
+function startLevel(levelNumber) {
+  const level = new Level(levelArray[levelNumber]);
+  console.log(level);
+  drawAll(level)
+  
+  //clearPlayfield();
+  //createLevelElements();
 
+  //drawLevelElements();
+
+  //releaseGame();
+}
+
+function clearPlayfield() {
   const playfieldElement = document.getElementById('playfield');
   if (playfieldElement) playfieldElement.remove();
+  IdCounter = 0;
+}
+
+let IdCounter = 0;
+function uniqueId() {
+  return IdCounter++;
+}
+
+function createLevelElements() {
+  createPlayfieldElement();
+  createElement(paddle);
+  blockArray.forEach(createElement);
+  ballArray.forEach(createElement);
 }
 
 function createPlayfieldElement() {
@@ -47,16 +63,8 @@ function createLevelObjects(level) {
   });
 }
 
-function createLevelElements() {
-  createPlayfieldElement();
-  createElement(paddle);
-  blockArray.forEach(createElement);
-  ballArray.forEach(createElement);
-}
-
 function drawLevelElements() {
   draw(playfield);
-  console.log(playfield)
   draw(paddle);
 
   blockArray.forEach(draw);

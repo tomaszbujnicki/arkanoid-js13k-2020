@@ -3,9 +3,13 @@ class Level {
     this.playfield = new Playfield(level.playfield);
     this.paddle = createPaddle(level.paddle, this.playfield);
     this.ballArray = createBallArray(level.balls, this.playfield);
-    this.blockArray = createBlockArray(level.block, this.playfield);
+    this.blockArray = createBlockArray(level.blocks, this.playfield);
   }
+
+
 }
+
+
 
 function createPaddle(paddle, playfield) {
   let newPaddle = new Paddle(paddle, playfield);
@@ -16,7 +20,6 @@ function createPaddle(paddle, playfield) {
 
 function createBallArray(balls, playfield) {
   const ballArray = [];
-
   balls.forEach((item) => {
     const ball = new Ball(item, playfield);
     if (canCreateObject(ball, playfield)) {
@@ -29,7 +32,6 @@ function createBallArray(balls, playfield) {
 
 function createBlockArray(blocks, playfield) {
   const blockArray = [];
-
   blocks.forEach((item) => {
     const block = new Block(item, playfield);
     if (canCreateObject(block, playfield)) {

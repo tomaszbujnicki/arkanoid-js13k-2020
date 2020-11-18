@@ -2,7 +2,6 @@ let playfield = {},
   paddle = {},
   blockArray = [],
   ballArray = [],
-  IdCounter,
   isPause = true,
   player,
   isMuted = false;
@@ -25,9 +24,41 @@ const highScoreListMaxLength = 5,
     { player: 'Bob', score: 3 },
   ];
 
-function startNewGame() {
-  game = new Game();
-  startLevel();
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+
+function draw(object, color = 'white') {
+  ctx.save();
+  ctx.rect(object.left, object.top, object.width, object.height);
+  ctx.clip();
+  ctx.fillStyle = color;
+  ctx.strokeStyle = 'silver';
+  ctx.lineWidth = 10;
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  
+  //
+  //ctx.fillStyle = 'silver';
+  //
+  //
+  //ctx.fillRect(object.left+1, object.top+1, object.width-2, object.height-2);
+  //ctx.strokeRect(object.left, object.top, object.width, object.height);
+  // 
+  /*   ctx.clip();
+  ctx.lineWidth *= 2;
+  ctx.fill();
+  ctx.stroke(); */
+  //ctx.restore();
+}
+
+function drawAll(level) {
+  //draw(level.playfield, 'transparent');
+  draw(level.paddle);
+   level.ballArray.forEach(draw);
+  level.blockArray.forEach((block) => {
+    draw(block, getColor(block.power));
+  });
 }
 
 function updateHighScoreList() {
@@ -73,21 +104,17 @@ function updateInfoPanel() {
   document.getElementById('score').textContent = game.score;
 }
 
-function uniqueId() {
-  return IdCounter++;
-}
-
-function draw(object) {
+/* function draw(object) {
   if (!object) return;
 
   let element = document.getElementById(object.id);
-  if (!element) return
+  if (!element) return;
 
   element.style.top = object.top + 'px';
   element.style.left = object.left + 'px';
   element.style.height = object.height + 'px';
   element.style.width = object.width + 'px';
-}
+} */
 
 function createElement(object) {
   const element = document.createElement('div');
@@ -111,14 +138,10 @@ function increaseBallsSpeed() {
   ballArray.forEach((ball) => ball.speedUp());
 }
 
-function changeColor(object) {
-  if (!object) return;
+function getColor(power) {
+  let color = 'white';
 
-  let element = document.getElementById(object.id);
-
-  let color = 'pink';
-
-  switch (object.power) {
+  switch (power) {
     case 1:
       color = 'white';
       break;
@@ -132,11 +155,11 @@ function changeColor(object) {
       color = 'blue';
       break;
     default:
-      color = 'pink';
+      color = 'white';
       break;
   }
 
-  element.style.backgroundColor = color;
+  return color;
 }
 
 function pauseGame() {

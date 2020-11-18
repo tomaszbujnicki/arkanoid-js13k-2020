@@ -71,11 +71,11 @@ const levelArray = [
 
     playfield: {
       height: 700,
-      width: 700,
+      width: 1000,
       rowHeight: 15,
       columnWidth: 50,
       top: 0,
-      left: 200,
+      left: 0,
     },
 
     paddle: {
