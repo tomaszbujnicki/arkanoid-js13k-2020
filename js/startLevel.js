@@ -1,24 +1,40 @@
-function startLevel() {
-  clearLevel();
-
-  createLevelObjects(levelArray[currentLevel]);
-
-  createLevelElements();
-
-  drawLevelElements();
-
-  releaseGame();
+function startNewGame() {
+  closeCards();
+  hideElement('options');
+  displayElement('canvas');
+  const game = new Game();
+  startLevel(game.levelNumber);
 }
 
-function clearLevel() {
-  playfield = {};
-  paddle = {};
-  blockArray = [];
-  ballArray = [];
-  IdCounter = 0;
+function startLevel(levelNumber) {
+  const level = new Level(levelArray[levelNumber]);
+  console.log(level);
+  drawAll(level)
+  
+  //clearPlayfield();
+  //createLevelElements();
 
+  //drawLevelElements();
+
+  //releaseGame();
+}
+
+function clearPlayfield() {
   const playfieldElement = document.getElementById('playfield');
   if (playfieldElement) playfieldElement.remove();
+  IdCounter = 0;
+}
+
+let IdCounter = 0;
+function uniqueId() {
+  return IdCounter++;
+}
+
+function createLevelElements() {
+  createPlayfieldElement();
+  createElement(paddle);
+  blockArray.forEach(createElement);
+  ballArray.forEach(createElement);
 }
 
 function createPlayfieldElement() {
@@ -31,30 +47,24 @@ function createPlayfieldElement() {
 }
 
 function createLevelObjects(level) {
-  playfield = Object.create(level.playfield);
+  playfield = new Playfield(level.playfield);
 
-  paddle = newPaddle(level.paddle, playfield);
+  paddle = new Paddle(level.paddle, playfield);
 
   level.blocks.forEach((item) => {
-    const block = newBlock(item, playfield);
+    const block = new Block(item, playfield);
     if (block) {
       blockArray.push(block);
     }
   });
 
   level.balls.forEach((item) => {
-    ballArray.push(newBall(item));
+    ballArray.push(new Ball(item));
   });
 }
 
-function createLevelElements() {
-  createPlayfieldElement();
-  createElement(paddle);
-  blockArray.forEach(createElement);
-  ballArray.forEach(createElement);
-}
-
 function drawLevelElements() {
+  draw(playfield);
   draw(paddle);
 
   blockArray.forEach(draw);

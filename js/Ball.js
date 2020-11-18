@@ -1,16 +1,17 @@
 class Ball {
-  constructor(speedX, speedY, maxSpeed, size, top, left) {
+  constructor(ball) {
     this.id = uniqueId();
     this.type = 'ball';
-    this.speedX = speedX;
-    this.speedY = speedY;
-    this.maxSpeed = maxSpeed;
-    this.size = size;
-    this.top = top;
-    this.left = left;
-    this.height = size;
-    this.width = size;
+    this.speedX = ball.speedX;
+    this.speedY = ball.speedY;
+    this.maxSpeed = ball.maxSpeed;
+    this.size = ball.size;
+    this.top = ball.top;
+    this.left = ball.left;
+    this.height = ball.size;
+    this.width = ball.size;
     this.isSticked = true;
+    if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 
   move() {
@@ -25,20 +26,8 @@ class Ball {
       this.speedX * this.speedX + this.speedY * this.speedY
     );
     if (speed < this.maxSpeed) {
-      this.speedY > 0 ? (this.speedY += 0.001) : (this.speedY -= 0.001);
+      this.speedY > 0 ? (this.speedY += 0.0005) : (this.speedY -= 0.0005);
+      this.speedX > 0 ? (this.speedX += 0.0005) : (this.speedX -= 0.0005);
     }
   }
-}
-
-function newBall(ball) {
-  const item = new Ball(
-    ball.speedX,
-    ball.speedY,
-    ball.maxSpeed,
-    ball.size,
-    ball.top,
-    ball.left
-  );
-
-  return item;
 }
