@@ -89,7 +89,7 @@ const levelArray = [
     balls: [
       {
         speedX: 2,
-        speedY: 5,
+        speedY: -5,
         size: 30,
         top: 620,
         left: 300,

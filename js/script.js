@@ -10,8 +10,6 @@ const options = {
   countdownDelay: 1, // fix it
 };
 
-
-
 const highScoreListMaxLength = 5,
   highScoreList = [
     { player: 'Mike', score: 2 },
@@ -69,17 +67,9 @@ function updateInfoPanel() {
   document.getElementById('score').textContent = game.score;
 }
 
-
-
-function increaseBallsSpeed() {
-  ballArray.forEach((ball) => ball.speedUp());
-}
-
-
-
 function pauseGame() {
-    isPause = true;
-/*     clearCountDown();
+  isPause = true;
+  /*     clearCountDown();
     hideElement('playfield');
     continueButton = document.getElementById('continue-button');
     continueButton.disabled = false;
@@ -88,7 +78,6 @@ function pauseGame() {
     displayElement('options');
     openCard('menu');
     hint(); */
-  
 }
 
 function releaseGame() {
@@ -199,10 +188,7 @@ function gameOver() {
   isPause = true;
 }
 
-function deleteBlock(block) {
-  const index = blockArray.findIndex((e) => e === block);
-  blockArray.splice(index, 1);
-}
+
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

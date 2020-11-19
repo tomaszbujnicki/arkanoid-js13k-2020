@@ -9,14 +9,17 @@ class Level {
     this.check = check;
     this.drawAll = drawAll;
     this.movePaddle = movePaddle;
+    this.collisions = collisions;
   }
   deleteBall(ball) {
-    console.log(this.ballArray)
     const index = this.ballArray.findIndex((e) => e === ball);
     this.ballArray.splice(index, 1);
   }
-  
 
+  deleteBlock(block) {
+    const index = this.blockArray.findIndex((e) => e === block);
+    this.blockArray.splice(index, 1);
+  }
 }
 
 function createPaddle(paddle, playfield) {

@@ -1,7 +1,7 @@
 class Game {
   constructor(levelArray) {
     this.lives = 2;
-    this.levelNumber = 0;
+    this.levelNumber = 2;
     this.score = 0;
     this.playerName = getPlayerName();
     this.levels = levelArray;

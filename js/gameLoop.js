@@ -2,14 +2,14 @@ function startLevel() {
   const level = this;
   level.drawAll();
   isPause = false;
-  let lastRender = 0;
+  let lastRender;
   window.requestAnimationFrame(gameLoop);
 
   function gameLoop(timestamp) {
     if (isPause) return;
     let progress = timestamp - lastRender;
     level.update(progress);
-    //level.check();
+    level.check();
     level.drawAll();
     lastRender = timestamp;
     window.requestAnimationFrame(gameLoop);
@@ -20,8 +20,10 @@ function update(progress) {
   let p = progress / 16;
   if (!p) p = 1;
   this.movePaddle(p);
-  this.ballArray.forEach((ball) => ball.move(p));
-  //increaseBallsSpeed();
+  this.ballArray.forEach((ball) => {
+    ball.move(p)
+    ball.speedUp(p);
+  });
 }
 
 function movePaddle(p) {
@@ -32,13 +34,13 @@ function movePaddle(p) {
   const paddle = this.paddle;
   const ballArray = this.ballArray;
   const before = paddle.left;
-  if (player1_left){
+  if (player1_left) {
     paddle.leftRange = playfield.left;
-    paddle.moveLeft(p)
-  } else{
+    paddle.moveLeft(p);
+  } else {
     paddle.rightRange = playfield.left + playfield.width;
     paddle.moveRight(p);
-  } 
+  }
   const shift = paddle.left - before;
   ballArray.forEach((ball) => {
     if (ball.isSticked) {
@@ -48,7 +50,7 @@ function movePaddle(p) {
 }
 
 function check() {
-  collisions();
+  this.collisions();
 
   /*   if (isLevelPassed()) {
     nextLevel();
