@@ -2,43 +2,36 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 function drawAll() {
-  ctx.clearRect(0, 0, 1000 , 700)
-  drawRectangle(level.playfield, 'transparent');
-  drawRectangle(level.paddle);
+  ctx.clearRect(0, 0, 1000, 700);
+  drawShape(level.playfield, 'transparent');
+  drawShape(level.paddle);
   level.ballArray.forEach((ball) => {
-    drawCircle(ball);
+    drawShape(ball, 'white', 'circle');
   });
   level.blockArray.forEach((block) => {
-    drawRectangle(block, getColor(block.power));
+    drawShape(block, getColor(block.power));
   });
 }
 
-function drawRectangle(object, color = 'white') {
+function drawShape(object, color = 'white', shape) {
   ctx.save();
   ctx.fillStyle = color;
   ctx.strokeStyle = 'silver';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.rect(object.left, object.top, object.width, object.height);
-  ctx.clip();
-  ctx.fill();
-  ctx.stroke();
-  ctx.restore();
-}
-
-function drawCircle(object, color = 'white') {
-  ctx.save();
-  ctx.fillStyle = color;
-  ctx.strokeStyle = 'silver';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(
-    object.left + object.size / 2,
-    object.top + object.size / 2,
-    object.size / 2,
-    0,
-    2 * Math.PI
-  );
+  if (!shape) {
+    ctx.rect(object.left, object.top, object.width, object.height);
+  } else {
+    if ((shape = 'circle')) {
+      ctx.arc(
+        object.left + object.size / 2,
+        object.top + object.size / 2,
+        object.size / 2,
+        0,
+        2 * Math.PI
+      );
+    }
+  }
   ctx.clip();
   ctx.fill();
   ctx.stroke();
