@@ -1,12 +1,15 @@
-function gameLoop() {
+function gameLoop(timestamp) {
   if (isPause) return;
+  let progress = timestamp - lastRender;
+  update(progress);
+  drawAll();
 
-  draw(paddle);
-  ballArray.forEach(draw);
+  lastRender = timestamp;
+  window.requestAnimationFrame(gameLoop);
+}
+let lastRender = 0;
 
-  movePaddle();
-  ballArray.forEach((ball) => ball.move());
-
+function oldLoop() {
   ballArray.forEach(collisions);
 
   increaseBallsSpeed();
@@ -20,14 +23,22 @@ function gameLoop() {
     loseLife();
     return;
   }
-
-  window.requestAnimationFrame(gameLoop);
 }
 
-function movePaddle() {
+function update(progress) {
+  let p = progress / 16;
+  if (!p) p = 1;
+  movePaddle(p);
+  level.ballArray.forEach((ball) => ball.move(p));
+}
+
+function movePaddle(p) {
+  const paddle = level.paddle;
+  const ballArray = level.ballArray;
+
   if (player1_left) {
     const before = paddle.left;
-    paddle.moveLeft();
+    paddle.moveLeft(p);
     const shift = before - paddle.left;
 
     ballArray.forEach((ball) => {
@@ -39,7 +50,7 @@ function movePaddle() {
 
   if (player1_right) {
     const before = paddle.left;
-    paddle.moveRight();
+    paddle.moveRight(p);
     const shift = before - paddle.left;
 
     ballArray.forEach((ball) => {

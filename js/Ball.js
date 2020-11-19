@@ -10,14 +10,14 @@ class Ball {
     this.left = ball.left;
     this.height = ball.size;
     this.width = ball.size;
-    this.isSticked = true;
+    this.isSticked = false;
     if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 
-  move() {
+  move(p) {
     if (!this.isSticked) {
-      this.left += this.speedX;
-      this.top += this.speedY;
+    this.left += this.speedX * p;
+    this.top += this.speedY * p;
     }
   }
 

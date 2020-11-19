@@ -1,12 +1,19 @@
+let game;
+let level;
+
 function startNewGame() {
-  closeCards();
-  hideElement('options');
-  displayElement('canvas');
-  const game = new Game();
-  startLevel(game.levelNumber);
+  game = new Game(levelArray);
+  loadLevel();
+  drawAll();
+  isPause = false;
+  gameLoop();
 }
 
-function startLevel(levelNumber) {
+function loadLevel() {
+  level = new Level(game.levels[game.levelNumber]);
+}
+
+/* function startLevel(levelNumber) {
   const level = new Level(levelArray[levelNumber]);
   console.log(level);
   drawAll(level)
@@ -17,7 +24,7 @@ function startLevel(levelNumber) {
   //drawLevelElements();
 
   //releaseGame();
-}
+} */
 
 function clearPlayfield() {
   const playfieldElement = document.getElementById('playfield');

@@ -5,11 +5,7 @@ class Level {
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
   }
-
-
 }
-
-
 
 function createPaddle(paddle, playfield) {
   let newPaddle = new Paddle(paddle, playfield);

@@ -121,8 +121,8 @@ const levelArray = [
     playfield: {
       height: 700,
       width: 1000,
-      rowHeight: 25,
-      columnWidth: 25,
+      rowHeight: 30,
+      columnWidth: 30,
       top: 0,
       left: 0,
     },

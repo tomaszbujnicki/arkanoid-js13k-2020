@@ -11,6 +11,8 @@ document.getElementById('playerName_Button').addEventListener(
   'click',
   () => {
     gameSound.mouseClick.play();
+    hideElement('options');
+    openCard('playGround');
     startNewGame();
   },
   false
@@ -58,3 +60,14 @@ document.getElementById('options__mute-button').addEventListener(
   },
   false
 );
+
+function openCard(id) {
+  closeCards();
+  displayElement(id);
+}
+
+function closeCards() {
+  document
+    .querySelectorAll('#game div.game-card')
+    .forEach((element) => element.classList.add('hide'));
+}

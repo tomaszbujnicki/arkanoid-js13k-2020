@@ -10,6 +10,8 @@ const options = {
   countdownDelay: 1, // fix it
 };
 
+
+
 const highScoreListMaxLength = 5,
   highScoreList = [
     { player: 'Mike', score: 2 },
@@ -23,43 +25,6 @@ const highScoreListMaxLength = 5,
     { player: 'Amy', score: 55 },
     { player: 'Bob', score: 3 },
   ];
-
-const canvas = document.querySelector('#canvas');
-const ctx = canvas.getContext('2d');
-
-function draw(object, color = 'white') {
-  ctx.save();
-  ctx.rect(object.left, object.top, object.width, object.height);
-  ctx.clip();
-  ctx.fillStyle = color;
-  ctx.strokeStyle = 'silver';
-  ctx.lineWidth = 10;
-  ctx.fill();
-  ctx.stroke();
-  ctx.restore();
-  
-  //
-  //ctx.fillStyle = 'silver';
-  //
-  //
-  //ctx.fillRect(object.left+1, object.top+1, object.width-2, object.height-2);
-  //ctx.strokeRect(object.left, object.top, object.width, object.height);
-  // 
-  /*   ctx.clip();
-  ctx.lineWidth *= 2;
-  ctx.fill();
-  ctx.stroke(); */
-  //ctx.restore();
-}
-
-function drawAll(level) {
-  //draw(level.playfield, 'transparent');
-  draw(level.paddle);
-   level.ballArray.forEach(draw);
-  level.blockArray.forEach((block) => {
-    draw(block, getColor(block.power));
-  });
-}
 
 function updateHighScoreList() {
   highScoreList.sort(function (a, b) {
@@ -104,35 +69,7 @@ function updateInfoPanel() {
   document.getElementById('score').textContent = game.score;
 }
 
-/* function draw(object) {
-  if (!object) return;
 
-  let element = document.getElementById(object.id);
-  if (!element) return;
-
-  element.style.top = object.top + 'px';
-  element.style.left = object.left + 'px';
-  element.style.height = object.height + 'px';
-  element.style.width = object.width + 'px';
-} */
-
-function createElement(object) {
-  const element = document.createElement('div');
-  element.id = object.id;
-  element.classList.add(object.type);
-  document.getElementById('playfield').appendChild(element);
-}
-
-function openCard(id) {
-  closeCards();
-  displayElement(id);
-}
-
-function closeCards() {
-  document
-    .querySelectorAll('#game div.game-card')
-    .forEach((element) => element.classList.add('hide'));
-}
 
 function increaseBallsSpeed() {
   ballArray.forEach((ball) => ball.speedUp());
@@ -163,10 +100,8 @@ function getColor(power) {
 }
 
 function pauseGame() {
-  playfieldElement = document.getElementById('playfield');
-  if (playfieldElement && !isPause) {
     isPause = true;
-    clearCountDown();
+/*     clearCountDown();
     hideElement('playfield');
     continueButton = document.getElementById('continue-button');
     continueButton.disabled = false;
@@ -174,8 +109,8 @@ function pauseGame() {
     hideElement('info-panel');
     displayElement('options');
     openCard('menu');
-    hint();
-  }
+    hint(); */
+  
 }
 
 function releaseGame() {
