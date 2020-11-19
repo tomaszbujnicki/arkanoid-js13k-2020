@@ -1,45 +1,30 @@
 class Paddle {
-  constructor(top, left, height, width, speedX, leftRange, rightRange) {
+  constructor(paddle, playfield) {
     this.id = uniqueId();
     this.type = 'paddle';
-
-    this.top = top;
-    this.left = left;
-    this.height = height;
-    this.width = width;
-
-    this.speedX = speedX;
-    this.leftRange = leftRange;
-    this.rightRange = rightRange;
+    this.top = paddle.top;
+    this.left = paddle.left;
+    this.height = paddle.height;
+    this.width = paddle.width;
+    this.speedX = paddle.speedX;
+    this.leftRange = 0;
+    this.rightRange = playfield.width;
+    if (this.speedX >= 50) this.speedX = 50;
   }
 
-  moveLeft() {
-    this.left -= this.speedX;
+  moveLeft(p) {
+    this.left -= this.speedX * p;
 
     if (this.left < this.leftRange) {
       this.left = this.leftRange;
     }
   }
 
-  moveRight() {
-    this.left += this.speedX;
+  moveRight(p) {
+    this.left += this.speedX * p;
 
     if (this.left + this.width > this.rightRange) {
       this.left = this.rightRange - this.width;
     }
   }
-}
-
-function newPaddle(paddle, playfield) {
-  const item = new Paddle(
-    paddle.top,
-    paddle.left,
-    paddle.height,
-    paddle.width,
-    paddle.speedX,
-    playfield.left,
-    playfield.left + playfield.width
-  );
-
-  return item;
 }

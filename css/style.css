@@ -59,7 +59,7 @@ button:hover {
 }
 
 .playfield {
-	background-color: black;
+	background-color: gray;
 	position: absolute;
 }
 
@@ -127,6 +127,7 @@ button:hover {
 	right: 0;
 	background-color: black;
 	padding: 20px;
+	top:0;
 }
 
 .options__button {
@@ -263,6 +264,10 @@ th:nth-child(even) {
 .main-menu-button {
 	position: absolute;
 	bottom: 100px;
+}
+
+.canvas {
+	background-color: black;
 }
 
 .hide {
