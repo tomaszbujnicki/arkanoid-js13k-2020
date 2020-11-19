@@ -1,17 +1,15 @@
-let game;
-let level;
-
 function startNewGame() {
-  game = new Game(levelArray);
-  loadLevel();
-  drawAll();
-  isPause = false;
-  gameLoop();
+  const game = new Game(levelArray);
+  while (game.levelNumber < game.levels.length) {
+    const level = new Level(game.levels[game.levelNumber]);
+    level.startLevel();
+    //console.log(level);
+    return;
+  }
+  gameEndYouWin();
 }
 
-function loadLevel() {
-  level = new Level(game.levels[game.levelNumber]);
-}
+function startLevel() {}
 
 /* function startLevel(levelNumber) {
   const level = new Level(levelArray[levelNumber]);

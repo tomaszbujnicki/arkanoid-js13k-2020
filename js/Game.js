@@ -6,7 +6,6 @@ class Game {
     this.playerName = getPlayerName();
     this.levels = levelArray;
   }
-
 }
 
 function getPlayerName() {

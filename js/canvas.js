@@ -3,12 +3,12 @@ const ctx = canvas.getContext('2d');
 
 function drawAll() {
   ctx.clearRect(0, 0, 1000, 700);
-  drawShape(level.playfield, 'transparent');
-  drawShape(level.paddle);
-  level.ballArray.forEach((ball) => {
+  drawShape(this.playfield, 'transparent');
+  drawShape(this.paddle);
+  this.ballArray.forEach((ball) => {
     drawShape(ball, 'white', 'circle');
   });
-  level.blockArray.forEach((block) => {
+  this.blockArray.forEach((block) => {
     drawShape(block, getColor(block.power));
   });
 }
