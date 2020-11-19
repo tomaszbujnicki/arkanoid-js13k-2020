@@ -3,26 +3,26 @@ const levelArray = [
     name: 'Black Hole',
 
     playfield: {
-      height: 700,
-      width: 1000,
+      height: 550,
+      width: 800,
       rowHeight: 15,
       columnWidth: 50,
-      top: 0,
-      left: 0,
+      top: 100,
+      left: 100,
     },
 
     paddle: {
       speedX: 10,
       height: 10,
       width: 200,
-      top: 650,
+      top: 450,
       left: 200,
     },
 
     balls: [
       {
         speedX: -2,
-        speedY: 2.7,
+        speedY: -2.7,
         size: 10,
         top: 640,
         left: 300,
@@ -46,7 +46,7 @@ const levelArray = [
       },
       {
         speedX: 4,
-        speedY: 5,
+        speedY: -5,
         size: 20,
         top: 630,
         left: 200,
@@ -54,7 +54,7 @@ const levelArray = [
       },
       {
         speedX: 2,
-        speedY: 5,
+        speedY: -5,
         size: 5,
         top: 645,
         left: 400,

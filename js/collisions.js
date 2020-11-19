@@ -1,32 +1,38 @@
-function collisions(ball) {
-  wallsCollisions(ball);
-  paddleCollisions(ball);
-  blockCollisions(ball);
+function collisions() {
+  const playfield = level.playfield;
+  const paddle = level.paddle;
+  level.ballArray.forEach((ball) => {
+    wallsCollisions(ball, playfield);
+    paddleCollisions(ball, paddle);
+    //blockCollisions(ball);
+  });
+  
+
 }
 
-function wallsCollisions(ball) {
-  if (ball.left > playfield.width - ball.size) {
-    ball.left = playfield.width - ball.size;
+function wallsCollisions(ball, playfield) {
+  if (ball.left > playfield.left + playfield.width - ball.size) {
+    ball.left = playfield.left + playfield.width - ball.size;
     ball.speedX *= -1;
   }
 
-  if (ball.left < 0) {
-    ball.left = 0;
+  if (ball.left < playfield.left) {
+    ball.left = playfield.left;
     ball.speedX *= -1;
   }
 
-  if (ball.top < 0) {
-    ball.top = 0;
+  if (ball.top < playfield.top) {
+    ball.top = playfield.top;
     ball.speedY *= -1;
   }
 
-  if (ball.top > playfield.height - ball.size) {
-    document.getElementById(ball.id).remove();
-    deleteBall(ball);
+  if (ball.top > playfield.height + playfield.top - ball.size) {
+    level.deleteBall(ball);
   }
 }
 
-function paddleCollisions(ball) {
+
+function paddleCollisions(ball, paddle) {
   if (
     ball.speedY > 0 &&
     ball.top >= paddle.top - ball.size &&

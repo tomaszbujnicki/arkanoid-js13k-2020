@@ -5,6 +5,11 @@ class Level {
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
   }
+  deleteBall(ball) {
+    console.log(this.ballArray)
+    const index = this.ballArray.findIndex((e) => e === ball);
+    this.ballArray.splice(index, 1);
+  }
 }
 
 function createPaddle(paddle, playfield) {
@@ -42,10 +47,10 @@ function canCreateObject(item, playfield) {
   if (
     item.width > 0 &&
     item.height > 0 &&
-    item.left >= 0 &&
-    item.left + item.width <= playfield.width &&
-    item.top >= 0 &&
-    item.top + item.height <= playfield.height
+    item.left >= playfield.left &&
+    item.left + item.width <= playfield.left + playfield.width &&
+    item.top >= playfield.top &&
+    item.top + item.height <= playfield.top + playfield.height
   ) {
     return true;
   } else {

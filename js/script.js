@@ -75,29 +75,7 @@ function increaseBallsSpeed() {
   ballArray.forEach((ball) => ball.speedUp());
 }
 
-function getColor(power) {
-  let color = 'white';
 
-  switch (power) {
-    case 1:
-      color = 'white';
-      break;
-    case 2:
-      color = 'green';
-      break;
-    case 3:
-      color = 'red';
-      break;
-    case 4:
-      color = 'blue';
-      break;
-    default:
-      color = 'white';
-      break;
-  }
-
-  return color;
-}
 
 function pauseGame() {
     isPause = true;
@@ -224,11 +202,6 @@ function gameOver() {
 function deleteBlock(block) {
   const index = blockArray.findIndex((e) => e === block);
   blockArray.splice(index, 1);
-}
-
-function deleteBall(ball) {
-  const index = ballArray.findIndex((e) => e === ball);
-  ballArray.splice(index, 1);
 }
 
 function random(min, max) {

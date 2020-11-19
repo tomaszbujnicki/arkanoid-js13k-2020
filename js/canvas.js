@@ -37,3 +37,27 @@ function drawShape(object, color = 'white', shape) {
   ctx.stroke();
   ctx.restore();
 }
+
+function getColor(power) {
+  let color = 'white';
+
+  switch (power) {
+    case 1:
+      color = 'white';
+      break;
+    case 2:
+      color = 'green';
+      break;
+    case 3:
+      color = 'red';
+      break;
+    case 4:
+      color = 'blue';
+      break;
+    default:
+      color = 'white';
+      break;
+  }
+
+  return color;
+}

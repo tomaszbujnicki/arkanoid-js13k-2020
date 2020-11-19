@@ -2,6 +2,7 @@ function gameLoop(timestamp) {
   if (isPause) return;
   let progress = timestamp - lastRender;
   update(progress);
+  check();
   drawAll();
 
   lastRender = timestamp;
@@ -10,8 +11,6 @@ function gameLoop(timestamp) {
 let lastRender = 0;
 
 function oldLoop() {
-  ballArray.forEach(collisions);
-
   increaseBallsSpeed();
 
   if (isLevelPassed()) {
@@ -33,8 +32,12 @@ function update(progress) {
 }
 
 function movePaddle(p) {
+  const playfield = level.playfield;
   const paddle = level.paddle;
   const ballArray = level.ballArray;
+  paddle.leftRange = playfield.left;
+  paddle.rightRange = playfield.left + playfield.width;
+
 
   if (player1_left) {
     const before = paddle.left;
@@ -59,4 +62,8 @@ function movePaddle(p) {
       }
     });
   }
+}
+
+function check() {
+  collisions();
 }
