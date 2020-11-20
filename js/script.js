@@ -42,14 +42,13 @@ function showHighScoreList() {
   }
 }
 
-updateHighScoreList();
-
 function updateScore(points) {
   if (Number.isInteger(points)) {
-    game.score += points;
-    document.getElementById('score').textContent = game.score;
+    this.score += points;
   }
 }
+
+updateHighScoreList();
 
 function hideElement(id) {
   document.getElementById(id).classList.add('hide');
@@ -148,45 +147,9 @@ function unstickBalls() {
   ballArray.forEach((ball) => (ball.isSticked = false));
 }
 
-function isLevelPassed() {
-  return blockArray.length === 0;
-}
 
-function isLevelFailed() {
-  return ballArray.length === 0;
-}
 
-function nextLevel() {
-  game.level++;
-  isPause = true;
-  window.setTimeout(() => {
-    levelArray.length <= game.level ? gameEnd() : startLevel();
-  }, 2000);
-}
 
-function gameEnd() {} // game won, passed all levels
-
-function loseLife() {
-  game.lives--;
-  updateInfoPanel();
-  isPause = true;
-  window.setTimeout(() => {
-    game.lives <= 0 ? gameOver() : startLevel();
-  }, 2000);
-}
-
-function gameOver() {
-  highScoreList.push({ player: playerName, score: game.score });
-  updateHighScoreList();
-  displayElement('gameOver');
-  hideElement('info-panel');
-  continueButton = document.getElementById('continue-button');
-  continueButton.disabled = true;
-  continueButton.classList.add('disabled');
-  document.getElementById('gameOver__score').textContent = game.score;
-  clearLevel();
-  isPause = true;
-}
 
 
 

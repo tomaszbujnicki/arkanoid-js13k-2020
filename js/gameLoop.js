@@ -1,5 +1,6 @@
 function startLevel() {
-  const level = this;
+  const game = this;
+  const level = game.level;
   level.drawAll();
   isPause = false;
   let lastRender;
@@ -9,8 +10,10 @@ function startLevel() {
     if (isPause) return;
     let progress = timestamp - lastRender;
     level.update(progress);
-    level.check();
+    level.collisions();
     level.drawAll();
+    if (game.checkWinConditions()) return;
+    if (game.checkLoseConditions()) return;
     lastRender = timestamp;
     window.requestAnimationFrame(gameLoop);
   }
@@ -21,7 +24,7 @@ function update(progress) {
   if (!p) p = 1;
   this.movePaddle(p);
   this.ballArray.forEach((ball) => {
-    ball.move(p)
+    ball.move(p);
     ball.speedUp(p);
   });
 }
@@ -49,16 +52,34 @@ function movePaddle(p) {
   });
 }
 
-function check() {
-  this.collisions();
+function nextLevel() {
+  game.level++;
+  isPause = true;
+  window.setTimeout(() => {
+    levelArray.length <= game.level ? gameEnd() : startLevel();
+  }, 2000);
+}
 
-  /*   if (isLevelPassed()) {
-    nextLevel();
-    return;
-  }
+function gameEnd() {} // game won, passed all levels
 
-  if (isLevelFailed()) {
-    loseLife();
-    return;
-  } */
+function loseLife() {
+  game.lives--;
+  updateInfoPanel();
+  isPause = true;
+  window.setTimeout(() => {
+    game.lives <= 0 ? gameOver() : startLevel();
+  }, 2000);
+}
+
+function gameOver(playerName, playerScore) {
+  highScoreList.push({ player: playerName, score: playerScore });
+  updateHighScoreList();
+  displayElement('gameOver');
+  hideElement('info-panel');
+  hideElement('canvas');
+  continueButton = document.getElementById('continue-button');
+  continueButton.disabled = true;
+  continueButton.classList.add('disabled');
+  document.getElementById('gameOver__score').textContent = playerScore;
+  isPause = true;
 }

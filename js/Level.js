@@ -4,13 +4,15 @@ class Level {
     this.paddle = createPaddle(level.paddle, this.playfield);
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
+    this.score = 0;
     this.startLevel = startLevel;
     this.update = update;
-    this.check = check;
     this.drawAll = drawAll;
     this.movePaddle = movePaddle;
     this.collisions = collisions;
+    this.updateScore = updateScore;
   }
+  
   deleteBall(ball) {
     const index = this.ballArray.findIndex((e) => e === ball);
     this.ballArray.splice(index, 1);
@@ -19,6 +21,14 @@ class Level {
   deleteBlock(block) {
     const index = this.blockArray.findIndex((e) => e === block);
     this.blockArray.splice(index, 1);
+  }
+
+  isLevelPassed() {
+    return this.blockArray.length === 0;
+  }
+
+  isLevelFailed() {
+    return this.ballArray.length === 0;
   }
 }
 

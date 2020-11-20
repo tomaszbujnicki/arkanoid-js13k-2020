@@ -136,7 +136,7 @@ const levelArray = [
     },
 
     balls: [
-      {
+/*       {
         speedX: 1,
         speedY: -3,
         size: 30,
@@ -151,7 +151,7 @@ const levelArray = [
         top: 100,
         left: 600,
         maxSpeed: 20,
-      },
+      }, */
       {
         speedX: 4,
         speedY: -3,
@@ -160,7 +160,7 @@ const levelArray = [
         left: 600,
         maxSpeed: 20,
       },
-      {
+      /* {
         speedX: 1.5,
         speedY: -3,
         size: 30,
@@ -223,7 +223,7 @@ const levelArray = [
         top: 100,
         left: 600,
         maxSpeed: 20,
-      },
+      }, */
     ],
 
     // prettier-ignore

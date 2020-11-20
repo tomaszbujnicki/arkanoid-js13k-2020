@@ -55,13 +55,13 @@ function collisions() {
 
   function blockCollisions(ball) {
     for (const block of blockArray) {
-      if (isBlockHit(block)/*  && bounceBall(block) */) {
+      if (isBlockHit(block) && bounceBall(block)) {
         block.damage();
         if (block.power <= 0) {
           
           level.deleteBlock(block);
-          //updateScore(25);
-          //gameSound['destroyed_' + random(1, 2)].play();
+          level.updateScore(25);
+          gameSound['destroyed_' + random(1, 2)].play();
         } else {
           gameSound['hit_' + random(1, 5)].play();
         }
