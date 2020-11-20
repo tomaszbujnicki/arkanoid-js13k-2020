@@ -7,34 +7,54 @@ class Game {
     this.playerName = getPlayerName();
     this.levels = levelArray;
     this.startLevel = startLevel;
-    this.updateScore = updateScore;
+    this.update = update;
+    this.drawAll = drawAll;
+    this.collisions = collisions;
   }
   loadLevel() {
     this.level = new Level(this.levels[this.levelNumber]);
   }
-  checkWinConditions() {
-    if (this.level.isLevelPassed()) {
-      this.levelNumber++;
-      this.updateScore(this.level.score);
-      this.loadLevel();
-      this.startLevel();
-      return true;
+  updateScore(points) {
+    if (Number.isInteger(points)) {
+      this.score += points;
     }
   }
-  checkLoseConditions() {
-    if (this.level.isLevelFailed()) {
+  nextLevel() {
+      this.levelNumber++;
+      isPause = true;
+      window.setTimeout(() => {
+        console.log(this);
+        if(this.levels.length > this.levelNumber){
+          this.loadLevel();
+          this.startLevel();
+        }else{
+          this.gameEnd()
+        }
+      }, 2000);
+  }
+  loseLife() {
       this.lives--;
       if (this.lives >= 0) {
-        /* const ball = new Ball(this.levels[this.levelNumber].balls[0], playfield);
-        this.level.ballArray.push(ball); */
-        this.startLevel();
-        return true;
-      }
-      gameOver(this.playerName, this.score);
-      return true;
-    }
+        this.level.ballArray = createBallArray(this.levels[this.levelNumber].balls, this.level.playfield);
+        this.level.paddle = createPaddle(this.levels[this.levelNumber].paddle, this.level.playfield);
+      }else{
+        isPause = true;
+        gameOver(this.playerName, this.score);
+      }    
   }
 }
+
+function gameEnd() {} // game won, passed all levels
+
+function loseLife() {
+  game.lives--;
+  isPause = true;
+  window.setTimeout(() => {
+    game.lives <= 0 ? gameOver() : startLevel();
+  }, 2000);
+}
+
+
 
 function getPlayerName() {
   let playerName = document.getElementById('playerName_Field').value;

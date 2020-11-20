@@ -24,7 +24,8 @@ const highScoreListMaxLength = 5,
     { player: 'Bob', score: 3 },
   ];
 
-function updateHighScoreList() {
+function updateHighScoreList(playerName, playerScore) {
+  highScoreList.push({ player: playerName, score: playerScore });
   highScoreList.sort(function (a, b) {
     return b.score - a.score;
   });
@@ -42,13 +43,14 @@ function showHighScoreList() {
   }
 }
 
-function updateScore(points) {
-  if (Number.isInteger(points)) {
-    this.score += points;
-  }
+function gameOver(playerName, playerScore) {
+  updateHighScoreList(playerName, playerScore);
+  openCard('gameOver');
+  continueButton = document.getElementById('continue-button');
+  continueButton.disabled = true;
+  continueButton.classList.add('disabled');
+  document.getElementById('gameOver__score').textContent = playerScore;
 }
-
-updateHighScoreList();
 
 function hideElement(id) {
   document.getElementById(id).classList.add('hide');
@@ -56,14 +58,6 @@ function hideElement(id) {
 
 function displayElement(id) {
   document.getElementById(id).classList.remove('hide');
-}
-
-function updateInfoPanel() {
-  document.getElementById('level-name').textContent =
-    levelArray[game.level].name;
-  document.getElementById('level-number').textContent = game.level + 1;
-  document.getElementById('lives').textContent = game.lives;
-  document.getElementById('score').textContent = game.score;
 }
 
 function pauseGame() {
@@ -80,8 +74,6 @@ function pauseGame() {
 }
 
 function releaseGame() {
-  updateInfoPanel();
-  displayElement('info-panel');
   hideElement('options');
   openCard('playfield');
   countDown();

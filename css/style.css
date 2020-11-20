@@ -146,18 +146,6 @@ button:hover {
 	background-image: url(../img/sound-off.svg)
 }
 
-#info-panel li {
-	font-family: 'Courier New', Courier, monospace;
-	width: 100%;
-	color: blue;
-	font-size: 16px;
-}
-
-#info-panel li span {
-	font-size: 18px;
-	font-weight: 700;
-	color: white;
-}
 
 .paddle {
 	background-color: white;
@@ -265,7 +253,10 @@ th:nth-child(even) {
 	position: absolute;
 	bottom: 100px;
 }
-
+.playGround{
+	width: 1260px;
+	height: 700px;
+}
 .canvas {
 	background-color: black;
 }

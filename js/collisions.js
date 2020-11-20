@@ -1,5 +1,6 @@
 function collisions() {
-  const level = this;
+  const game = this;
+  const level = game.level;
   const playfield = level.playfield;
   const paddle = level.paddle;
   const blockArray = level.blockArray;
@@ -58,11 +59,11 @@ function collisions() {
       if (isBlockHit(block) && bounceBall(block)) {
         block.damage();
         if (block.power <= 0) {
-          
           level.deleteBlock(block);
-          level.updateScore(25);
+          game.updateScore(25);
           gameSound['destroyed_' + random(1, 2)].play();
         } else {
+          game.updateScore(5);
           gameSound['hit_' + random(1, 5)].play();
         }
       }
