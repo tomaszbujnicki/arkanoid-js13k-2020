@@ -5,7 +5,6 @@ class Level {
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
     this.score = 0;
-    this.startLevel = startLevel;
     this.update = update;
     this.drawAll = drawAll;
     this.movePaddle = movePaddle;
@@ -29,6 +28,11 @@ class Level {
 
   isLevelFailed() {
     return this.ballArray.length === 0;
+  }
+
+  unstickBalls() {
+    hint();
+    this.ballArray.forEach((ball) => (ball.isSticked = false));
   }
 }
 

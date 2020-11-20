@@ -30,14 +30,17 @@ function update(progress) {
 }
 
 function movePaddle(p) {
-  if ((player1_right && player1_left) || (!player1_right && !player1_left)) {
+  if (
+    (controlState.right && controlState.left) ||
+    (!controlState.right && !controlState.left)
+  ) {
     return;
   }
   const playfield = this.playfield;
   const paddle = this.paddle;
   const ballArray = this.ballArray;
   const before = paddle.left;
-  if (player1_left) {
+  if (controlState.left) {
     paddle.leftRange = playfield.left;
     paddle.moveLeft(p);
   } else {
@@ -74,9 +77,8 @@ function loseLife() {
 function gameOver(playerName, playerScore) {
   highScoreList.push({ player: playerName, score: playerScore });
   updateHighScoreList();
-  displayElement('gameOver');
+  openCard('gameOver');
   hideElement('info-panel');
-  hideElement('canvas');
   continueButton = document.getElementById('continue-button');
   continueButton.disabled = true;
   continueButton.classList.add('disabled');

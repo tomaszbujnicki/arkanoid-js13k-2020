@@ -142,17 +142,6 @@ function hint(text) {
   displayElement('hint');
 }
 
-function unstickBalls() {
-  hint();
-  ballArray.forEach((ball) => (ball.isSticked = false));
-}
-
-
-
-
-
-
-
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

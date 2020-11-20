@@ -3,6 +3,7 @@ class Game {
     this.lives = 1;
     this.levelNumber = 0;
     this.score = 0;
+    this.level = null;
     this.playerName = getPlayerName();
     this.levels = levelArray;
     this.startLevel = startLevel;
@@ -23,8 +24,9 @@ class Game {
   checkLoseConditions() {
     if (this.level.isLevelFailed()) {
       this.lives--;
-      if (this.lives >= 0){
-        this.loadLevel();
+      if (this.lives >= 0) {
+        /* const ball = new Ball(this.levels[this.levelNumber].balls[0], playfield);
+        this.level.ballArray.push(ball); */
         this.startLevel();
         return true;
       }

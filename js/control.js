@@ -1,29 +1,40 @@
-let player1_right = false,
-  player1_left = false;
+const controlState = {
+  left: false,
+  right: false,
+  space: false,
+  pause: false,
+};
 
-document.addEventListener('keydown', press);
-function press(e) {
-  if (e.keyCode === 39) {
-    player1_right = true;
+function keybordControl() {
+  document.addEventListener('keydown', press);
+  function press(e) {
+    if (e.keyCode === 39) {
+      controlState.right = true;
+    }
+    if (e.keyCode === 37) {
+      controlState.left = true;
+    }
+    if (e.keyCode === 32) {
+      controlState.space = true;
+    }
+    if (e.keyCode === 80) {
+      controlState.pause = true;
+    }
   }
 
-  if (e.keyCode === 37) {
-    player1_left = true;
-  }
-  if (e.keyCode === 80) {
-    pauseGame();
-  }
-  if (e.keyCode === 32) {
-    unstickBalls();
-  }
-}
-
-document.addEventListener('keyup', release);
-function release(e) {
-  if (e.keyCode === 39) {
-    player1_right = false;
-  }
-  if (e.keyCode === 37) {
-    player1_left = false;
+  document.addEventListener('keyup', release);
+  function release(e) {
+    if (e.keyCode === 39) {
+      controlState.right = false;
+    }
+    if (e.keyCode === 37) {
+      controlState.left = false;
+    }
+    if (e.keyCode === 32) {
+      controlState.space = false;
+    }
+    if (e.keyCode === 80) {
+      controlState.pause = false;
+    }
   }
 }

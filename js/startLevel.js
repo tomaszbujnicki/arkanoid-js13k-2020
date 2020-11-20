@@ -1,4 +1,5 @@
 function startNewGame() {
+  keybordControl()
   const game = new Game(levelArray);
   game.loadLevel();
   game.startLevel();
