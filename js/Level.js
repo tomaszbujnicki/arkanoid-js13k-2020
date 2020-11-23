@@ -1,11 +1,17 @@
 class Level {
-  constructor(level) {
+  constructor(level, game) {
     this.playfield = new Playfield(level.playfield);
     this.paddle = createPaddle(level.paddle, this.playfield);
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
+    this.name = level.name
+    this.game = game;
     this.movePaddle = movePaddle;
+    this.collisions = collisions;
+    this.update = update;
+    this.drawAll = drawAll;
   }
+
   deleteBall(ball) {
     const index = this.ballArray.findIndex((e) => e === ball);
     this.ballArray.splice(index, 1);

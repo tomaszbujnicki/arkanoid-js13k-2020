@@ -1,25 +1,15 @@
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 function drawAll() {
-
   ctx.clearRect(0, 0, 1260, 700);
-  drawShape(this.level.playfield, 'transparent');
-  drawShape(this.level.paddle);
-  this.level.ballArray.forEach((ball) => {
+  drawShape(this.playfield, 'transparent');
+  drawShape(this.paddle);
+  this.ballArray.forEach((ball) => {
     drawShape(ball, 'white', 'circle');
   });
-  this.level.blockArray.forEach((block) => {
+  this.blockArray.forEach((block) => {
     drawShape(block, getColor(block.power));
   });
-  /* ctx.font = "30px Arial";
-ctx.fillText("Hello World", 10, 50); 
-function updateInfoPanel() {
-  document.getElementById('level-name').textContent =
-    levelArray[game.level].name;
-  document.getElementById('level-number').textContent = game.level + 1;
-  document.getElementById('lives').textContent = game.lives;
-  document.getElementById('score').textContent = game.score;
-}*/
 }
 
 function drawShape(object, color = 'white', shape) {

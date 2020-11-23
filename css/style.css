@@ -126,8 +126,13 @@ button:hover {
 	height: 100%;
 	right: 0;
 	background-color: black;
-	padding: 20px;
-	top:0;
+	top: 0;
+}
+
+.info-panel {
+	width: 256px;
+	height: 700px;
+	background-color: black;
 }
 
 .options__button {
@@ -253,12 +258,16 @@ th:nth-child(even) {
 	position: absolute;
 	bottom: 100px;
 }
-.playGround{
+
+.playground {
 	width: 1260px;
 	height: 700px;
 }
+
 .canvas {
 	background-color: black;
+	width: 1260px;
+	height: 700px;
 }
 
 .hide {

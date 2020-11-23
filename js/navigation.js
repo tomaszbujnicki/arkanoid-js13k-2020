@@ -11,8 +11,6 @@ document.getElementById('playerName_Button').addEventListener(
   'click',
   () => {
     gameSound.mouseClick.play();
-    hideElement('options');
-    openCard('playGround');
     startNewGame();
   },
   false

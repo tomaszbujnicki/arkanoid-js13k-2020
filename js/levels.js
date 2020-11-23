@@ -63,7 +63,7 @@ const levelArray = [
     ],
     // prettier-ignore
     blocks: [
-                                                  [14,14, 1],   
+                                                  [14,14, 1],[14,15, 1],   
     ],
   },
   {
@@ -260,7 +260,7 @@ const levelArray = [
     paddle: {
       speedX: 10,
       height: 10,
-      width: 60,
+      width: 600,
       top: 650,
       left: 200,
     },
@@ -269,7 +269,7 @@ const levelArray = [
       {
         speedX: 11,
         speedY: -7,
-        size: 5,
+        size: 15,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -277,7 +277,7 @@ const levelArray = [
       {
         speedX: 13,
         speedY: -3,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -285,7 +285,7 @@ const levelArray = [
       {
         speedX: 4,
         speedY: -3,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -293,7 +293,7 @@ const levelArray = [
       {
         speedX: 4,
         speedY: -3,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -301,7 +301,7 @@ const levelArray = [
       {
         speedX: 2.5,
         speedY: 7,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -309,7 +309,7 @@ const levelArray = [
       {
         speedX: 2,
         speedY: 6,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -317,7 +317,7 @@ const levelArray = [
       {
         speedX: 2,
         speedY: -5,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -325,7 +325,7 @@ const levelArray = [
       {
         speedX: 2,
         speedY: 3,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,
@@ -333,7 +333,7 @@ const levelArray = [
       {
         speedX: 2,
         speedY: 8,
-        size: 5,
+        size: 50,
         top: 100,
         left: 600,
         maxSpeed: 20,

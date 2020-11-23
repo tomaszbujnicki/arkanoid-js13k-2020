@@ -14,7 +14,7 @@
 
 <body>
 	<div id="game" class="game">
-		<div id="playGround" class="playGround game-card hide"><canvas id="canvas" class="canvas" width="1260" height="700">
+		<div id="playground" class="playground game-card hide"><canvas id="canvas" class="canvas" width="1260" height="700">
 			</canvas></div>
 
 		<div id="menu" class="game-card">
@@ -87,10 +87,12 @@
 				<li><button class="options__button sound-on" title="Mute / Unmute" alt="mute"
 						id="options__mute-button"></button></li>
 			</ul>
+			<canvas id="info-panel" class="info-panel hide" width="256" height="700">
+			</canvas></div>
 		</div>
 	</div>
 
-	<script src="js/canvas.js"></script>
+	<script src="js/draw.js"></script>
 	<script src="js/Playfield.js"></script>
 	<script src="js/Level.js"></script>
 	<script src="js/Game.js"></script>

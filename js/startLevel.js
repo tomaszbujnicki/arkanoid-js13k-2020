@@ -1,4 +1,7 @@
 function startNewGame() {
+  hideElement('options');
+  openCard('playground');
+  displayElement('info-panel')
   keybordControl()
   const game = new Game(levelArray);
   game.loadLevel();
