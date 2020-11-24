@@ -33,8 +33,5 @@ function keybordControl() {
     if (e.keyCode === 32) {
       controlState.space = false;
     }
-    if (e.keyCode === 80) {
-      controlState.pause = false;
-    }
   }
 }

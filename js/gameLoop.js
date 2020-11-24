@@ -1,14 +1,19 @@
 function startLevel() {
   const game = this;
   const level = game.level;
+  game.isPause = false;
   level.drawAll();
   game.updateInfoPanel();
-  isPause = false;
   let lastRender;
   window.requestAnimationFrame(gameLoop);
 
   function gameLoop(timestamp) {
-    if (isPause) return;
+    if (controlState.pause) {game.pause();
+    return;}
+    if (game.isPause) {
+      return;
+    }
+    
     let progress = timestamp - lastRender;
 
     level.update(progress);
@@ -21,6 +26,7 @@ function startLevel() {
     if (level.isLost()) {
       game.loseLife();
     }
+
     lastRender = timestamp;
     window.requestAnimationFrame(gameLoop);
   }
@@ -29,6 +35,9 @@ function startLevel() {
 function update(progress) {
   let p = progress / 16;
   if (!p) p = 1;
+  if (controlState.space) {
+    this.unstickBalls();
+  }
   this.movePaddle(p);
   this.ballArray.forEach((ball) => {
     ball.move(p);
@@ -61,7 +70,3 @@ function movePaddle(p) {
     }
   });
 }
-
-
-
-

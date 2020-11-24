@@ -10,7 +10,7 @@ class Ball {
     this.left = ball.left;
     this.height = ball.size;
     this.width = ball.size;
-    this.isSticked = false;
+    this.isSticked = true;
     if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 

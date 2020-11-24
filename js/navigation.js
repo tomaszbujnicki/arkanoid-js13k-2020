@@ -15,14 +15,6 @@ document.getElementById('playerName_Button').addEventListener(
   },
   false
 );
-document.getElementById('continue-button').addEventListener(
-  'click',
-  () => {
-    gameSound.mouseClick.play();
-    releaseGame();
-  },
-  false
-);
 document.getElementById('high-score-button').addEventListener(
   'click',
   () => {

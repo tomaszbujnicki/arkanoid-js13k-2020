@@ -1,10 +1,6 @@
-let playfield = {},
-  paddle = {},
-  blockArray = [],
-  ballArray = [],
-  isPause = true,
-  player,
-  isMuted = false;
+let isMuted = false;
+let loopId;
+let mine;
 
 const options = {
   countdownDelay: 1, // fix it
@@ -47,7 +43,7 @@ function gameOver(playerName, playerScore) {
   updateHighScoreList(playerName, playerScore);
   openCard('gameOver');
   hideElement('info-panel');
-  continueButton = document.getElementById('continue-button');
+  const continueButton = document.getElementById('continue-button');
   continueButton.disabled = true;
   continueButton.classList.add('disabled');
   document.getElementById('gameOver__score').textContent = playerScore;
@@ -59,25 +55,6 @@ function hideElement(id) {
 
 function displayElement(id) {
   document.getElementById(id).classList.remove('hide');
-}
-
-function pauseGame() {
-  isPause = true;
-  /*     clearCountDown();
-    hideElement('playfield');
-    continueButton = document.getElementById('continue-button');
-    continueButton.disabled = false;
-    continueButton.classList.remove('disabled');
-    hideElement('info-panel');
-    displayElement('options');
-    openCard('menu');
-    hint(); */
-}
-
-function releaseGame() {
-  hideElement('options');
-  openCard('playfield');
-  countDown();
 }
 
 function countDown() {
@@ -167,12 +144,11 @@ function updateInfoPanel() {
 
   ctx.font = 'bold 20pt Courier';
   ctx.fillStyle = 'white';
-  ctx.textAlign = "center";
-  ctx.fillText(game.level.name, canvas.width/2, row * 1);
-
+  ctx.textAlign = 'center';
+  ctx.fillText(game.level.name, canvas.width / 2, row * 1);
 
   ctx.font = 'bold 16pt Courier';
-  ctx.textAlign = "left";
+  ctx.textAlign = 'left';
 
   ctx.fillText(
     game.levelNumber + 1 + ' / ' + (game.levels.length + 1),
