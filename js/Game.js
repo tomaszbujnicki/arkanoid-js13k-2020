@@ -16,18 +16,17 @@ class Game {
   }
 
   pause() {
+    const game = this;
     this.isPause = true;
     //clearCountDown();
     const continueButton = document.getElementById('continue-button');
-    continueButton.addEventListener(
-      'click',
-      () => {
-        gameSound.mouseClick.play();
-        this.releaseGame();
-      },
-      false
-    );
-    
+    continueButton.addEventListener('click', rel, false);
+    function rel() {
+      gameSound.mouseClick.play();
+      game.releaseGame();
+      continueButton.removeEventListener('click', rel, false);
+    }
+
     continueButton.disabled = false;
     continueButton.classList.remove('disabled');
 
@@ -36,19 +35,19 @@ class Game {
     openCard('menu');
     hint();
   }
-  
+
   releaseGame() {
     hideElement('options');
     displayElement('info-panel');
     openCard('playground');
     controlState.pause = false;
-    this.startLevel()
+    this.startLevel();
     //countDown();
   }
 
   nextLevel() {
     this.isPause = true;
-    this.levelNumber++;
+    //this.levelNumber++;
 
     gameSound.levelClear.play();
     window.setTimeout(() => {
