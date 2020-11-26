@@ -1,4 +1,4 @@
-const levelArray = [
+export default [
   {
     name: 'Black Hole',
 

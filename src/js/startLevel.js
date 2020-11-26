@@ -1,4 +1,7 @@
-function startLevel() {
+import Level from './Level';
+import { GAMESTATE } from './data';
+
+export default function startLevel() {
   const game = this;
   game.level = new Level(this.levels[this.levelNumber], this);
   game.state = GAMESTATE.RUN;

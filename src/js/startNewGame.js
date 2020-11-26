@@ -1,5 +1,9 @@
+import { keybordControl } from './control';
+import Game from './Game';
+import levelArray from './levels';
+
 export default function startNewGame() {
-  keybordControl()
+  keybordControl();
   const playerName = getPlayerName();
   const game = new Game(levelArray, playerName);
   game.loadLevel();

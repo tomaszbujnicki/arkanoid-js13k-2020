@@ -1,11 +1,8 @@
-import drawInfoPanel from 'js/drawInfoPanel';
-import SOUND from "js/sounds";
-
-const GAMESTATE = {
-  RUN: 0,
-  PAUSE: 1,
-  ABORT: 2,
-};
+import drawInfoPanel from './drawInfoPanel';
+import SOUND from './sounds';
+import Level from './Level';
+import startLevel from './startLevel';
+import { GAMESTATE } from './data';
 
 export default class Game {
   constructor(levelArray, playerName) {
@@ -22,7 +19,7 @@ export default class Game {
 
   loadLevel() {}
 
-/*   pause() {
+  /*   pause() {
     const game = this;
     this.isPause = true;
     //clearCountDown();
@@ -61,15 +58,16 @@ export default class Game {
   }
 
   loseLife() {
+    const level = this.level;
     this.lives--;
     if (this.lives >= 0) {
-      this.level.ballArray = createBallArray(
+      level.ballArray = level.createBallArray(
         this.levels[this.levelNumber].balls,
-        this.level.playfield
+        level.playfield
       );
-      this.level.paddle = createPaddle(
+      level.paddle = level.createPaddle(
         this.levels[this.levelNumber].paddle,
-        this.level.playfield
+        level.playfield
       );
     } else {
       this.state = GAMESTATE.ABORT;

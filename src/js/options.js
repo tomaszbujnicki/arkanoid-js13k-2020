@@ -1,4 +1,4 @@
-import SOUND from "js/sounds";
+import SOUND from "./sounds";
 
 const options = {
   countdownDelay: 1,

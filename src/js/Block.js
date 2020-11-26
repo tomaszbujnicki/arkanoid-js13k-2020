@@ -17,3 +17,8 @@ export default class Block {
     this.power--;
   }
 }
+
+let IdCounter = 0;
+function uniqueId() {
+  return IdCounter++;
+}

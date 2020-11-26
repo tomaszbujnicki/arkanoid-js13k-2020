@@ -1,5 +1,5 @@
-import SOUND from 'js/sounds';
-import startNewGame from 'js/startNewGame';
+import SOUND from './sounds';
+import startNewGame from './startNewGame';
 
 export default function navigation() {
   function hideElement(id) {

@@ -1,3 +1,5 @@
+export { controlState, keybordControl };
+
 const controlState = {
   left: false,
   right: false,

@@ -1,3 +1,5 @@
+export { random };
+
 const highScoreListMaxLength = 5,
   highScoreList = [
     { player: 'Mike', score: 2 },

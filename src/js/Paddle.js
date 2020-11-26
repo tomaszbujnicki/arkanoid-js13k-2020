@@ -1,6 +1,5 @@
 export default class Paddle {
   constructor(paddle, playfield) {
-    this.id = uniqueId();
     this.type = 'paddle';
     this.top = paddle.top;
     this.left = paddle.left;

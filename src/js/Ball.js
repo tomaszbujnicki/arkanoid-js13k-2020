@@ -31,3 +31,8 @@ export default class Ball {
     }
   }
 }
+
+let IdCounter = 0;
+function uniqueId() {
+  return IdCounter++;
+}

@@ -1,4 +1,7 @@
-function collisions() {
+import SOUND from './sounds';
+import { random } from './functions';
+
+export default function collisions() {
   const level = this;
   const playfield = level.playfield;
   const paddle = level.paddle;
@@ -27,7 +30,7 @@ function collisions() {
 
     if (ball.top > playfield.height + playfield.top - ball.size) {
       level.deleteBall(ball);
-      SOUND.ballLost_1.play();
+      SOUND.ballLost.play();
     }
   }
 
@@ -58,13 +61,12 @@ function collisions() {
     for (const block of blockArray) {
       if (isBlockHit(block) && bounceBall(block)) {
         block.damage();
+        SOUND['hit_' + random(1, 3)].play();
         if (block.power <= 0) {
           level.deleteBlock(block);
           level.game.updateScore(25);
-          SOUND['destroyed_' + random(1, 2)].play();
         } else {
           level.game.updateScore(5);
-          SOUND['hit_' + random(1, 5)].play();
         }
       }
     }
