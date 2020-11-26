@@ -1,4 +1,4 @@
-class Paddle {
+export default class Paddle {
   constructor(paddle, playfield) {
     this.id = uniqueId();
     this.type = 'paddle';

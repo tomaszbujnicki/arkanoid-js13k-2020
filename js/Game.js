@@ -1,28 +1,35 @@
-class Game {
-  constructor(levelArray) {
+import drawInfoPanel from 'js/drawInfoPanel';
+import SOUND from "js/sounds";
+
+const GAMESTATE = {
+  RUN: 0,
+  PAUSE: 1,
+  ABORT: 2,
+};
+
+export default class Game {
+  constructor(levelArray, playerName) {
     this.lives = 2;
     this.levelNumber = 0;
     this.score = 0;
     this.level = null;
-    this.playerName = getPlayerName();
+    this.playerName = playerName;
     this.levels = levelArray;
-    this.isPause = true;
     this.startLevel = startLevel;
-    this.updateInfoPanel = updateInfoPanel;
+    this.drawInfoPanel = drawInfoPanel;
+    this.state = GAMESTATE.ABORT;
   }
 
-  loadLevel() {
-    this.level = new Level(this.levels[this.levelNumber], this);
-  }
+  loadLevel() {}
 
-  pause() {
+/*   pause() {
     const game = this;
     this.isPause = true;
     //clearCountDown();
     const continueButton = document.getElementById('continue-button');
     continueButton.addEventListener('click', rel, false);
     function rel() {
-      gameSound.mouseClick.play();
+      SOUND.mouseClick.play();
       game.releaseGame();
       continueButton.removeEventListener('click', rel, false);
     }
@@ -34,34 +41,27 @@ class Game {
     displayElement('options');
     openCard('menu');
     hint();
-  }
+  } */
 
-  releaseGame() {
-    hideElement('options');
-    displayElement('info-panel');
-    openCard('playground');
-    controlState.pause = false;
-    this.startLevel();
-    //countDown();
-  }
+  theEnd() {} // game won, passed all levels
 
   nextLevel() {
-    this.isPause = true;
-    //this.levelNumber++;
-
-    gameSound.levelClear.play();
+    this.state = GAMESTATE.ABORT;
+    // level passed info
+    this.levelNumber++;
+    SOUND.levelClear.play();
     window.setTimeout(() => {
       if (this.levels.length > this.levelNumber) {
         this.loadLevel();
         this.startLevel();
       } else {
-        this.gameEnd();
+        this.theEnd();
       }
     }, 2000);
   }
+
   loseLife() {
     this.lives--;
-    this.updateInfoPanel();
     if (this.lives >= 0) {
       this.level.ballArray = createBallArray(
         this.levels[this.levelNumber].balls,
@@ -72,24 +72,14 @@ class Game {
         this.level.playfield
       );
     } else {
-      this.isPause = true;
+      this.state = GAMESTATE.ABORT;
       gameOver(this.playerName, this.score);
     }
   }
+
   updateScore(points) {
     if (Number.isInteger(points)) {
       this.score += points;
-      this.updateInfoPanel();
     }
   }
-}
-
-function gameEnd() {} // game won, passed all levels
-
-function getPlayerName() {
-  let playerName = document.getElementById('playerName_Field').value;
-  if (!playerName) {
-    playerName = 'Player';
-  }
-  return playerName;
 }

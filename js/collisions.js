@@ -27,7 +27,7 @@ function collisions() {
 
     if (ball.top > playfield.height + playfield.top - ball.size) {
       level.deleteBall(ball);
-      gameSound.ballLost_1.play()
+      SOUND.ballLost_1.play();
     }
   }
 
@@ -61,10 +61,10 @@ function collisions() {
         if (block.power <= 0) {
           level.deleteBlock(block);
           level.game.updateScore(25);
-          gameSound['destroyed_' + random(1, 2)].play();
+          SOUND['destroyed_' + random(1, 2)].play();
         } else {
           level.game.updateScore(5);
-          gameSound['hit_' + random(1, 5)].play();
+          SOUND['hit_' + random(1, 5)].play();
         }
       }
     }

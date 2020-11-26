@@ -1,4 +1,4 @@
-class Block {
+export default class Block {
   constructor(block, playfield) {
     this.id = uniqueId();
     this.type = 'block';

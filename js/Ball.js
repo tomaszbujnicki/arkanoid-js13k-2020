@@ -1,4 +1,4 @@
-class Ball {
+export default class Ball {
   constructor(ball) {
     this.id = uniqueId();
     this.type = 'ball';

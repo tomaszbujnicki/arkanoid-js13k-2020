@@ -1,4 +1,4 @@
-const gameSound = {
+export default SOUND = {
   hit_1: new Audio('audio/hit-1.wav'),
   hit_2: new Audio('audio/hit-2.wav'),
   hit_3: new Audio('audio/hit-3.wav'),
@@ -18,14 +18,3 @@ const gameSound = {
   powerUp_2: new Audio('audio/power-up-2.wav'),
   powerUp_3: new Audio('audio/power-up-3.wav'),
 };
-
-function toggleMute() {
-  isMuted = !isMuted;
-  const button = document.getElementById('options__mute-button');
-  isMuted
-    ? button.classList.add('sound-off')
-    : button.classList.remove('sound-off');
-  for (let sound in gameSound) {
-    gameSound[sound].muted = isMuted;
-  }
-}

@@ -1,14 +1,15 @@
-function startNewGame() {
-  hideElement('options');
-  openCard('playground');
-  displayElement('info-panel')
+export default function startNewGame() {
   keybordControl()
-  const game = new Game(levelArray);
+  const playerName = getPlayerName();
+  const game = new Game(levelArray, playerName);
   game.loadLevel();
   game.startLevel();
-}
 
-let IdCounter = 0;
-function uniqueId() {
-  return IdCounter++;
+  function getPlayerName() {
+    let playerName = document.getElementById('playerName_Field').value;
+    if (!playerName) {
+      playerName = 'Player';
+    }
+    return playerName;
+  }
 }

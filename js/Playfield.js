@@ -1,4 +1,4 @@
-class Playfield {
+export default class Playfield {
   constructor(playfield) {
     this.id = 'playfield';
     this.height = playfield.height;

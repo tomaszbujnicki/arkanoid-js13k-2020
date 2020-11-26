@@ -1,15 +1,20 @@
-class Level {
+import SOUND from "js/sounds";
+import draw from 'js/draw';
+import Ball from "js/Ball";
+import Block from "js/Block";
+import Paddle from "js/Paddle";
+import Playfield from "js/Playfield";
+
+export default class Level {
   constructor(level, game) {
     this.playfield = new Playfield(level.playfield);
     this.paddle = createPaddle(level.paddle, this.playfield);
     this.ballArray = createBallArray(level.balls, this.playfield);
     this.blockArray = createBlockArray(level.blocks, this.playfield);
-    this.name = level.name
+    this.name = level.name;
     this.game = game;
-    this.movePaddle = movePaddle;
     this.collisions = collisions;
-    this.update = update;
-    this.drawAll = drawAll;
+    this.draw = draw;
   }
 
   deleteBall(ball) {
@@ -29,6 +34,43 @@ class Level {
   }
   isLost() {
     return this.ballArray.length === 0;
+  }
+
+  update(progress) {
+    let p = progress / 16;
+    if (!p) p = 1;
+    if (controlState.space) {
+      this.unstickBalls();
+    }
+    this.movePaddle(p);
+    this.ballArray.forEach((ball) => {
+      ball.move(p);
+      ball.speedUp(p);
+    });
+  }
+
+  movePaddle(p) {
+    if (
+      (controlState.right && controlState.left) ||
+      (!controlState.right && !controlState.left)
+    ) {
+      return;
+    }
+    const before = this.paddle.left;
+
+    if (controlState.left) {
+      this.paddle.leftRange = this.playfield.left;
+      this.paddle.moveLeft(p);
+    } else {
+      this.paddle.rightRange = this.playfield.left + this.playfield.width;
+      this.paddle.moveRight(p);
+    }
+    const shift = this.paddle.left - before;
+    this.ballArray.forEach((ball) => {
+      if (ball.isSticked) {
+        ball.left += shift;
+      }
+    });
   }
 }
 
@@ -76,4 +118,9 @@ function canCreateObject(item, playfield) {
   } else {
     return false;
   }
+}
+
+let IdCounter = 0;
+function uniqueId() {
+  return IdCounter++;
 }
