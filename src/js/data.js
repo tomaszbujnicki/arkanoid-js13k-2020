@@ -1,4 +1,4 @@
-export {GAMESTATE}
+export { GAMESTATE };
 
 const GAMESTATE = {
   RUN: 0,

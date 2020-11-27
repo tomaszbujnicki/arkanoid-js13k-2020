@@ -1,4 +1,4 @@
-import { keybordControl } from './control';
+import { keybordControl } from './keybordControl';
 import Game from './Game';
 import levelArray from './levels';
 

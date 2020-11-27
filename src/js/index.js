@@ -1,7 +1,7 @@
-import "../css/reset.css";
-import "../css/style.css";
+import '../css/reset.css';
+import '../css/style.css';
 
-import navigation from './navigation';
+import { navigation } from './navigation';
 
 function init() {
   navigation();

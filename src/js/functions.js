@@ -1,48 +1,5 @@
 export { random };
 
-const highScoreListMaxLength = 5,
-  highScoreList = [
-    { player: 'Mike', score: 2 },
-    { player: 'Derrek', score: 22 },
-    { player: 'Emily', score: 11 },
-    { player: 'Bart', score: 44 },
-    { player: 'Sally', score: 1 },
-    { player: 'Cecile', score: 33 },
-    { player: 'Jack', score: 4 },
-    { player: 'Roland', score: 5 },
-    { player: 'Amy', score: 55 },
-    { player: 'Bob', score: 3 },
-  ];
-
-function updateHighScoreList(playerName, playerScore) {
-  highScoreList.push({ player: playerName, score: playerScore });
-  highScoreList.sort(function (a, b) {
-    return b.score - a.score;
-  });
-
-  highScoreList.length = highScoreListMaxLength;
-}
-
-function showHighScoreList() {
-  for (const index in highScoreList) {
-    let name = document.getElementById('high-score-name-' + index);
-    let score = document.getElementById('high-score-score-' + index);
-    if (!name || !score) break;
-    name.textContent = highScoreList[index].player;
-    score.textContent = highScoreList[index].score;
-  }
-}
-
-function gameOver(playerName, playerScore) {
-  updateHighScoreList(playerName, playerScore);
-  openCard('gameOver');
-  hideElement('info-panel');
-  const continueButton = document.getElementById('continue-button');
-  continueButton.disabled = true;
-  continueButton.classList.add('disabled');
-  document.getElementById('gameOver__score').textContent = playerScore;
-}
-
 function countDown() {
   const levelName = document.getElementById('countdown__levelName');
   const timer = document.getElementById('countdown__timer');

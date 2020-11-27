@@ -1,4 +1,4 @@
-import { controlState } from './control';
+import { controlState } from './keybordControl';
 import draw from './draw';
 import collisions from './collisions';
 import Ball from './Ball';

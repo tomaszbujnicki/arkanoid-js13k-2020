@@ -13,7 +13,7 @@ export default function startLevel() {
     let progress = timestamp - lastRender;
 
     if (game.state === GAMESTATE.ABORT) return;
-
+console.log('.');
     if (game.state === GAMESTATE.RUN) {
       level.update(progress);
       level.collisions();

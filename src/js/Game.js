@@ -1,13 +1,13 @@
 import drawInfoPanel from './drawInfoPanel';
 import SOUND from './sounds';
-import Level from './Level';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
+import { gameOver } from './menu';
 
 export default class Game {
   constructor(levelArray, playerName) {
-    this.lives = 2;
-    this.levelNumber = 0;
+    this.lives = 0;
+    this.levelNumber = 1;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
