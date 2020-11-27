@@ -1,44 +1,37 @@
-import drawInfoPanel from './drawInfoPanel';
+import drawPanel from './drawPanel';
+import drawInfo from './drawInfo';
 import SOUND from './sounds';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
-import { gameOver } from './menu';
+import { gameOver } from './gameOver';
+import { pause } from './pause';
 
 export default class Game {
   constructor(levelArray, playerName) {
     this.lives = 0;
-    this.levelNumber = 1;
+    this.levelNumber = 0;
     this.score = 0;
+    this.seconds = 0;
+    this.hint = '';
     this.level = null;
     this.playerName = playerName;
     this.levels = levelArray;
     this.startLevel = startLevel;
-    this.drawInfoPanel = drawInfoPanel;
+    this.drawPanel = drawPanel;
+    this.drawInfo = drawInfo;
     this.state = GAMESTATE.ABORT;
   }
 
   loadLevel() {}
 
-  /*   pause() {
-    const game = this;
-    this.isPause = true;
-    //clearCountDown();
-    const continueButton = document.getElementById('continue-button');
-    continueButton.addEventListener('click', rel, false);
-    function rel() {
-      SOUND.mouseClick.play();
-      game.releaseGame();
-      continueButton.removeEventListener('click', rel, false);
-    }
+  stop() {
+    this.state = GAMESTATE.PAUSE;
+    pause(this);
+  }
 
-    continueButton.disabled = false;
-    continueButton.classList.remove('disabled');
-
-    hideElement('info-panel');
-    displayElement('options');
-    openCard('menu');
-    hint();
-  } */
+  resume() {
+    this.state = GAMESTATE.RUN;
+  }
 
   theEnd() {} // game won, passed all levels
 
@@ -71,7 +64,7 @@ export default class Game {
       );
     } else {
       this.state = GAMESTATE.ABORT;
-      gameOver(this.playerName, this.score);
+      gameOver(this);
     }
   }
 

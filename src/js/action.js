@@ -1,9 +1,10 @@
 import SOUND from './sounds';
 import startNewGame from './startNewGame';
 import highscore from './highscore';
+import { resume } from './pause';
 
-export function menu(action) {
-  switch (action) {
+export function action(view) {
+  switch (view) {
     case 'new-game':
       {
         SOUND.mouseClick.play();
@@ -14,12 +15,23 @@ export function menu(action) {
     case 'start-game':
       {
         SOUND.mouseClick.play();
+        disableContinueButton(false);
         hideElement('options');
         openCard('playground');
         displayElement('info-panel');
         startNewGame();
       }
       break;
+    case 'continue-game':
+      {
+        SOUND.mouseClick.play();
+        hideElement('options');
+        openCard('playground');
+        displayElement('info-panel');
+        resume();
+      }
+      break;
+
     case 'highscore':
       {
         SOUND.mouseClick.play();
@@ -39,18 +51,25 @@ export function menu(action) {
         openCard('menu');
       }
       break;
+    case 'game-over':
+      {
+        disableContinueButton(true);
+        openCard('gameOver');
+        hideElement('info-panel');
+        displayElement('options');
+      }
+      break;
+    case 'pause':
+      {
+        openCard('menu');
+        hideElement('info-panel');
+        displayElement('options');
+      }
+      break;
 
     default:
       break;
   }
-}
-
-export function gameOver(playerName, playerScore) {
-  highscore.update(playerName, playerScore);
-  disableContinueButton(true);
-  openCard('gameOver');
-  hideElement('info-panel');
-  document.getElementById('gameOver__score').textContent = playerScore;
 }
 
 function disableContinueButton(isDisabled) {

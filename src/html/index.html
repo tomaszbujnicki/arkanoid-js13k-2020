@@ -11,8 +11,12 @@
 
 <body>
 	<div id="game" class="game">
-		<div id="playground" class="playground game-card hide"><canvas id="canvas" class="canvas" width="1260" height="700">
-			</canvas></div>
+		<div id="playground" class="playground game-card hide">
+			<canvas id="canvas" class="canvas" width="1000" height="700">
+			</canvas>
+			<canvas id="playgroud-info" class="canvas" width="1000" height="700">
+			</canvas>
+		</div>
 
 		<div id="menu" class="game-card">
 			<h2>Arkanoid 404</h2>
@@ -72,21 +76,15 @@
 					href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a></p>
 			<button class="main-menu-button">back</button>
 		</div>
-		<div id="countdown" class="countdown hide">
-			<p id="countdown__levelName" class="countdown__text countdown__text--small"></p>
-			<p id="countdown__timer" class="countdown__text"></p>
-		</div>
-		<div id="hint" class="hint hide">
-			<div id="hint-message" class="hint-message"></div>
-		</div>
 		<div class="right-panel">
 			<ul id="options" class="">
 				<li><button class="options__button sound-on" title="Mute / Unmute" alt="mute"
 						id="options__mute-button"></button></li>
 			</ul>
 			<canvas id="info-panel" class="info-panel hide" width="256" height="700">
-			</canvas></div>
+			</canvas>
 		</div>
+	</div>
 	</div>
 	<script src="../js/index.js"></script>
 </body>

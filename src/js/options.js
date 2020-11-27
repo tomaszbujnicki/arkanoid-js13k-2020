@@ -1,11 +1,11 @@
-import SOUND from "./sounds";
+import SOUND from './sounds';
 
-const options = {
-  countdownDelay: 1,
-  isMuted = false,
+export const options = {
+  countdownDelay: 3,
+  isMuted: false,
 };
 
-export default function options() {
+/* export function options() {
   document.getElementById('options__mute-button').addEventListener(
     'click',
     () => {
@@ -25,5 +25,4 @@ export default function options() {
       SOUND[sound].muted = isMuted;
     }
   }
-}
-
+} */

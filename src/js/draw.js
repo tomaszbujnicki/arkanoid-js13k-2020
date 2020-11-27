@@ -36,10 +36,10 @@ export default function draw() {
     ctx.stroke();
     ctx.restore();
   }
-  
+
   function getColor(power) {
     let color = 'white';
-  
+
     switch (power) {
       case 1:
         color = 'white';
@@ -57,9 +57,7 @@ export default function draw() {
         color = 'white';
         break;
     }
-  
+
     return color;
   }
 }
-
-

@@ -1,5 +1,7 @@
 import Level from './Level';
 import { GAMESTATE } from './data';
+import { isKeyPressed } from './keybordControl';
+import { gameOver } from './gameOver';
 
 export default function startLevel() {
   const game = this;
@@ -13,7 +15,10 @@ export default function startLevel() {
     let progress = timestamp - lastRender;
 
     if (game.state === GAMESTATE.ABORT) return;
-console.log('.');
+    //console.log('.');
+
+    if (isKeyPressed.pause) game.stop();
+
     if (game.state === GAMESTATE.RUN) {
       level.update(progress);
       level.collisions();
@@ -26,7 +31,8 @@ console.log('.');
     }
 
     level.draw();
-    game.drawInfoPanel();
+    game.drawPanel();
+    game.drawInfo();
 
     lastRender = timestamp;
     window.requestAnimationFrame(gameLoop);

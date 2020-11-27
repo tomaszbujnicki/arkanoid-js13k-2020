@@ -1,4 +1,4 @@
-import { controlState } from './keybordControl';
+import { isKeyPressed } from './keybordControl';
 import draw from './draw';
 import collisions from './collisions';
 import Ball from './Ball';
@@ -39,7 +39,7 @@ export default class Level {
   update(progress) {
     let p = progress / 16;
     if (!p) p = 1;
-    if (controlState.space) {
+    if (isKeyPressed.space) {
       this.unstickBalls();
     }
     this.movePaddle(p);
@@ -51,14 +51,14 @@ export default class Level {
 
   movePaddle(p) {
     if (
-      (controlState.right && controlState.left) ||
-      (!controlState.right && !controlState.left)
+      (isKeyPressed.right && isKeyPressed.left) ||
+      (!isKeyPressed.right && !isKeyPressed.left)
     ) {
       return;
     }
     const before = this.paddle.left;
 
-    if (controlState.left) {
+    if (isKeyPressed.left) {
       this.paddle.leftRange = this.playfield.left;
       this.paddle.moveLeft(p);
     } else {
@@ -79,7 +79,7 @@ export default class Level {
       return newPaddle;
     } else return false;
   }
-  
+
   createBallArray(balls, playfield) {
     const ballArray = [];
     balls.forEach((item) => {
@@ -88,10 +88,10 @@ export default class Level {
         ballArray.push(ball);
       }
     });
-  
+
     return ballArray;
   }
-  
+
   createBlockArray(blocks, playfield) {
     const blockArray = [];
     blocks.forEach((item) => {
@@ -100,10 +100,10 @@ export default class Level {
         blockArray.push(block);
       }
     });
-  
+
     return blockArray;
   }
-  
+
   canCreateObject(item, playfield) {
     if (
       item.width > 0 &&

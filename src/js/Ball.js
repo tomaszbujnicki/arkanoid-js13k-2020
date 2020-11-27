@@ -16,8 +16,8 @@ export default class Ball {
 
   move(p) {
     if (!this.isSticked) {
-    this.left += this.speedX * p;
-    this.top += this.speedY * p;
+      this.left += this.speedX * p;
+      this.top += this.speedY * p;
     }
   }
 
@@ -26,8 +26,12 @@ export default class Ball {
       this.speedX * this.speedX + this.speedY * this.speedY
     );
     if (speed < this.maxSpeed) {
-      this.speedY > 0 ? (this.speedY += 0.0005 * p) : (this.speedY -= 0.0005 * p);
-      this.speedX > 0 ? (this.speedX += 0.0005 * p) : (this.speedX -= 0.0005 * p);
+      this.speedY > 0
+        ? (this.speedY += 0.0005 * p)
+        : (this.speedY -= 0.0005 * p);
+      this.speedX > 0
+        ? (this.speedX += 0.0005 * p)
+        : (this.speedX -= 0.0005 * p);
     }
   }
 }

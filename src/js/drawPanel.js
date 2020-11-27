@@ -1,7 +1,7 @@
 const canvas = document.querySelector('#info-panel');
 const ctx = canvas.getContext('2d');
 
-export default function drawInfoPanel() {
+export default function drawPanel() {
   const game = this;
   ctx.save();
   ctx.clearRect(0, 0, 256, 700);

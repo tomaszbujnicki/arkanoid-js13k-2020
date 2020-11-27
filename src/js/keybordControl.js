@@ -1,6 +1,6 @@
-export { controlState, keybordControl };
+export { isKeyPressed, keybordControl };
 
-const controlState = {
+const isKeyPressed = {
   left: false,
   right: false,
   space: false,
@@ -11,29 +11,32 @@ function keybordControl() {
   document.addEventListener('keydown', press);
   function press(e) {
     if (e.keyCode === 39) {
-      controlState.right = true;
+      isKeyPressed.right = true;
     }
     if (e.keyCode === 37) {
-      controlState.left = true;
+      isKeyPressed.left = true;
     }
     if (e.keyCode === 32) {
-      controlState.space = true;
+      isKeyPressed.space = true;
     }
     if (e.keyCode === 80) {
-      controlState.pause = true;
+      isKeyPressed.pause = true;
     }
   }
 
   document.addEventListener('keyup', release);
   function release(e) {
     if (e.keyCode === 39) {
-      controlState.right = false;
+      isKeyPressed.right = false;
     }
     if (e.keyCode === 37) {
-      controlState.left = false;
+      isKeyPressed.left = false;
     }
     if (e.keyCode === 32) {
-      controlState.space = false;
+      isKeyPressed.space = false;
+    }
+    if (e.keyCode === 80) {
+      isKeyPressed.pause = false;
     }
   }
 }

@@ -1,21 +1,24 @@
-import { menu } from './menu';
+import { action } from './action';
 
 export function navigation() {
   document
     .getElementById('start-button')
-    .addEventListener('click', () => menu('new-game'));
+    .addEventListener('click', () => action('new-game'));
   document
     .getElementById('playerName_Button')
-    .addEventListener('click', () => menu('start-game'));
+    .addEventListener('click', () => action('start-game'));
+  document
+    .getElementById('continue-button')
+    .addEventListener('click', () => action('continue-game'));
   document
     .getElementById('high-score-button')
-    .addEventListener('click', () => menu('highscore'));
+    .addEventListener('click', () => action('highscore'));
   document
     .getElementById('credits-button')
-    .addEventListener('click', () => menu('credits'));
+    .addEventListener('click', () => action('credits'));
   document
     .querySelectorAll('.main-menu-button')
     .forEach((button) =>
-      button.addEventListener('click', () => menu('main-menu'))
+      button.addEventListener('click', () => action('main-menu'))
     );
 }

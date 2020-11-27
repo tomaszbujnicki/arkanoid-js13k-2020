@@ -136,7 +136,7 @@ export default [
     },
 
     balls: [
-/*       {
+      /*       {
         speedX: 1,
         speedY: -3,
         size: 30,
@@ -647,7 +647,6 @@ export default [
     blocks: [
                                                   [14,14, 1],   
     ],
-    
   },
   {
     name: 'test',
@@ -783,5 +782,4 @@ export default [
                                                   [14,14, 1],   
     ],
   },
-  
 ];
