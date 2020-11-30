@@ -24,11 +24,12 @@ export function action(view) {
       break;
     case 'continue-game':
       {
-        SOUND.mouseClick.play();
-        hideElement('options');
-        openCard('playground');
-        displayElement('info-panel');
-        resume();
+        if (resume()) {
+          SOUND.mouseClick.play();
+          hideElement('options');
+          openCard('playground');
+          displayElement('info-panel');
+        }
       }
       break;
 

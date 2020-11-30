@@ -11,18 +11,21 @@ export function pause(gameObject) {
 }
 
 export function resume() {
-  game.seconds = options.countdownDelay;
-  if (game.seconds <= 0) game.resume();
-  else {
-    countdownTimeoutId = setInterval(() => {
-      game.seconds--;
-      if (game.seconds <= 0) {
-        //if (isAnyBallSticked()) {
-        game.hint = 'Press SPACEBAR to launch ball';
-        //}
-        window.clearInterval(countdownTimeoutId);
-        game.resume();
-      }
-    }, 1000);
-  }
+  if (game) {
+    game.seconds = options.countdownDelay;
+    if (game.seconds <= 0) game.resume();
+    else {
+      countdownTimeoutId = setInterval(() => {
+        game.seconds--;
+        if (game.seconds <= 0) {
+          //if (isAnyBallSticked()) {
+          game.hint = 'Press SPACEBAR to launch ball';
+          //}
+          window.clearInterval(countdownTimeoutId);
+          game.resume();
+        }
+      }, 1000);
+    }
+    return true;
+  } else return false;
 }
