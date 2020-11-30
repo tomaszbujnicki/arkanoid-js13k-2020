@@ -2,6 +2,7 @@ import SOUND from './sounds';
 import startNewGame from './startNewGame';
 import highscore from './highscore';
 import { resume } from './pause';
+import { options } from './options';
 
 export function action(view) {
   switch (view) {
@@ -65,6 +66,12 @@ export function action(view) {
         openCard('menu');
         hideElement('info-panel');
         displayElement('options');
+      }
+      break;
+    case 'mute':
+      {
+        SOUND.mouseClick.play();
+        options.toggleMute();
       }
       break;
 

@@ -21,4 +21,7 @@ export function navigation() {
     .forEach((button) =>
       button.addEventListener('click', () => action('main-menu'))
     );
+  document
+    .getElementById('options__mute-button')
+    .addEventListener('click', () => action('mute'));
 }
