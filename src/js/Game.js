@@ -7,7 +7,7 @@ import { pause } from './pause';
 
 export default class Game {
   constructor(levelArray, playerName) {
-    this.lives = 0;
+    this.lives = 1;
     this.levelNumber = 0;
     this.score = 0;
     this.level = null;
@@ -58,6 +58,7 @@ export default class Game {
         this.levels[this.levelNumber].paddle,
         level.playfield
       );
+      level.hint = 'Press SPACEBAR to launch ball';
     } else {
       this.state = GAMESTATE.ABORT;
       gameOver(this);

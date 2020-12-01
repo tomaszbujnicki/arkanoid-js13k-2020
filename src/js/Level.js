@@ -78,6 +78,13 @@ export default class Level {
     });
   }
 
+  isAnyBallSticked() {
+    for (const ball of this.ballArray) {
+      if (ball.isSticked) return true;
+    }
+    return false;
+  }
+
   createPaddle(paddle, playfield) {
     let newPaddle = new Paddle(paddle, playfield);
     if (this.canCreateObject(newPaddle, playfield)) {

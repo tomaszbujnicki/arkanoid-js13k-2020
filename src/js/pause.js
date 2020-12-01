@@ -12,15 +12,17 @@ export function pause(gameObject) {
 
 export function resume() {
   if (game) {
-    game.seconds = options.countdownDelay;
-    if (game.seconds <= 0) game.resume();
+    const level = game.level;
+    level.seconds = options.countdownDelay;
+    if (level.isAnyBallSticked()) {
+      level.hint = 'Press SPACEBAR to launch ball';
+    }
+
+    if (level.seconds <= 0) game.resume();
     else {
       countdownTimeoutId = setInterval(() => {
-        game.seconds--;
-        if (game.seconds <= 0) {
-          //if (isAnyBallSticked()) {
-          game.hint = 'Press SPACEBAR to launch ball';
-          //}
+        level.seconds--;
+        if (level.seconds <= 0) {
           window.clearInterval(countdownTimeoutId);
           game.resume();
         }

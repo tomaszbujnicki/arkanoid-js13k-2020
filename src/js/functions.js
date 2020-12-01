@@ -1,12 +1,5 @@
 export { random };
 
-const isAnyBallSticked = () => {
-  for (const ball of ballArray) {
-    if (ball.isSticked) return true;
-  }
-  return false;
-};
-
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
