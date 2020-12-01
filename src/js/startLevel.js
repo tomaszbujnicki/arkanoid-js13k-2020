@@ -15,7 +15,6 @@ export default function startLevel() {
     let progress = timestamp - lastRender;
 
     if (game.state === GAMESTATE.ABORT) return;
-    //console.log('.');
 
     if (isKeyPressed.pause) game.stop();
 
@@ -31,8 +30,8 @@ export default function startLevel() {
     }
 
     level.draw();
+    level.drawInfo();
     game.drawPanel();
-    game.drawInfo();
 
     lastRender = timestamp;
     window.requestAnimationFrame(gameLoop);

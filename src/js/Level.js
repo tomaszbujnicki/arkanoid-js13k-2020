@@ -1,5 +1,6 @@
 import { isKeyPressed } from './keybordControl';
 import draw from './draw';
+import drawInfo from './drawInfo';
 import collisions from './collisions';
 import Ball from './Ball';
 import Block from './Block';
@@ -14,8 +15,11 @@ export default class Level {
     this.blockArray = this.createBlockArray(level.blocks, this.playfield);
     this.name = level.name;
     this.game = game;
+    this.hint = 'Press SPACEBAR to launch ball';
+    this.seconds = 0;
     this.collisions = collisions;
     this.draw = draw;
+    this.drawInfo = drawInfo;
   }
 
   deleteBall(ball) {
@@ -28,6 +32,7 @@ export default class Level {
   }
   unstickBalls() {
     this.ballArray.forEach((ball) => (ball.isSticked = false));
+    this.hint = '';
   }
   isWon() {
     return this.blockArray.length === 0;

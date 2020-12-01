@@ -5,16 +5,16 @@ export default function drawInfo() {
   ctx.save();
   ctx.clearRect(0, 0, 1260, 700);
 
-  const center_x = this.level.playfield.width / 2 + this.level.playfield.left;
-  const center_y = this.level.playfield.height / 2 + this.level.playfield.top;
-  const paddle = this.level.paddle.top;
+  const center_x = this.playfield.width / 2 + this.playfield.left;
+  const center_y = this.playfield.height / 2 + this.playfield.top;
+  const paddle = this.paddle.top;
   const seconds = this.seconds;
-  const message = this.hint;
+  const hint = this.hint;
 
   if (seconds > 0) {
     countdown();
   } else {
-    if (message) hint();
+    if (hint) drawHint();
   }
 
   ctx.restore();
@@ -35,14 +35,12 @@ export default function drawInfo() {
     ctx.strokeText(seconds, center_x, center_y + 80);
   }
 
-  function hint() {
+  function drawHint() {
     ctx.strokeStyle = 'blue';
-    ctx.lineWidth = 1;
-    ctx.font = 'bold 18pt Verdana';
+    ctx.font = '14pt Verdana';
     ctx.fillStyle = blink();
     ctx.textAlign = 'center';
-    ctx.fillText(message, center_x, paddle - 40);
-    ctx.strokeText(message, center_x, paddle - 40);
+    ctx.fillText(hint, center_x, paddle - 40);
   }
 }
 

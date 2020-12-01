@@ -1,5 +1,4 @@
 import drawPanel from './drawPanel';
-import drawInfo from './drawInfo';
 import SOUND from './sounds';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
@@ -11,14 +10,11 @@ export default class Game {
     this.lives = 0;
     this.levelNumber = 0;
     this.score = 0;
-    this.seconds = 0;
-    this.hint = '';
     this.level = null;
     this.playerName = playerName;
     this.levels = levelArray;
     this.startLevel = startLevel;
     this.drawPanel = drawPanel;
-    this.drawInfo = drawInfo;
     this.state = GAMESTATE.ABORT;
   }
 
