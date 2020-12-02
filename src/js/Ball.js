@@ -21,17 +21,13 @@ export default class Ball {
     }
   }
 
-  speedUp(p) {
+  speedUp() {
     const speed = Math.sqrt(
       this.speedX * this.speedX + this.speedY * this.speedY
     );
     if (speed < this.maxSpeed) {
-      this.speedY > 0
-        ? (this.speedY += 0.0005 * p)
-        : (this.speedY -= 0.0005 * p);
-      this.speedX > 0
-        ? (this.speedX += 0.0005 * p)
-        : (this.speedX -= 0.0005 * p);
+      this.speedY *= 1.0001;
+      this.speedX *= 1.0001;
     }
   }
 }

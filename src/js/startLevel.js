@@ -20,7 +20,7 @@ export default function startLevel() {
 
     if (game.state === GAMESTATE.RUN) {
       level.update(progress);
-      level.collisions();
+      level.collisions(progress);
       if (level.isWon()) {
         game.nextLevel();
       }

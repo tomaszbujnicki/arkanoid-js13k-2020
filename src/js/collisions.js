@@ -1,7 +1,9 @@
 import SOUND from './sounds';
 import { random } from './functions';
 
-export default function collisions() {
+export default function collisions(progress) {
+  let p = progress / 16;
+  if (!p) p = 1;
   const level = this;
   const playfield = level.playfield;
   const paddle = level.paddle;
@@ -58,16 +60,32 @@ export default function collisions() {
   }
 
   function blockCollisions(ball) {
+    const hitArray = [];
+
     for (const block of blockArray) {
-      if (isBlockHit(block) && bounceBall(block)) {
-        block.damage();
-        SOUND['hit_' + random(1, 3)].play();
-        if (block.power <= 0) {
-          level.deleteBlock(block);
-          level.game.updateScore(25);
-        } else {
-          level.game.updateScore(5);
-        }
+      if (isBlockHit(block)) {
+        hitArray.push(block);
+      }
+    }
+
+    if (hitArray.length === 1) {
+      if (isHitAxisX(hitArray[0])) ball.speedX *= -1;
+      else ball.speedY *= -1;
+      hitBlock(hitArray[0]);
+    }
+
+    if (hitArray.length > 1) {
+    }
+
+    function hitBlock(block) {
+      //bounceBall(block);
+      block.damage();
+      SOUND['hit_' + random(1, 3)].play();
+      if (block.power <= 0) {
+        level.deleteBlock(block);
+        level.game.updateScore(25);
+      } else {
+        level.game.updateScore(5);
       }
     }
 
@@ -78,6 +96,40 @@ export default function collisions() {
         ball.left + ball.size >= block.left &&
         ball.left <= block.left + block.width
       );
+    }
+
+    function isHitAxisX(block) {
+      const walls = {};
+
+      if (ball.top - ball.speedY * p > block.top + block.height)
+        walls.bottom = true;
+
+      if (ball.top + ball.size - ball.speedY * p < block.top) walls.top = true;
+
+      if (ball.left + ball.size - ball.speedX * p < block.left)
+        walls.left = true;
+
+      if (ball.left - ball.speedX * p > block.left + block.width)
+        walls.right = true;
+
+      // if more then one wall - select first
+      if (Object.keys(walls).length > 1) {
+        let distanceX, distanceY;
+        if (walls.right)
+          distanceX = ball.left - ball.speedX * p - (block.left + block.width);
+        if (walls.left)
+          distanceX = block.left - (ball.left + ball.size - ball.speedX * p);
+        if (walls.top)
+          distanceY = block.top - (ball.top + ball.size - ball.speedY * p);
+        if (walls.bottom)
+          distanceY = ball.top - ball.speedY * p - (block.top + block.height);
+
+        return (
+          Math.abs(distanceX / ball.speedX) < Math.abs(distanceY / ball.speedY)
+        );
+      }
+
+      return walls.left || walls.right;
     }
 
     function bounceBall(block) {

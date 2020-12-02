@@ -1,4 +1,5 @@
 import { isKeyPressed } from './keybordControl';
+import { random } from './functions';
 import draw from './draw';
 import drawInfo from './drawInfo';
 import collisions from './collisions';
@@ -50,7 +51,7 @@ export default class Level {
     this.movePaddle(p);
     this.ballArray.forEach((ball) => {
       ball.move(p);
-      ball.speedUp(p);
+      ball.speedUp();
     });
   }
 
@@ -83,6 +84,22 @@ export default class Level {
       if (ball.isSticked) return true;
     }
     return false;
+  }
+
+  randomlyCreateNewBall() {
+    if (random(1, 100) <= 10) {
+      const item = {
+        speedX: 1.5,
+        speedY: -3,
+        size: random(5, 50),
+        top: random(0, this.playfield.height - 150),
+        left: random(0, this.playfield.width - 50),
+        maxSpeed: 20,
+      };
+      const ball = new Ball(item, this.playfield);
+      ball.isSticked = false;
+      this.ballArray.push(ball);
+    }
   }
 
   createPaddle(paddle, playfield) {
