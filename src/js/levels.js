@@ -260,21 +260,37 @@ export default [
     paddle: {
       speedX: 10,
       height: 10,
-      width: 600,
+      width: 200,
       top: 650,
       left: 200,
     },
 
     balls: [
       {
-        speedX: 11,
-        speedY: -7,
+        speedX: -4,
+        speedY: 4,
         size: 15,
         top: 100,
         left: 600,
         maxSpeed: 20,
       },
       {
+        speedX: -4.1,
+        speedY: 4,
+        size: 15,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      {
+        speedX: -4.2,
+        speedY: 4,
+        size: 15,
+        top: 100,
+        left: 600,
+        maxSpeed: 20,
+      },
+      /* {
         speedX: 13,
         speedY: -3,
         size: 50,
@@ -353,7 +369,7 @@ export default [
         top: 100,
         left: 600,
         maxSpeed: 20,
-      },
+      }, */
     ],
 
     // prettier-ignore
@@ -391,7 +407,7 @@ export default [
     ],
   },
   {
-    name: '404 / 2',
+    name: 'Milk',
 
     playfield: {
       height: 700,
@@ -477,7 +493,7 @@ export default [
       },
       {
         speedX: 2,
-        speedY: 0,
+        speedY: 1,
         size: 5,
         top: 100,
         left: 600,

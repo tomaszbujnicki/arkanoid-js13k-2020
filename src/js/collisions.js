@@ -61,24 +61,43 @@ export default function collisions(progress) {
 
   function blockCollisions(ball) {
     const hitArray = [];
+    const walls = {};
 
     for (const block of blockArray) {
-      if (isBlockHit(block)) {
+      const wall = isBlockHit(block);
+      if (wall) {
+        walls[wall] = true;
         hitArray.push(block);
       }
     }
-
-    if (hitArray.length === 1) {
-      if (isHitAxisX(hitArray[0])) ball.speedX *= -1;
-      else ball.speedY *= -1;
-      hitBlock(hitArray[0]);
+    if (hitArray.length === 0) {
+      return;
     }
 
-    if (hitArray.length > 1) {
+    console.log(hitArray);
+    console.log(walls);
+
+    if (walls.right && walls.left) {
+      console.log('left and right');
+      return false;
+    }
+    if (walls.top && walls.bottom) {
+      console.log('top and bottom');
+      return false;
+    }
+
+    for (const block of hitArray) {
+      hitBlock(block);
+    }
+
+    if (walls.right || walls.left) {
+      ball.speedX *= -1;
+    }
+    if (walls.top || walls.bottom) {
+      ball.speedY *= -1;
     }
 
     function hitBlock(block) {
-      //bounceBall(block);
       block.damage();
       SOUND['hit_' + random(1, 3)].play();
       if (block.power <= 0) {
@@ -90,15 +109,20 @@ export default function collisions(progress) {
     }
 
     function isBlockHit(block) {
-      return (
+      const hit =
         ball.top <= block.top + block.height &&
         ball.top + ball.size >= block.top &&
         ball.left + ball.size >= block.left &&
-        ball.left <= block.left + block.width
-      );
+        ball.left <= block.left + block.width;
+
+      if (hit) {
+        return whichWall(block);
+      } else {
+        return false;
+      }
     }
 
-    function isHitAxisX(block) {
+    function whichWall(block) {
       const walls = {};
 
       if (ball.top - ball.speedY * p > block.top + block.height)
@@ -124,62 +148,55 @@ export default function collisions(progress) {
         if (walls.bottom)
           distanceY = ball.top - ball.speedY * p - (block.top + block.height);
 
-        return (
+        let firstAxisX = false;
+        if (
           Math.abs(distanceX / ball.speedX) < Math.abs(distanceY / ball.speedY)
+        ) {
+          firstAxisX = true;
+        }
+        if (firstAxisX) {
+          walls.top = false;
+          walls.bottom = false;
+        } else {
+          walls.left = false;
+          walls.right = false;
+        }
+      }
+
+      if (walls.left) {
+        const neighborLeft = blockArray.find(
+          (item) => item.row === block.row && item.column === block.column - 1
         );
+        if (neighborLeft === undefined) {
+          return 'left';
+        }
       }
-
-      return walls.left || walls.right;
-    }
-
-    function bounceBall(block) {
-      let hasHit = false;
-
-      const neighborLeft = blockArray.find(
-        (item) => item.row === block.row && item.column === block.column - 1
-      );
-      const neighborRight = blockArray.find(
-        (item) => item.row === block.row && item.column === block.column + 1
-      );
-      const neighborBottom = blockArray.find(
-        (item) => item.column === block.column && item.row === block.row + 1
-      );
-      const neighborTop = blockArray.find(
-        (item) => item.column === block.column && item.row === block.row - 1
-      );
-
-      if (
-        ball.left + ball.size - ball.speedX < block.left &&
-        neighborLeft === undefined
-      ) {
-        ball.speedX = Math.abs(ball.speedX) * -1;
-        hasHit = true;
-      } else {
-        if (
-          ball.left - ball.speedX > block.left + block.width &&
-          neighborRight === undefined
-        ) {
-          ball.speedX = Math.abs(ball.speedX);
-          hasHit = true;
+      if (walls.right) {
+        const neighborRight = blockArray.find(
+          (item) => item.row === block.row && item.column === block.column + 1
+        );
+        if (neighborRight === undefined) {
+          return 'right';
+        }
+      }
+      if (walls.bottom) {
+        const neighborBottom = blockArray.find(
+          (item) => item.column === block.column && item.row === block.row + 1
+        );
+        if (neighborBottom === undefined) {
+          return 'bottom';
+        }
+      }
+      if (walls.top) {
+        const neighborTop = blockArray.find(
+          (item) => item.column === block.column && item.row === block.row - 1
+        );
+        if (neighborTop === undefined) {
+          return 'top';
         }
       }
 
-      if (
-        ball.top - ball.speedY > block.top + block.height &&
-        neighborBottom === undefined
-      ) {
-        ball.speedY = Math.abs(ball.speedY);
-        hasHit = true;
-      } else {
-        if (
-          ball.top + ball.size - ball.speedY < block.top &&
-          neighborTop === undefined
-        ) {
-          ball.speedY = Math.abs(ball.speedY) * -1;
-          hasHit = true;
-        }
-      }
-      return hasHit;
+      return false;
     }
   }
 }
