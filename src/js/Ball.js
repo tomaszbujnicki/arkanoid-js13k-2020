@@ -11,7 +11,7 @@ export default class Ball {
     this.height = ball.size;
     this.width = ball.size;
     this.isSticked = true;
-    if (this.maxSpeed >= 25) this.maxSpeed = 25;
+    if (this.maxSpeed >= 20) this.maxSpeed = 20;
   }
 
   move(p) {

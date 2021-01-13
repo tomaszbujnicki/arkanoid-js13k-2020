@@ -45,6 +45,7 @@ export default class Level {
   update(progress) {
     let p = progress / 16;
     if (!p) p = 1;
+    p /= 2;
     if (isKeyPressed.space) {
       this.unstickBalls();
     }

@@ -125,16 +125,43 @@ export default function collisions(progress) {
     function whichWall(block) {
       const walls = {};
 
-      if (ball.top - ball.speedY * p > block.top + block.height)
-        walls.bottom = true;
+      if (ball.top - ball.speedY * p > block.top + block.height) {
+        const neighborBottom = blockArray.find(
+          (item) => item.column === block.column && item.row === block.row + 1
+        );
+        if (neighborBottom === undefined) {
+          walls.bottom = true;
+        }
+      }
 
-      if (ball.top + ball.size - ball.speedY * p < block.top) walls.top = true;
+      if (ball.top + ball.size - ball.speedY * p < block.top) {
+        const neighborTop = blockArray.find(
+          (item) => item.column === block.column && item.row === block.row - 1
+        );
+        if (neighborTop === undefined) {
+          walls.top = true;
+        }
+      }
 
-      if (ball.left + ball.size - ball.speedX * p < block.left)
-        walls.left = true;
+      if (ball.left + ball.size - ball.speedX * p < block.left) {
+        const neighborLeft = blockArray.find(
+          (item) => item.row === block.row && item.column === block.column - 1
+        );
+        if (neighborLeft === undefined) {
+          walls.left = true;
+        }
+      }
 
-      if (ball.left - ball.speedX * p > block.left + block.width)
-        walls.right = true;
+      if (ball.left - ball.speedX * p > block.left + block.width) {
+        const neighborRight = blockArray.find(
+          (item) => item.row === block.row && item.column === block.column + 1
+        );
+        if (neighborRight === undefined) {
+          walls.right = true;
+        }
+      }
+
+      console.log(walls);
 
       // if more then one wall - select first
       if (Object.keys(walls).length > 1) {
@@ -163,6 +190,13 @@ export default function collisions(progress) {
         }
       }
 
+      console.log(walls);
+      if (walls.top === true) return 'top';
+      if (walls.bottom === true) return 'bottom';
+      if (walls.left === true) return 'left';
+      if (walls.right === true) return 'right';
+
+      /* 
       if (walls.left) {
         const neighborLeft = blockArray.find(
           (item) => item.row === block.row && item.column === block.column - 1
@@ -195,7 +229,7 @@ export default function collisions(progress) {
           return 'top';
         }
       }
-
+ */
       return false;
     }
   }

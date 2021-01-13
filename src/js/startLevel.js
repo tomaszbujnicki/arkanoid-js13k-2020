@@ -19,8 +19,10 @@ export default function startLevel() {
     if (isKeyPressed.pause) game.stop();
 
     if (game.state === GAMESTATE.RUN) {
-      level.update(progress);
-      level.collisions(progress);
+      for (let i = 0; i < 2; i++) {
+        level.update(progress);
+        level.collisions(progress);
+      }
       if (level.isWon()) {
         game.nextLevel();
       }
