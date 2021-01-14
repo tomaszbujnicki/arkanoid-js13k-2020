@@ -1,4 +1,5 @@
 import SOUND from './sounds';
+import fscreen from 'fscreen';
 
 export const options = {
   countdownDelay: 3,
@@ -12,6 +13,17 @@ export const options = {
       : button.classList.remove('sound-off');
     for (let sound in SOUND) {
       SOUND[sound].muted = this.isMuted;
+    }
+  },
+  toggleFullscreen() {
+    let game = document.getElementById('game');
+
+    if (fscreen.fullscreenElement === null) {
+      fscreen.requestFullscreen(game);
+    } else {
+      if (fscreen.exitFullscreen()) {
+        fscreen.exitFullscreen();
+      }
     }
   },
 };

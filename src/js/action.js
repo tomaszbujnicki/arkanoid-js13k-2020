@@ -74,6 +74,12 @@ export function action(view) {
         options.toggleMute();
       }
       break;
+    case 'fullscreen':
+      {
+        SOUND.mouseClick.play();
+        options.toggleFullscreen();
+      }
+      break;
 
     default:
       break;

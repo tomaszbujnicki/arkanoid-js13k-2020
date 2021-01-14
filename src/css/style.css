@@ -115,8 +115,12 @@ button:hover {
   background-image: url(../img/theme.svg);
 }
 
-.full-screen {
-  background-image: url(../img/full-screen.svg);
+.fullscreen {
+  background-image: url(../img/fullscreen.svg);
+}
+
+.fullscreen-on {
+  background-image: url(../img/fullscreen-exit.svg);
 }
 
 
