@@ -1,222 +1,244 @@
 html {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	justify-content: center;
-	align-items: center;
-	background-color: gray;
-	color: white;
-	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
 }
 
-
 div {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 button {
-	color: white;
-	cursor: pointer;
-	font-size: 24px;
-	background-color: blue;
-	padding: 5px 10px;
-	border: 2px solid blue;
-	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: blue;
+  padding: 5px 10px;
+  border: 2px solid blue;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
 }
 
 button:hover {
-	background-color: black;
+  background-color: black;
 }
 
 .highlighted {
-	background-color: yellow;
-	border-color: yellow;
-	color: red;
-	font-weight: 700;
+  background-color: yellow;
+  border-color: yellow;
+  color: red;
+  font-weight: 700;
 }
 
 .disabled {
-	background-color: gray;
-	border-color: gray;
-	color: white;
-	font-weight: normal;
+  background-color: gray;
+  border-color: gray;
+  color: white;
+  font-weight: normal;
 }
 
 .game {
-	min-width: 1280px;
-	min-height: 720px;
-	width: 1280px;
-	height: 720px;
-	background-color: black;
-	border-style: double;
-	border-color: blue;
-	border-width: 10px;
-	position: relative;
+  min-width: 1280px;
+  min-height: 720px;
+  width: 1280px;
+  height: 720px;
+  background-color: black;
+  border-style: double;
+  border-color: blue;
+  border-width: 10px;
+  position: relative;
 }
 
 .playfield {
-	background-color: gray;
-	position: absolute;
+  background-color: gray;
+  position: absolute;
 }
 
 .right-panel {
-	width: 260px;
-	border-left: solid blue 4px;
-	position: absolute;
-	height: 100%;
-	right: 0;
-	background-color: black;
-	top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  border-left: solid blue 4px;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  background-color: black;
+  top: 0;
+  padding-top: 20px;
 }
 
 .info-panel {
-	width: 256px;
-	height: 700px;
-	background-color: black;
+  width: 256px;
+  height: 100%;
+  background-color: black;
+}
+
+.options__title {
+  color: blue;
+}
+
+.options__list li {
+  margin-top: 60px;
+  margin-bottom: 0;
 }
 
 .options__button {
-	background-color: transparent;
-	padding: 0;
-	border: none;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  width: 64px;
+  height: 64px;
 }
 
 .sound-on {
-	background-image: url(../img/sound-on.svg);
-	width: 64px;
-	height: 64px;
+  background-image: url(../img/sound-on.svg);
 }
 
 .sound-off {
-	background-image: url(../img/sound-off.svg)
+  background-image: url(../img/sound-off.svg);
+}
+
+.language {
+  background-image: url(../img/language.svg);
+}
+
+.theme {
+  background-image: url(../img/theme.svg);
+}
+
+.full-screen {
+  background-image: url(../img/full-screen.svg);
 }
 
 
 .paddle {
-	background-color: white;
-	position: absolute;
+  background-color: white;
+  position: absolute;
 }
 
 .ball {
-	border-radius: 50%;
-	background-color: white;
-	position: absolute;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
 }
 
 .block {
-	background-color: white;
-	border: solid silver 1px;
-	position: absolute;
+  background-color: white;
+  border: solid silver 1px;
+  position: absolute;
 }
 
 .game-card {
-	position: absolute;
-	height: 700px;
-	width: 1000px;
-	top: 0;
-	left: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  position: absolute;
+  height: 700px;
+  width: 1000px;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .playerName {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .playerName label {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .playerName input {
-	margin-bottom: 30px;
-	height: 30px;
-	width: 250px;
-	color: black;
-	font-size: 16px;
-	font-weight: 700;
-	padding-left: 20px;
-	background-color: gray;
+  margin-bottom: 30px;
+  height: 30px;
+  width: 250px;
+  color: black;
+  font-size: 16px;
+  font-weight: 700;
+  padding-left: 20px;
+  background-color: gray;
 }
 
 .playerName input::placeholder {
-	color: black;
-	font-weight: normal;
+  color: black;
+  font-weight: normal;
 }
 
-
 h2 {
-	font-size: 48px;
-	margin: 100px 0;
+  font-size: 48px;
+  margin: 100px 0;
 }
 
 p {
-	font-size: 14px;
-	font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
-	margin-bottom: 50px;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+  margin-bottom: 50px;
 }
 
 p.big {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 a {
-	text-decoration: none;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: lightblue
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: lightblue;
 }
 
 ul {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
 }
 
 li {
-	margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 table {
-	width: 40%;
+  width: 40%;
 }
 
 td,
 th {
-	text-align: left;
-	padding: 8px;
+  text-align: left;
+  padding: 8px;
 }
-
 
 td:nth-child(even),
 th:nth-child(even) {
-	text-align: right;
+  text-align: right;
 }
 
 .main-menu-button {
-	position: absolute;
-	bottom: 100px;
+  position: absolute;
+  bottom: 100px;
 }
 
 .playground {
-	width: 1260px;
-	height: 700px;
+  width: 1260px;
+  height: 700px;
 }
 
 .canvas {
-	background-color: transparent;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 1000px;
-	height: 700px;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 700px;
 }
 
 .hide {
-	display: none;
+  display: none;
 }
