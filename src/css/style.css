@@ -31,6 +31,13 @@ button:hover {
   background-color: black;
 }
 
+button:focus, input:focus{
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: white;
+  outline-offset: 4px;
+}
+
 .highlighted {
   background-color: yellow;
   border-color: yellow;

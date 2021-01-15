@@ -39,24 +39,28 @@ export function action(view) {
         SOUND.mouseClick.play();
         highscore.show();
         openCard('high-score');
+        document.getElementById('main-menu-highscore').focus();
       }
       break;
     case 'credits':
       {
         SOUND.mouseClick.play();
         openCard('credits');
+        document.getElementById('main-menu-credits').focus();
       }
       break;
     case 'main-menu':
       {
         SOUND.mouseClick.play();
         openCard('menu');
+        document.getElementById('start-button').focus();
       }
       break;
     case 'game-over':
       {
         disableContinueButton(true);
         openCard('gameOver');
+        document.getElementById('main-menu-gameOver').focus();
         hideElement('info-panel');
         displayElement('options');
       }
@@ -66,6 +70,7 @@ export function action(view) {
         openCard('menu');
         hideElement('info-panel');
         displayElement('options');
+        document.getElementById('continue-button').focus();
       }
       break;
     case 'mute':

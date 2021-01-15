@@ -22,7 +22,7 @@
             <button
               id="continue-button"
               disabled="true"
-              class="highlighted disabled"
+              class="disabled"
             >
               Continue game
             </button>
@@ -40,13 +40,15 @@
           autocomplete="off"
           maxlength="25"
         />
-        <button id="playerName_Button" class="highlighted">Start!</button>
-        <button class="main-menu-button">back</button>
+        <button id="playerName_Button">Start!</button>
+        <button id="main-menu-start" class="main-menu-button">back</button>
       </div>
       <div id="gameOver" class="game-card hide">
         <h2 id="header">GAME OVER</h2>
         <h3>Score: <span id="gameOver__score"></span></h3>
-        <button class="main-menu-button">main menu</button>
+        <button id="main-menu-gameOver" class="main-menu-button">
+          main menu
+        </button>
       </div>
       <div id="high-score" class="game-card hide">
         <h2>High Score</h2>
@@ -76,7 +78,7 @@
             <td id="high-score-score-4"></td>
           </tr>
         </table>
-        <button class="main-menu-button">back</button>
+        <button id="main-menu-highscore" class="main-menu-button">back</button>
       </div>
       <div id="credits" class="game-card hide">
         <h2>Credits</h2>
@@ -92,7 +94,7 @@
           from
           <a href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a>
         </p>
-        <button class="main-menu-button">back</button>
+        <button id="main-menu-credits" class="main-menu-button">back</button>
       </div>
       <div class="right-panel">
         <div id="options" class="options">

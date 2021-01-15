@@ -29,23 +29,44 @@ export function navigation() {
     .getElementById('options__fullscreen-button')
     .addEventListener('click', () => action('fullscreen'));
 
+  // focus order
+  const menuButtons = document.querySelectorAll('#menu button');
+  const optionsButtons = document.querySelectorAll('#options button');
+  menuButtons[1].focus();
+
   document.addEventListener('keydown', press);
   function press(e) {
     // F
     if (e.keyCode === 70) {
-      if (
-        document.activeElement !== document.getElementById('playerName_Field')
-      ) {
+      if (document.activeElement.tagName !== 'INPUT') {
         action('fullscreen');
       }
     }
+
     // M
     if (e.keyCode === 77) {
-      if (
-        document.activeElement !== document.getElementById('playerName_Field')
-      ) {
+      if (document.activeElement.tagName !== 'INPUT') {
         action('mute');
       }
+    }
+
+    // Enter
+    if (e.keyCode === 13) {
+      if (
+        document.activeElement === document.getElementById('playerName_Field')
+      ) {
+        action('start-game');
+      }
+    }
+
+    // Down
+    if (e.keyCode === 40) {
+      isKeyPressed.space = true;
+    }
+
+    // Up
+    if (e.keyCode === 38) {
+      isKeyPressed.pause = true;
     }
   }
 }
