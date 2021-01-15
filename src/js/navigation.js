@@ -1,6 +1,7 @@
 import { action } from './action';
 
 export function navigation() {
+  document.getElementById('start-button').focus();
   document
     .getElementById('start-button')
     .addEventListener('click', () => action('new-game'));
@@ -32,11 +33,19 @@ export function navigation() {
   function press(e) {
     // F
     if (e.keyCode === 70) {
-      action('fullscreen');
+      if (
+        document.activeElement !== document.getElementById('playerName_Field')
+      ) {
+        action('fullscreen');
+      }
     }
     // M
     if (e.keyCode === 77) {
-      action('mute');
+      if (
+        document.activeElement !== document.getElementById('playerName_Field')
+      ) {
+        action('mute');
+      }
     }
   }
 }
