@@ -8,7 +8,7 @@ import { pause } from './pause';
 export default class Game {
   constructor(levelArray, playerName) {
     this.lives = 1;
-    this.levelNumber = 0;
+    this.levelNumber = 1;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;

@@ -1,9 +1,8 @@
-const canvas = document.querySelector('#playgroud-info');
+const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 export default function drawInfo() {
   ctx.save();
-  ctx.clearRect(0, 0, 1260, 700);
 
   const center_x = this.playfield.width / 2 + this.playfield.left;
   const center_y = this.playfield.height / 2 + this.playfield.top;

@@ -6,7 +6,7 @@ export default function drawPanel() {
   ctx.save();
   ctx.clearRect(0, 0, 256, 700);
 
-  const row = canvas.height / 10;
+  const row = canvas.height / 8;
   const column1 = 20;
   const column2 = 120;
 

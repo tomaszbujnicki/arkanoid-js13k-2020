@@ -74,18 +74,6 @@ export default function collisions(progress) {
       return;
     }
 
-    console.log(hitArray);
-    console.log(walls);
-
-    if (walls.right && walls.left) {
-      console.log('left and right');
-      return false;
-    }
-    if (walls.top && walls.bottom) {
-      console.log('top and bottom');
-      return false;
-    }
-
     for (const block of hitArray) {
       hitBlock(block);
     }
@@ -161,8 +149,6 @@ export default function collisions(progress) {
         }
       }
 
-      console.log(walls);
-
       // if more then one wall - select first
       if (Object.keys(walls).length > 1) {
         let distanceX, distanceY;
@@ -190,46 +176,11 @@ export default function collisions(progress) {
         }
       }
 
-      console.log(walls);
       if (walls.top === true) return 'top';
       if (walls.bottom === true) return 'bottom';
       if (walls.left === true) return 'left';
       if (walls.right === true) return 'right';
 
-      /* 
-      if (walls.left) {
-        const neighborLeft = blockArray.find(
-          (item) => item.row === block.row && item.column === block.column - 1
-        );
-        if (neighborLeft === undefined) {
-          return 'left';
-        }
-      }
-      if (walls.right) {
-        const neighborRight = blockArray.find(
-          (item) => item.row === block.row && item.column === block.column + 1
-        );
-        if (neighborRight === undefined) {
-          return 'right';
-        }
-      }
-      if (walls.bottom) {
-        const neighborBottom = blockArray.find(
-          (item) => item.column === block.column && item.row === block.row + 1
-        );
-        if (neighborBottom === undefined) {
-          return 'bottom';
-        }
-      }
-      if (walls.top) {
-        const neighborTop = blockArray.find(
-          (item) => item.column === block.column && item.row === block.row - 1
-        );
-        if (neighborTop === undefined) {
-          return 'top';
-        }
-      }
- */
       return false;
     }
   }

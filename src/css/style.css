@@ -46,8 +46,8 @@ button:hover {
 }
 
 .game {
-  min-width: 1280px;
-  min-height: 720px;
+  display: grid;
+  grid-template-columns: 90% auto;
   width: 1280px;
   height: 720px;
   background-color: black;
@@ -57,28 +57,20 @@ button:hover {
   position: relative;
 }
 
-.playfield {
-  background-color: gray;
-  position: absolute;
-}
-
 .right-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 260px;
-  border-left: solid blue 4px;
-  position: absolute;
+  width: auto;
   height: 100%;
-  right: 0;
+  border-left: solid blue 4px;
   background-color: black;
-  top: 0;
   padding-top: 20px;
 }
 
 .info-panel {
   width: 256px;
-  height: 100%;
+  height: 500px;
   background-color: black;
 }
 
@@ -142,14 +134,12 @@ button:hover {
 }
 
 .game-card {
-  position: absolute;
-  height: 700px;
-  width: 1000px;
-  top: 0;
-  left: 0;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .playerName {
@@ -230,17 +220,16 @@ th:nth-child(even) {
 }
 
 .playground {
-  width: 1260px;
-  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .canvas {
   background-color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1000px;
-  height: 700px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .hide {
