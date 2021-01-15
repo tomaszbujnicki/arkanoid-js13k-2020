@@ -2,7 +2,9 @@ const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 export default function draw() {
-  ctx.clearRect(0, 0, 1260, 700);
+  resizeCanvas();
+
+  ctx.clearRect(0, 0, 1000, 700);
   drawShape(this.playfield, 'transparent');
   drawShape(this.paddle);
   this.ballArray.forEach((ball) => {
@@ -60,4 +62,31 @@ export default function draw() {
 
     return color;
   }
+}
+
+let ijj = 0;
+function resizeCanvas() {
+  ijj += 1;
+  if (ijj < 60) return;
+  ijj = 0;
+  const playground = document
+    .getElementById('playground')
+    .getBoundingClientRect();
+
+  const canvasRatio = 1000 / 700;
+  const playgroundRatio = playground.width / playground.height;
+
+  if (playgroundRatio > canvasRatio) {
+    canvas.style.height = playground.height + 'px';
+    canvas.style.width = playground.height * canvasRatio + 'px';
+    console.log('+');
+  } else {
+    canvas.style.width = playground.width + 'px';
+    canvas.style.height = playground.width / canvasRatio + 'px';
+    console.log('-');
+  }
+
+  const canvasSize = canvas.getBoundingClientRect();
+  console.log(canvasSize.width, canvasSize.height);
+  console.log(playground.width, playground.height);
 }

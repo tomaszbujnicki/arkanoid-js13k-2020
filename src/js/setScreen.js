@@ -1,6 +1,10 @@
 import fscreen from 'fscreen';
 
-export function fullscreen() {
+export function setScreen() {
+  fscreen.addEventListener('fullscreenchange', fullscreen, false);
+}
+
+function fullscreen() {
   if (fscreen.fullscreenElement !== null) {
     document
       .getElementById('options__fullscreen-button')

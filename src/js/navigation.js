@@ -1,6 +1,4 @@
 import { action } from './action';
-import { fullscreen } from './fullscreen';
-import fscreen from 'fscreen';
 
 export function navigation() {
   document
@@ -29,5 +27,4 @@ export function navigation() {
   document
     .getElementById('options__fullscreen-button')
     .addEventListener('click', () => action('fullscreen'));
-  fscreen.addEventListener('fullscreenchange', fullscreen, false);
 }
