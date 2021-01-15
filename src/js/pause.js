@@ -1,17 +1,22 @@
 import { action } from './action';
+import { GAMESTATE } from './data';
 import { options } from './options';
 
 let game;
 let countdownTimeoutId;
 
 export function pause(gameObject) {
-  window.clearInterval(countdownTimeoutId);
   game = gameObject;
-  action('pause');
+  if (game.state === GAMESTATE.RUN || game.state === GAMESTATE.WAIT) {
+    game.state = GAMESTATE.PAUSE;
+    window.clearInterval(countdownTimeoutId);
+    action('pause');
+  }
 }
 
 export function resume() {
   if (game) {
+    game.state = GAMESTATE.WAIT;
     const level = game.level;
     level.seconds = options.countdownDelay;
     if (level.isAnyBallSticked()) {

@@ -34,7 +34,7 @@ button:hover {
 .highlighted {
   background-color: yellow;
   border-color: yellow;
-  color: red;
+  color: blue;
   font-weight: 700;
 }
 
@@ -47,7 +47,7 @@ button:hover {
 
 .game {
   display: grid;
-  grid-template-columns: 90% auto;
+  grid-template-columns: 80% auto;
   width: 1280px;
   height: 720px;
   background-color: black;

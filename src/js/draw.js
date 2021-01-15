@@ -79,14 +79,10 @@ function resizeCanvas() {
   if (playgroundRatio > canvasRatio) {
     canvas.style.height = playground.height + 'px';
     canvas.style.width = playground.height * canvasRatio + 'px';
-    console.log('+');
   } else {
     canvas.style.width = playground.width + 'px';
     canvas.style.height = playground.width / canvasRatio + 'px';
-    console.log('-');
   }
 
   const canvasSize = canvas.getBoundingClientRect();
-  console.log(canvasSize.width, canvasSize.height);
-  console.log(playground.width, playground.height);
 }

@@ -27,4 +27,16 @@ export function navigation() {
   document
     .getElementById('options__fullscreen-button')
     .addEventListener('click', () => action('fullscreen'));
+
+  document.addEventListener('keydown', press);
+  function press(e) {
+    // F
+    if (e.keyCode === 70) {
+      action('fullscreen');
+    }
+    // M
+    if (e.keyCode === 77) {
+      action('mute');
+    }
+  }
 }
