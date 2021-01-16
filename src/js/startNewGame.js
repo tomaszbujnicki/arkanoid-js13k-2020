@@ -6,7 +6,6 @@ export default function startNewGame() {
   keybordControl();
   const playerName = getPlayerName();
   const game = new Game(levelArray, playerName);
-  game.loadLevel();
   game.startLevel();
 
   function getPlayerName() {

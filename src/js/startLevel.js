@@ -2,6 +2,7 @@ import Level from './Level';
 import { GAMESTATE } from './data';
 import { isKeyPressed } from './keybordControl';
 import { gameOver } from './gameOver';
+import { pause } from './pause';
 
 export default function startLevel() {
   const game = this;
@@ -16,7 +17,7 @@ export default function startLevel() {
 
     if (game.state === GAMESTATE.ABORT) return;
 
-    if (isKeyPressed.pause) game.stop();
+    if (isKeyPressed.pause) pause(game);
 
     if (game.state === GAMESTATE.RUN) {
       for (let i = 0; i < 2; i++) {

@@ -3,7 +3,6 @@ import SOUND from './sounds';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
 import { gameOver } from './gameOver';
-import { pause } from './pause';
 
 export default class Game {
   constructor(levelArray, playerName) {
@@ -16,12 +15,6 @@ export default class Game {
     this.startLevel = startLevel;
     this.drawPanel = drawPanel;
     this.state = GAMESTATE.ABORT;
-  }
-
-  loadLevel() {}
-
-  stop() {
-    pause(this);
   }
 
   resume() {
@@ -37,7 +30,6 @@ export default class Game {
     SOUND.levelClear.play();
     window.setTimeout(() => {
       if (this.levels.length > this.levelNumber) {
-        this.loadLevel();
         this.startLevel();
       } else {
         this.theEnd();

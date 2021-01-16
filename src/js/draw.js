@@ -1,9 +1,10 @@
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
-
+let abba = 0;
 export default function draw() {
   resizeCanvas();
-
+  abba++;
+  console.log('abba');
   ctx.clearRect(0, 0, 1000, 700);
   drawShape(this.playfield, 'transparent');
   drawShape(this.paddle);
@@ -64,11 +65,7 @@ export default function draw() {
   }
 }
 
-let ijj = 0;
 function resizeCanvas() {
-  ijj += 1;
-  if (ijj < 60) return;
-  ijj = 0;
   const playground = document
     .getElementById('playground')
     .getBoundingClientRect();
