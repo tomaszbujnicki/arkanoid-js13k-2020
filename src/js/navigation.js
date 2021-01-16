@@ -78,7 +78,7 @@ export function navigation() {
         ? [...document.querySelectorAll('.options__button')]
         : [
             ...document.querySelectorAll(
-              '.game-card:not(.hide) button:not([disabled="true"])'
+              '.game-card:not(.hide) button:not(.disabled)'
             ),
           ];
 
@@ -97,7 +97,7 @@ export function navigation() {
         ? [...document.querySelectorAll('.options__button')]
         : [
             ...document.querySelectorAll(
-              '.game-card:not(.hide) button:not([disabled="true"])'
+              '.game-card:not(.hide) button:not(.disabled)'
             ),
           ];
 
