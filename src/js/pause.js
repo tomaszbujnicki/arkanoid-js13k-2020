@@ -8,14 +8,14 @@ let countdownTimeoutId;
 export function pause(gameObject) {
   game = gameObject;
   if (game.state === GAMESTATE.RUN || game.state === GAMESTATE.WAIT) {
-    game.state = GAMESTATE.WAIT;
+    game.state = GAMESTATE.MENU;
     window.clearInterval(countdownTimeoutId);
     action('pause');
   }
 }
 
 export function resume() {
-  if (game) {
+  if (game.state === GAMESTATE.MENU) {
     const level = game.level;
     level.seconds = options.countdownDelay;
     if (level.isAnyBallSticked()) {

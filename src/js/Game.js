@@ -3,18 +3,32 @@ import SOUND from './sounds';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
 import { gameOver } from './gameOver';
+import levelArray from './levels';
+import { resume } from './pause';
 
 export default class Game {
-  constructor(levelArray, playerName) {
+  constructor() {
+    this.lives;
+    this.levelNumber;
+    this.score;
+    this.level;
+    this.playerName;
+    this.state = GAMESTATE.MENU;
+    this.levels = levelArray;
+    this.startLevel = startLevel;
+    this.drawPanel = drawPanel;
+  }
+
+  startNewGame(playerName) {
     this.lives = 1;
     this.levelNumber = 0;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
-    this.levels = levelArray;
-    this.startLevel = startLevel;
-    this.drawPanel = drawPanel;
     this.state = GAMESTATE.ABORT;
+    window.setTimeout(() => {
+      this.startLevel();
+    }, 100);
   }
 
   resume() {
