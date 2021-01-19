@@ -19,17 +19,17 @@ export default class Game {
     this.drawPanel = drawPanel;
   }
 
-  startNewGame(playerName = 'Player3') {
+  startNewGame(playerName, callback) {
     this.lives = 0;
-    this.levelNumber = 1;
+    this.levelNumber = 0;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
     this.state = GAMESTATE.ABORT;
     window.setTimeout(() => {
       this.startLevel();
+      callback(true);
     }, 100);
-    return true;
   }
 
   pause() {
@@ -88,12 +88,16 @@ export default class Game {
       );
       level.hint = 'Press SPACEBAR to launch ball';
     } else {
-      this.state = GAMESTATE.MENU;
-      highscore.update(this.playerName, this.score);
-      document.getElementById('gameOver__score').textContent = this.score;
-      document.getElementById('gameOver').classList.remove('hide');
-      document.getElementById('playground').classList.add('hide');
+      this.state = GAMESTATE.ABORT;
+      document.getElementById('endGame-button').classList.remove('hide');
     }
+  }
+
+  endGame() {
+    this.state = GAMESTATE.MENU;
+    highscore.update(this.playerName, this.score);
+    document.getElementById('gameOver__score').textContent = this.score;
+    return true;
   }
 
   updateScore(points) {

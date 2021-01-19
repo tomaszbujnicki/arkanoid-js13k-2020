@@ -9,7 +9,8 @@ export default {
   ],
 
   update(player, score) {
-    if (player && score) {
+    if (!player) player = 'Player';
+    if (score) {
       this.table.push({ player, score });
     }
     this.table.sort(function (a, b) {

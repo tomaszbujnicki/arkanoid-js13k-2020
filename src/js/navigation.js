@@ -20,6 +20,7 @@ export class Navigation {
     );
     DOMelements.newGameBtn.addEventListener('click', () => this.newGame());
     DOMelements.startGameBtn.addEventListener('click', () => this.startGame());
+    DOMelements.endGameBtn.addEventListener('click', () => this.gameOver());
     DOMelements.continueGameBtn.addEventListener('click', () =>
       this.continueGame()
     );
@@ -40,10 +41,12 @@ export class Navigation {
   }
 
   startGame() {
-    if (this.game.startNewGame()) {
+    const playerName = DOMelements.playerNameInput.value;
+    this.game.startNewGame(playerName, (isStarted) => {
+      this.hide(DOMelements.endGameBtn);
       this.disable(DOMelements.continueGameBtn, false);
       this.openCard(DOMelements.playgroundCard);
-    }
+    });
   }
 
   continueGame() {
@@ -60,9 +63,11 @@ export class Navigation {
   }
 
   gameOver() {
-    this.disable(continueGameBtn);
-    this.openCard(DOMelements.gameOverCard);
-    DOMelements.menuGameOverBtn.focus();
+    if (this.game.endGame()) {
+      this.disable(DOMelements.continueGameBtn);
+      this.openCard(DOMelements.gameOverCard);
+      DOMelements.menuGameOverBtn.focus();
+    }
   }
 
   highscore() {
@@ -176,12 +181,5 @@ export class Navigation {
     } else {
       el.classList.add('disabled');
     }
-  }
-  getPlayerName() {
-    let playerName = document.getElementById('playerName_Field').value;
-    if (!playerName) {
-      playerName = 'Player';
-    }
-    return playerName;
   }
 }

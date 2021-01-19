@@ -19,6 +19,7 @@ export const DOMelements = {
   menuGameOverBtn: document.getElementById('main-menu-gameOver'),
   muteBtn: document.getElementById('options__mute-button'),
   fullscreenBtn: document.getElementById('options__fullscreen-button'),
+  endGameBtn: document.getElementById('endGame-button'),
   // text input
   playerNameInput: document.getElementById('playerName_Field'),
   // cards
