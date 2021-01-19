@@ -2,6 +2,7 @@ import { DOMelements, GAMESTATE } from './data';
 import SOUND from './sounds';
 import { options } from './options';
 import highscore from './highscore';
+import fscreen from 'fscreen';
 
 export class Navigation {
   constructor(game) {
@@ -33,6 +34,7 @@ export class Navigation {
     DOMelements.fullscreenBtn.addEventListener('click', () =>
       options.toggleFullscreen()
     );
+    fscreen.addEventListener('fullscreenchange', this.fullscreenIcon, false);
   }
 
   newGame() {
@@ -135,6 +137,18 @@ export class Navigation {
         default:
           break;
       }
+    }
+  }
+
+  fullscreenIcon() {
+    if (fscreen.fullscreenElement !== null) {
+      document
+        .getElementById('options__fullscreen-button')
+        .classList.add('fullscreen-on');
+    } else {
+      document
+        .getElementById('options__fullscreen-button')
+        .classList.remove('fullscreen-on');
     }
   }
 
