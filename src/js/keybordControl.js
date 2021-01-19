@@ -4,7 +4,6 @@ const isKeyPressed = {
   left: false,
   right: false,
   space: false,
-  pause: false,
 };
 
 function keybordControl() {
@@ -19,9 +18,6 @@ function keybordControl() {
     if (e.keyCode === 32) {
       isKeyPressed.space = true;
     }
-    if (e.keyCode === 80) {
-      isKeyPressed.pause = true;
-    }
   }
 
   document.addEventListener('keyup', release);
@@ -34,9 +30,6 @@ function keybordControl() {
     }
     if (e.keyCode === 32) {
       isKeyPressed.space = false;
-    }
-    if (e.keyCode === 80) {
-      isKeyPressed.pause = false;
     }
   }
 }

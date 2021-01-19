@@ -153,16 +153,16 @@ button:focus, input:focus{
   position: relative;
 }
 
-.playerName {
+.new-game {
   display: flex;
   justify-content: center;
 }
 
-.playerName label {
+.new-game label {
   margin-bottom: 30px;
 }
 
-.playerName input {
+.new-game input {
   margin-bottom: 30px;
   height: 30px;
   width: 250px;
@@ -173,7 +173,7 @@ button:focus, input:focus{
   background-color: gray;
 }
 
-.playerName input::placeholder {
+.new-game input::placeholder {
   color: black;
   font-weight: normal;
 }

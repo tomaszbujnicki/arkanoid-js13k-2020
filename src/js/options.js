@@ -2,7 +2,6 @@ import SOUND from './sounds';
 import fscreen from 'fscreen';
 
 export const options = {
-  countdownDelay: 3,
   isMuted: false,
 
   toggleMute() {

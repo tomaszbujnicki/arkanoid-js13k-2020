@@ -1,10 +1,9 @@
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
-let abba = 0;
+
 export default function draw() {
   resizeCanvas();
-  abba++;
-  console.log('abba');
+  console.log('.');
   ctx.clearRect(0, 0, 1000, 700);
   drawShape(this.playfield, 'transparent');
   drawShape(this.paddle);

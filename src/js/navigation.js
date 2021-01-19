@@ -1,13 +1,20 @@
-import { DOMelements } from './data';
+import { DOMelements, GAMESTATE } from './data';
 import SOUND from './sounds';
 import { options } from './options';
+import highscore from './highscore';
 
 export class Navigation {
   constructor(game) {
     this.game = game;
     this.listen();
+    DOMelements.newGameBtn.focus();
   }
   listen() {
+    document.addEventListener('keydown', (e) => {
+      if (this.game.state === GAMESTATE.MENU || /Key[FMP]/.test(e.code))
+        this.action(e.code);
+    });
+
     DOMelements.buttons.forEach((button) =>
       button.addEventListener('click', () => SOUND.mouseClick.play())
     );
@@ -18,13 +25,127 @@ export class Navigation {
     );
     DOMelements.highscoreBtn.addEventListener('click', () => this.highscore());
     DOMelements.creditsBtn.addEventListener('click', () => this.credits());
-    DOMelements.mainMenuBtns.forEach((button) =>
-      button.addEventListener('click', () => this.mainMenu())
+    DOMelements.menuBtns.forEach((button) =>
+      button.addEventListener('click', () => this.menu())
     );
-    DOMelements.muteBtn.addEventListener('click', () => this.mute());
+    DOMelements.muteBtn.addEventListener('click', () => options.toggleMute());
     DOMelements.fullscreenBtn.addEventListener('click', () =>
-      this.fullscreen()
+      options.toggleFullscreen()
     );
+  }
+
+  newGame() {
+    this.openCard(DOMelements.newGameCard);
+    DOMelements.playerNameInput.focus();
+  }
+
+  startGame() {
+    if (this.game.startNewGame()) {
+      this.disable(DOMelements.continueGameBtn, false);
+      this.openCard(DOMelements.playgroundCard);
+    }
+  }
+
+  continueGame() {
+    if (this.game.resume()) {
+      this.openCard(DOMelements.playgroundCard);
+    }
+  }
+
+  pause() {
+    if (this.game.pause()) {
+      this.openCard(DOMelements.menuCard);
+      DOMelements.continueGameBtn.focus();
+    }
+  }
+
+  gameOver() {
+    this.disable(continueGameBtn);
+    this.openCard(DOMelements.gameOverCard);
+    DOMelements.menuGameOverBtn.focus();
+  }
+
+  highscore() {
+    highscore.show();
+    this.openCard(DOMelements.highscoreCard);
+    DOMelements.menuHighscoreBtn.focus();
+  }
+
+  credits() {
+    this.openCard(DOMelements.creditsCard);
+    DOMelements.menuCreditsBtn.focus();
+  }
+
+  menu() {
+    this.openCard(DOMelements.menuCard);
+    DOMelements.newGameBtn.focus();
+  }
+
+  action(key) {
+    console.log(key);
+    if (document.activeElement === DOMelements.playerNameInput) {
+      switch (key) {
+        case 'ArrowDown':
+          DOMelements.startGameBtn.focus();
+          break;
+        case 'Enter':
+          if (!DOMelements.newGameCard.classList.contains('hide')) {
+            this.startGame();
+          }
+          break;
+        case 'NumpadEnter':
+          if (!DOMelements.newGameCard.classList.contains('hide')) {
+            this.startGame();
+          }
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (key) {
+        case 'KeyF':
+          options.toggleFullscreen();
+          break;
+        case 'KeyM':
+          options.toggleMute();
+          break;
+        case 'KeyP':
+          this.pause();
+          break;
+        case 'ArrowUp':
+          this.moveFocus(-1);
+          break;
+        case 'ArrowDown':
+          this.moveFocus(1);
+          break;
+        case 'ArrowLeft':
+          const topButton = document.querySelector(
+            '.game-card:not(.hide) button'
+          );
+          topButton.focus();
+          break;
+        case 'ArrowRight':
+          DOMelements.muteBtn.focus();
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  moveFocus(step) {
+    const focused = document.activeElement;
+    const buttons = focused.classList.contains('options__button')
+      ? [...document.querySelectorAll('.options__button')]
+      : [
+          ...document.querySelectorAll(
+            '.game-card:not(.hide) button:not(.disabled), #playerName_Field'
+          ),
+        ];
+    const index = buttons.findIndex((e) => e === focused);
+    if (buttons[index + step]) {
+      buttons[index + step].focus();
+    }
   }
 
   hide(el) {
@@ -34,10 +155,10 @@ export class Navigation {
     el.classList.remove('hide');
   }
 
-  openCard(el) {
+  openCard(card) {
     DOMelements.cards.forEach((card) => this.hide(card));
 
-    if (el === DOMelements.playgroundCard) {
+    if (card === DOMelements.playgroundCard) {
       this.hide(DOMelements.options);
       this.show(DOMelements.infoPanel);
     } else {
@@ -45,7 +166,7 @@ export class Navigation {
       this.hide(DOMelements.infoPanel);
     }
 
-    this.show(el);
+    this.show(card);
   }
 
   disable(el, isDisabled = true) {
@@ -54,131 +175,6 @@ export class Navigation {
       el.classList.remove('disabled');
     } else {
       el.classList.add('disabled');
-    }
-  }
-
-  newGame() {
-    this.openCard(DOMelements.playerNameCard);
-    DOMelements.playerNameInput.focus();
-  }
-
-  startGame() {
-    this.disable(DOMelements.continueGameBtn, false);
-    this.openCard(DOMelements.playgroundCard);
-    this.game.startNewGame();
-  }
-
-  continueGame() {
-    this.openCard(DOMelements.playgroundCard);
-    this.game.resume();
-  }
-
-  highscore() {
-    highscore.show();
-    openCard('high-score');
-    document.getElementById('main-menu-highscore').focus();
-  }
-
-  credits() {
-    openCard('credits');
-    document.getElementById('main-menu-credits').focus();
-  }
-
-  mainMenu() {
-    openCard('menu');
-    document.getElementById('start-button').focus();
-  }
-
-  mute() {
-    options.toggleMute();
-  }
-
-  fullscreen() {
-    options.toggleFullscreen();
-  }
-
-  keyboard() {
-    DOMelements.newGameBtn.focus();
-    // focus order
-    document.querySelector('#menu button').focus();
-    const optionsButtons = document.querySelectorAll('#options button');
-
-    document.addEventListener('keydown', press);
-
-    function press(e) {
-      if (document.activeElement.tagName !== 'INPUT') {
-        // F
-        if (e.keyCode === 70) {
-          action('fullscreen');
-        }
-        // M
-        if (e.keyCode === 77) {
-          action('mute');
-        }
-        // Right
-        if (e.keyCode === 39) {
-          if (document.getElementById('playground').offsetWidth === 0) {
-            const firstButton = document.querySelector('.options__button');
-            firstButton.focus();
-          }
-        }
-        // Left
-        if (e.keyCode === 37) {
-          if (document.getElementById('playground').offsetWidth === 0) {
-            const firstButton = document.querySelector(
-              '.game-card:not(.hide) button'
-            );
-            firstButton.focus();
-          }
-        }
-      }
-
-      // Enter
-      if (e.keyCode === 13) {
-        if (
-          document.activeElement === document.getElementById('playerName_Field')
-        ) {
-          action('start-game');
-        }
-      }
-
-      // Down
-      if (e.keyCode === 40) {
-        const focused = document.activeElement;
-        const buttons = focused.classList.contains('options__button')
-          ? [...document.querySelectorAll('.options__button')]
-          : [
-              ...document.querySelectorAll(
-                '.game-card:not(.hide) button:not(.disabled)'
-              ),
-            ];
-
-        if (buttons.length > 1) {
-          if (focused !== buttons[buttons.length - 1]) {
-            const index = buttons.findIndex((e) => e === focused);
-            buttons[index + 1].focus();
-          }
-        }
-      }
-
-      // Up
-      if (e.keyCode === 38) {
-        const focused = document.activeElement;
-        const buttons = focused.classList.contains('options__button')
-          ? [...document.querySelectorAll('.options__button')]
-          : [
-              ...document.querySelectorAll(
-                '.game-card:not(.hide) button:not(.disabled)'
-              ),
-            ];
-
-        if (buttons.length > 1) {
-          if (focused !== buttons[0]) {
-            const index = buttons.findIndex((e) => e === focused);
-            buttons[index - 1].focus();
-          }
-        }
-      }
     }
   }
   getPlayerName() {

@@ -2,9 +2,8 @@ import drawPanel from './drawPanel';
 import SOUND from './sounds';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
-import { gameOver } from './gameOver';
 import levelArray from './levels';
-import { resume } from './pause';
+import highscore from './highscore';
 
 export default class Game {
   constructor() {
@@ -13,15 +12,16 @@ export default class Game {
     this.score;
     this.level;
     this.playerName;
+    this.countdownId;
     this.state = GAMESTATE.MENU;
     this.levels = levelArray;
     this.startLevel = startLevel;
     this.drawPanel = drawPanel;
   }
 
-  startNewGame(playerName) {
-    this.lives = 1;
-    this.levelNumber = 0;
+  startNewGame(playerName = 'Player3') {
+    this.lives = 0;
+    this.levelNumber = 1;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
@@ -29,10 +29,33 @@ export default class Game {
     window.setTimeout(() => {
       this.startLevel();
     }, 100);
+    return true;
+  }
+
+  pause() {
+    if (this.state === GAMESTATE.RUN || this.state === GAMESTATE.WAIT) {
+      this.state = GAMESTATE.MENU;
+      window.clearInterval(this.countdownId);
+      return true;
+    }
   }
 
   resume() {
-    this.state = GAMESTATE.RUN;
+    if (this.lives > 0 && this.state === GAMESTATE.MENU) {
+      this.state = GAMESTATE.WAIT;
+      this.level.seconds = 3;
+      if (this.level.isAnyBallSticked()) {
+        this.level.hint = 'Press SPACEBAR to launch ball';
+      }
+      this.countdownId = setInterval(() => {
+        this.level.seconds--;
+        if (this.level.seconds <= 0) {
+          window.clearInterval(this.countdownId);
+          this.state = GAMESTATE.RUN;
+        }
+      }, 1000);
+      return true;
+    }
   }
 
   theEnd() {} // game won, passed all levels
@@ -65,8 +88,11 @@ export default class Game {
       );
       level.hint = 'Press SPACEBAR to launch ball';
     } else {
-      this.state = GAMESTATE.ABORT;
-      gameOver(this);
+      this.state = GAMESTATE.MENU;
+      highscore.update(this.playerName, this.score);
+      document.getElementById('gameOver__score').textContent = this.score;
+      document.getElementById('gameOver').classList.remove('hide');
+      document.getElementById('playground').classList.add('hide');
     }
   }
 

@@ -8,32 +8,28 @@ export const GAMESTATE = {
 export const DOMelements = {
   // buttons
   buttons: [...document.querySelectorAll('button')],
-
-  // menu buttons
-  newGameBtn: document.getElementById('start-button'),
+  newGameBtn: document.getElementById('new-button'),
   startGameBtn: document.getElementById('playerName_Button'),
   continueGameBtn: document.getElementById('continue-button'),
   highscoreBtn: document.getElementById('high-score-button'),
   creditsBtn: document.getElementById('credits-button'),
-  mainMenuBtns: [...document.querySelectorAll('.main-menu-button')],
-
-  //options buttons
+  menuBtns: [...document.querySelectorAll('.main-menu-button')],
+  menuHighscoreBtn: document.getElementById('main-menu-highscore'),
+  menuCreditsBtn: document.getElementById('main-menu-credits'),
+  menuGameOverBtn: document.getElementById('main-menu-gameOver'),
   muteBtn: document.getElementById('options__mute-button'),
   fullscreenBtn: document.getElementById('options__fullscreen-button'),
-
   // text input
   playerNameInput: document.getElementById('playerName_Field'),
-
   // cards
   cards: document.querySelectorAll('#game div.game-card'),
   playgroundCard: document.getElementById('playground'),
-  playerNameCard: document.getElementById('playerName'),
+  newGameCard: document.getElementById('new-game'),
   highscoreCard: document.getElementById('high-score'),
   creditsCard: document.getElementById('credits'),
   menuCard: document.getElementById('menu'),
   gameOverCard: document.getElementById('gameOver'),
-
-  //
+  // panel
   options: document.getElementById('options'),
   infoPanel: document.getElementById('info-panel'),
 };
