@@ -17,7 +17,8 @@
 
       <div id="menu" class="game-card">
         <h2>Arkanoid 404</h2>
-        <ul>
+        <div>
+        <ul class="menuList">
           <li><button id="new-button">New game</button></li>
           <li>
             <button
@@ -32,15 +33,19 @@
           <li><button id="credits-button">Credits</button></li>
         </ul>
       </div>
-      <div id="new-game" class="game-card new-game hide">
-        <label id="playerName_Label" for="playerName_Field">Name:</label>
+      </div>
+      <div id="new-game" class="game-card hide">
+        <h2>New Game</h2>
+        <label id="playerName_Label" for="playerName_Field" class="name-label">Name:</label>
         <input
           id="playerName_Field"
+          class="name-input"
           type="text"
           placeholder="Player"
           autocomplete="off"
           maxlength="25"
         />
+
         <button id="playerName_Button">Start!</button>
         <button id="main-menu-start" class="main-menu-button">back</button>
       </div>
@@ -100,10 +105,9 @@
         </p>
         <button id="main-menu-credits" class="main-menu-button" >back</button>
       </div>
-      <div class="right-panel">
-        <div id="options" class="options">
-          <h3 class="options__title">Options</h3>
-          <ul class="options__list">
+      <div class="right-panel">        
+          <ul id="options" class="options__list">
+            <h3 class="options__title">Options</h3>
             <li>
               <button
                 class="options__button sound-on"
@@ -137,7 +141,6 @@
               ></button>
             </li>
           </ul>
-        </div>
         <canvas
           id="info-panel"
           class="info-panel hide"

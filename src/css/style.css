@@ -72,22 +72,16 @@ button:focus, input:focus{
   height: 100%;
   border-left: solid blue 4px;
   background-color: black;
-  padding-top: 20px;
 }
 
 .info-panel {
-  width: 256px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   background-color: black;
 }
 
 .options__title {
   color: blue;
-}
-
-.options__list li {
-  margin-top: 60px;
-  margin-bottom: 0;
 }
 
 .options__button {
@@ -145,19 +139,30 @@ button:focus, input:focus{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
-
-.new-game {
-  display: flex;
-  justify-content: center;
+.menuList{
+  margin-top: 150px;
 }
 
-.new-game label {
+.menuList li{
   margin-bottom: 30px;
 }
 
-.new-game input {
+.main-menu-button {
+  position: absolute;
+  bottom: 0;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+
+.name-label {
+  margin-bottom: 30px;
+}
+
+.name-input {
   margin-bottom: 30px;
   height: 30px;
   width: 250px;
@@ -168,14 +173,18 @@ button:focus, input:focus{
   background-color: gray;
 }
 
-.new-game input::placeholder {
+.name-input::placeholder {
   color: black;
   font-weight: normal;
 }
 
 h2 {
   font-size: 48px;
-  margin: 100px 0;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  position: absolute;
+  top: 0;
 }
 
 p {
@@ -198,12 +207,16 @@ a {
   text-decoration: none;
   color: blue;
 }
+.options__list {
+  height: 100%;
+}
 
 ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   list-style: none;
+  justify-content: space-around;
 }
 
 li {
@@ -223,11 +236,6 @@ th {
 td:nth-child(even),
 th:nth-child(even) {
   text-align: right;
-}
-
-.main-menu-button {
-  position: absolute;
-  bottom: 100px;
 }
 
 .playground {
