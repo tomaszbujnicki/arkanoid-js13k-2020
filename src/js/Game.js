@@ -41,7 +41,7 @@ export default class Game {
   }
 
   resume() {
-    if (this.lives > 0 && this.state === GAMESTATE.MENU) {
+    if (this.lives >= 0 && this.state === GAMESTATE.MENU) {
       this.state = GAMESTATE.WAIT;
       this.level.seconds = 3;
       if (this.level.isAnyBallSticked()) {
