@@ -1,4 +1,4 @@
-export default {
+export const highscore = {
   maxLength: 5,
   table: [
     { player: 'Mike', score: 1 },
@@ -9,6 +9,9 @@ export default {
   ],
 
   update(player, score) {
+    if (localStorage.getItem('highscore')) {
+      this.table = JSON.parse(localStorage.getItem('highscore'));
+    }
     if (!player) player = 'Player';
     if (score) {
       this.table.push({ player, score });
@@ -18,10 +21,11 @@ export default {
     });
 
     this.table.length = this.maxLength;
+    localStorage.setItem('highscore', JSON.stringify(this.table));
+    this.fillCard();
   },
 
-  show() {
-    this.update();
+  fillCard() {
     for (const index in this.table) {
       let name = document.getElementById('high-score-name-' + index);
       let score = document.getElementById('high-score-score-' + index);
