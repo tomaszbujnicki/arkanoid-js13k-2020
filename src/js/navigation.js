@@ -1,6 +1,5 @@
 import { DOMelements, GAMESTATE, SVG } from './data';
-import SOUND from './sounds';
-import { options } from './options';
+import { SOUND } from './sound';
 import highscore from './highscore';
 import fscreen from 'fscreen';
 
@@ -9,6 +8,7 @@ export class Navigation {
     this.game = game;
     this.listen();
     this.theme();
+
     DOMelements.newGameBtn.focus();
   }
   listen() {
@@ -31,9 +31,9 @@ export class Navigation {
     DOMelements.menuBtns.forEach((button) =>
       button.addEventListener('click', () => this.menu())
     );
-    DOMelements.muteBtn.addEventListener('click', () => options.toggleMute());
+    DOMelements.muteBtn.addEventListener('click', () => this.toggleMute());
     DOMelements.fullscreenBtn.addEventListener('click', () =>
-      options.toggleFullscreen()
+      this.toggleFullscreen()
     );
     DOMelements.themeBtn.addEventListener('click', () => this.theme());
     fscreen.addEventListener('fullscreenchange', this.fullscreenIcon, false);
@@ -75,7 +75,6 @@ export class Navigation {
   }
 
   highscore() {
-    highscore.show();
     this.openCard(DOMelements.highscoreCard);
     DOMelements.menuHighscoreBtn.focus();
   }
@@ -113,10 +112,10 @@ export class Navigation {
     } else {
       switch (key) {
         case 'KeyF':
-          options.toggleFullscreen();
+          this.toggleFullscreen();
           break;
         case 'KeyM':
-          options.toggleMute();
+          this.toggleMute();
           break;
         case 'KeyP':
           this.pause();
@@ -142,12 +141,27 @@ export class Navigation {
     }
   }
 
+  toggleFullscreen() {
+    if (fscreen.fullscreenElement === null) {
+      fscreen.requestFullscreen(DOMelements.game);
+    } else {
+      if (fscreen.exitFullscreen()) {
+        fscreen.exitFullscreen();
+      }
+    }
+  }
+
   fullscreenIcon() {
     if (fscreen.fullscreenElement !== null) {
       DOMelements.fullscreenBtn.innerHTML = SVG.fullscreenExit;
     } else {
       DOMelements.fullscreenBtn.innerHTML = SVG.fullscreen;
     }
+  }
+
+  toggleMute() {
+    const isMuted = SOUND.toggleMute();
+    DOMelements.muteBtn.innerHTML = isMuted ? SVG.soundOff : SVG.soundOn;
   }
 
   theme() {

@@ -1,4 +1,4 @@
-import SOUND from './sounds';
+import { SOUND } from './sound';
 import { random } from './functions';
 
 export default function collisions(progress) {

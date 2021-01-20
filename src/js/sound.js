@@ -14,7 +14,7 @@ import powerUp_1 from '../audio/power-up-1.wav';
 import powerUp_2 from '../audio/power-up-2.wav';
 import powerUp_3 from '../audio/power-up-3.wav';
 
-export default {
+export const SOUND = {
   hit_1: new Audio(hit_1),
   hit_2: new Audio(hit_2),
   hit_3: new Audio(hit_3),
@@ -30,4 +30,14 @@ export default {
   powerUp_1: new Audio(powerUp_1),
   powerUp_2: new Audio(powerUp_2),
   powerUp_3: new Audio(powerUp_3),
+
+  toggleMute() {
+    isMuted = !isMuted;
+    for (let sound in SOUND) {
+      SOUND[sound].muted = isMuted;
+    }
+    return isMuted;
+  },
 };
+
+let isMuted = false;

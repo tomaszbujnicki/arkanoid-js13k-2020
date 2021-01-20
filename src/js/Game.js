@@ -1,9 +1,9 @@
 import drawPanel from './drawPanel';
-import SOUND from './sounds';
+import { SOUND } from './sound';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
 import levelArray from './levels';
-import highscore from './highscore';
+import { highscore } from './highscore';
 
 export default class Game {
   constructor() {
