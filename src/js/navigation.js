@@ -1,4 +1,4 @@
-import { DOMelements, GAMESTATE } from './data';
+import { DOMelements, GAMESTATE, SVG } from './data';
 import SOUND from './sounds';
 import { options } from './options';
 import highscore from './highscore';
@@ -8,6 +8,7 @@ export class Navigation {
   constructor(game) {
     this.game = game;
     this.listen();
+    this.theme();
     DOMelements.newGameBtn.focus();
   }
   listen() {
@@ -34,6 +35,7 @@ export class Navigation {
     DOMelements.fullscreenBtn.addEventListener('click', () =>
       options.toggleFullscreen()
     );
+    DOMelements.themeBtn.addEventListener('click', () => this.theme());
     fscreen.addEventListener('fullscreenchange', this.fullscreenIcon, false);
   }
 
@@ -142,14 +144,21 @@ export class Navigation {
 
   fullscreenIcon() {
     if (fscreen.fullscreenElement !== null) {
-      document
-        .getElementById('options__fullscreen-button')
-        .classList.add('fullscreen-on');
+      DOMelements.fullscreenBtn.innerHTML = SVG.fullscreenExit;
     } else {
-      document
-        .getElementById('options__fullscreen-button')
-        .classList.remove('fullscreen-on');
+      DOMelements.fullscreenBtn.innerHTML = SVG.fullscreen;
     }
+  }
+
+  theme() {
+    /*     let root = document.documentElement;
+    root.style.setProperty('--background', 'white');
+    root.style.setProperty('--first', 'red');
+    root.style.setProperty('--second', 'black'); */
+    DOMelements.muteBtn.innerHTML = SVG.soundOn;
+    DOMelements.languageBtn.innerHTML = SVG.language;
+    DOMelements.themeBtn.innerHTML = SVG.theme;
+    DOMelements.fullscreenBtn.innerHTML = SVG.fullscreen;
   }
 
   moveFocus(step) {

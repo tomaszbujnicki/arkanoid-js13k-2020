@@ -1,5 +1,3 @@
-import '../css/reset.css';
-import '../css/style.css';
 import Game from './Game';
 import { keybordControl } from './keybordControl';
 import { Navigation } from './navigation';

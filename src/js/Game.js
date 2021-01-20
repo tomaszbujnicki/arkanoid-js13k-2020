@@ -21,7 +21,7 @@ export default class Game {
 
   startNewGame(playerName, callback) {
     this.lives = 0;
-    this.levelNumber = 0;
+    this.levelNumber = 1;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
@@ -62,7 +62,6 @@ export default class Game {
 
   nextLevel() {
     this.state = GAMESTATE.ABORT;
-    // level passed info
     this.levelNumber++;
     SOUND.levelClear.play();
     window.setTimeout(() => {
@@ -89,7 +88,9 @@ export default class Game {
       level.hint = 'Press SPACEBAR to launch ball';
     } else {
       this.state = GAMESTATE.ABORT;
-      document.getElementById('endGame-button').classList.remove('hide');
+      const button = document.getElementById('endGame-button');
+      button.classList.remove('hide');
+      button.focus();
     }
   }
 

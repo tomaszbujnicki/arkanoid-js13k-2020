@@ -1,24 +1,22 @@
 import SOUND from './sounds';
 import fscreen from 'fscreen';
+import { DOMelements, SVG } from './data';
 
 export const options = {
   isMuted: false,
 
   toggleMute() {
     this.isMuted = !this.isMuted;
-    const button = document.getElementById('options__mute-button');
     this.isMuted
-      ? button.classList.add('sound-off')
-      : button.classList.remove('sound-off');
+      ? (DOMelements.muteBtn.innerHTML = SVG.soundOff)
+      : (DOMelements.muteBtn.innerHTML = SVG.soundOn);
     for (let sound in SOUND) {
       SOUND[sound].muted = this.isMuted;
     }
   },
   toggleFullscreen() {
-    let game = document.getElementById('game');
-
     if (fscreen.fullscreenElement === null) {
-      fscreen.requestFullscreen(game);
+      fscreen.requestFullscreen(DOMelements.game);
     } else {
       if (fscreen.exitFullscreen()) {
         fscreen.exitFullscreen();

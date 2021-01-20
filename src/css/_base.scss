@@ -1,0 +1,110 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+  color: var(--first);
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 48px;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  position: absolute;
+  top: 0;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--second);
+}
+
+button {
+  color: var(--first);
+  cursor: pointer;
+  font-size: 24px;
+  background-color: var(--second);
+  padding: 5px 10px;
+  border: 2px solid var(--second);
+  font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, sans-serif;
+}
+
+button:hover {
+  background-color: var(--background);
+}
+
+button:focus,
+input:focus {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: var(--first);
+  outline-offset: 4px;
+}
+
+p {
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 50px;
+  text-align: center;
+  line-height: 2;
+}
+
+p.big {
+  font-size: 24px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  justify-content: space-around;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 40%;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+td:nth-child(even),
+th:nth-child(even) {
+  text-align: right;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 80% auto;
+  width: 1280px;
+  height: 720px;
+  background-color: var(--background);
+  border-style: double;
+  border-color: var(--second);
+  border-width: 10px;
+  position: relative;
+}
+
+.fill{
+  fill: var(--first);
+}
