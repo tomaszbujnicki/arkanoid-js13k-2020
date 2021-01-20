@@ -7,11 +7,17 @@ export const highscore = {
     { player: 'Bart', score: 4 },
     { player: 'Sally', score: 5 },
   ],
-
-  update(player, score) {
+  load() {
     if (localStorage.getItem('highscore')) {
       this.table = JSON.parse(localStorage.getItem('highscore'));
+      this.fillCard();
     }
+  },
+  save() {
+    localStorage.setItem('highscore', JSON.stringify(this.table));
+  },
+
+  update(player, score) {
     if (!player) player = 'Player';
     if (score) {
       this.table.push({ player, score });
@@ -21,7 +27,8 @@ export const highscore = {
     });
 
     this.table.length = this.maxLength;
-    localStorage.setItem('highscore', JSON.stringify(this.table));
+
+    this.save();
     this.fillCard();
   },
 

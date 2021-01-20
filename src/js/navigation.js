@@ -1,6 +1,5 @@
 import { DOMelements, GAMESTATE, SVG } from './data';
 import { SOUND } from './sound';
-import highscore from './highscore';
 import fscreen from 'fscreen';
 
 export class Navigation {
