@@ -26,8 +26,8 @@ export default class Ball {
       this.speedX * this.speedX + this.speedY * this.speedY
     );
     if (speed < this.maxSpeed) {
-      this.speedY *= 1.0001;
-      this.speedX *= 1.0001;
+      this.speedY *= 1.01;
+      this.speedX *= 1.01;
     }
   }
 }
