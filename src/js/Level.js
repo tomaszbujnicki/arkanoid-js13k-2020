@@ -11,9 +11,9 @@ import Playfield from './Playfield';
 export default class Level {
   constructor(level, game) {
     this.playfield = new Playfield(level.playfield);
-    this.paddle = this.createPaddle(level.paddle, this.playfield);
-    this.ballArray = this.createBallArray(level.balls, this.playfield);
-    this.blockArray = this.createBlockArray(level.blocks, this.playfield);
+    this.paddle = this.createPaddle(level.paddle);
+    this.ballArray = this.createBallArray(level.balls);
+    this.blockArray = this.createBlockArray(level.blocks);
     this.name = level.name;
     this.game = game;
     this.hint = 'Press SPACEBAR to launch ball';
@@ -102,18 +102,20 @@ export default class Level {
     }
   }
 
-  createPaddle(paddle, playfield) {
+  createPaddle(paddle) {
+    const playfield = this.playfield;
     let newPaddle = new Paddle(paddle, playfield);
-    if (this.canCreateObject(newPaddle, playfield)) {
+    if (this.canCreateObject(newPaddle)) {
       return newPaddle;
     } else return false;
   }
 
-  createBallArray(balls, playfield) {
+  createBallArray(balls) {
+    const playfield = this.playfield;
     const ballArray = [];
     balls.forEach((item) => {
       const ball = new Ball(item, playfield);
-      if (this.canCreateObject(ball, playfield)) {
+      if (this.canCreateObject(ball)) {
         ballArray.push(ball);
       }
     });
@@ -121,11 +123,12 @@ export default class Level {
     return ballArray;
   }
 
-  createBlockArray(blocks, playfield) {
+  createBlockArray(blocks) {
+    const playfield = this.playfield;
     const blockArray = [];
     blocks.forEach((item) => {
       const block = new Block(item, playfield);
-      if (this.canCreateObject(block, playfield)) {
+      if (this.canCreateObject(block)) {
         blockArray.push(block);
       }
     });
@@ -133,7 +136,8 @@ export default class Level {
     return blockArray;
   }
 
-  canCreateObject(item, playfield) {
+  canCreateObject(item) {
+    const playfield = this.playfield;
     if (
       item.width > 0 &&
       item.height > 0 &&
