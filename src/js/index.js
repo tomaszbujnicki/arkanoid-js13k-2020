@@ -7,7 +7,6 @@ function init() {
   const game = new Game();
   const navigation = new Navigation(game);
   highscore.load();
-
   keybordControl();
 }
 

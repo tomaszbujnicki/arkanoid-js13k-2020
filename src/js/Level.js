@@ -7,6 +7,7 @@ import Ball from './Ball';
 import Block from './Block';
 import Paddle from './Paddle';
 import Playfield from './Playfield';
+import { powers } from './powers';
 
 export default class Level {
   constructor(level, game) {
@@ -14,11 +15,13 @@ export default class Level {
     this.paddle = this.createPaddle(level.paddle);
     this.ballArray = this.createBallArray(level.balls);
     this.blockArray = this.createBlockArray(level.blocks);
+    this.powerArray = [];
     this.name = level.name;
     this.game = game;
     this.hint = 'Press SPACEBAR to launch ball';
     this.seconds = 0;
     this.collisions = collisions;
+    this.powers = powers;
     this.draw = draw;
     this.drawInfo = drawInfo;
   }
@@ -30,6 +33,10 @@ export default class Level {
   deleteBlock(block) {
     const index = this.blockArray.findIndex((e) => e === block);
     this.blockArray.splice(index, 1);
+  }
+  deletePower(power) {
+    const index = this.powerArray.findIndex((e) => e === power);
+    this.powerArray.splice(index, 1);
   }
   unstickBalls() {
     this.ballArray.forEach((ball) => (ball.isSticked = false));
@@ -52,6 +59,9 @@ export default class Level {
     this.movePaddle(p);
     this.ballArray.forEach((ball) => {
       ball.move(p);
+    });
+    this.powerArray.forEach((power) => {
+      power.move(p);
     });
   }
 

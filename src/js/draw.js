@@ -3,7 +3,6 @@ const ctx = canvas.getContext('2d');
 
 export default function draw() {
   resizeCanvas();
-  console.log('.');
   ctx.clearRect(0, 0, 1000, 700);
   drawShape(this.playfield, 'transparent');
   drawShape(this.paddle);
@@ -12,6 +11,9 @@ export default function draw() {
   });
   this.blockArray.forEach((block) => {
     drawShape(block, getColor(block.power));
+  });
+  this.powerArray.forEach((power) => {
+    drawShape(power, 'green');
   });
 
   function drawShape(object, color = 'white', shape) {

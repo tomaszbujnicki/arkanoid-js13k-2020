@@ -1,5 +1,6 @@
 import { SOUND } from './sound';
 import { random } from './functions';
+import Power from './Power';
 
 export default function collisions(progress) {
   let p = progress / 16;
@@ -94,6 +95,9 @@ export default function collisions(progress) {
       block.damage();
       SOUND['hit_' + random(1, 3)].play();
       if (block.power <= 0) {
+        if (random(0, 100) < 100) {
+          level.powerArray.push(new Power(block));
+        }
         level.deleteBlock(block);
         level.game.updateScore(25);
       } else {
