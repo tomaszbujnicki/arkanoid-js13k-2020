@@ -95,6 +95,22 @@ export default [
         left: 300,
         maxSpeed: 20,
       },
+      {
+        speedX: -2,
+        speedY: -5,
+        size: 20,
+        top: 620,
+        left: 300,
+        maxSpeed: 20,
+      },
+      {
+        speedX: 2,
+        speedY: 5,
+        size: 20,
+        top: 40,
+        left: 300,
+        maxSpeed: 20,
+      },
     ],
     // prettier-ignore
     blocks: [

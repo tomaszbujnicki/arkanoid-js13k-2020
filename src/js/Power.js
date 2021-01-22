@@ -8,7 +8,9 @@ export default class Power {
     this.top = block.top;
     this.width = block.width;
     this.height = block.height;
-    this.power = pickPower();
+    let index = pickPower();
+    this.name = powers[index].name;
+    this.color = powers[index].color;
   }
 
   move() {
@@ -18,40 +20,47 @@ export default class Power {
 
 function pickPower() {
   const rand = random(0, weightRange - 1);
-  console.log(powers[powersArray.findIndex((e) => e > rand)]);
-  return powers[powersArray.findIndex((e) => e > rand)];
+  const index = powersArray.findIndex((e) => e > rand);
+  console.log(index);
+  return index;
 }
 
 const powers = [
   {
     id: 0,
     name: 'Wider Paddle',
-    isGood: true,
     weight: 10,
+    color: 'red',
   },
   {
     id: 1,
     name: 'Faster Paddle',
-    isGood: true,
     weight: 10,
+    color: 'green',
   },
   {
     id: 2,
     name: 'Sticky Paddle',
-    isGood: true,
     weight: 10,
+    color: 'blue',
   },
   {
     id: 3,
     name: 'Shooting',
-    isGood: true,
-    weight: 1,
+    weight: 10,
+    color: 'yellow',
   },
   {
     id: 4,
     name: 'Balls slow down',
-    isGood: true,
     weight: 10,
+    color: 'pink',
+  },
+  {
+    id: 5,
+    name: 'Balls slow down',
+    weight: 10,
+    color: 'white',
   },
 ];
 

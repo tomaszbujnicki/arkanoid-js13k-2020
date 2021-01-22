@@ -21,7 +21,7 @@ export default class Game {
 
   startNewGame(playerName, callback) {
     this.lives = 0;
-    this.levelNumber = 2;
+    this.levelNumber = 1;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;

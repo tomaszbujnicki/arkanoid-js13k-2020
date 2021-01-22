@@ -163,16 +163,7 @@ export class Navigation {
     DOMelements.muteBtn.innerHTML = isMuted ? SVG.soundOff : SVG.soundOn;
   }
 
-  theme() {
-    /*     let root = document.documentElement;
-    root.style.setProperty('--background', 'white');
-    root.style.setProperty('--first', 'red');
-    root.style.setProperty('--second', 'black'); */
-    DOMelements.muteBtn.innerHTML = SVG.soundOn;
-    DOMelements.languageBtn.innerHTML = SVG.language;
-    DOMelements.themeBtn.innerHTML = SVG.theme;
-    DOMelements.fullscreenBtn.innerHTML = SVG.fullscreen;
-  }
+  theme() {}
 
   moveFocus(step) {
     const focused = document.activeElement;

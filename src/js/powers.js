@@ -20,7 +20,6 @@ export function powers() {
 
     if (power.top > playfield.height + playfield.top) {
       level.deletePower(power);
-      SOUND.ballLost.play();
     }
   });
 }

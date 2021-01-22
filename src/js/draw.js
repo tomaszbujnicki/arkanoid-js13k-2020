@@ -1,26 +1,37 @@
+import { theme } from './theme';
+
 const canvas = document.querySelector('#canvas');
 const ctx = canvas.getContext('2d');
 
 export default function draw() {
+  const colors = {
+    background: theme.background ? theme.background : themeList[0].background,
+    first: theme.first ? theme.first : themeList[0].first,
+    stroke: theme.stroke ? theme.stroke : themeList[0].stroke,
+    block1: theme.block1 ? theme.block1 : themeList[0].block1,
+    block2: theme.block2 ? theme.block2 : themeList[0].block2,
+    block3: theme.block3 ? theme.block3 : themeList[0].block3,
+    block4: theme.block4 ? theme.block4 : themeList[0].block4,
+  };
   resizeCanvas();
   ctx.clearRect(0, 0, 1000, 700);
   drawShape(this.playfield, 'transparent');
   drawShape(this.paddle);
   this.ballArray.forEach((ball) => {
-    drawShape(ball, 'white', 'circle');
+    drawShape(ball, theme.first, 'circle');
   });
   this.blockArray.forEach((block) => {
     drawShape(block, getColor(block.power));
   });
   this.powerArray.forEach((power) => {
-    drawShape(power, 'green');
+    drawShape(power, power.color);
   });
 
-  function drawShape(object, color = 'white', shape) {
+  function drawShape(object, color = theme.first, shape) {
     ctx.save();
     ctx.fillStyle = color;
-    ctx.strokeStyle = 'silver';
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'none';
+    ctx.lineWidth = 1;
     ctx.beginPath();
     if (!shape) {
       ctx.rect(object.left, object.top, object.width, object.height);
@@ -42,23 +53,25 @@ export default function draw() {
   }
 
   function getColor(power) {
-    let color = 'white';
+    let color = theme.background;
 
     switch (power) {
       case 1:
-        color = 'white';
+        {
+          color = colors.block1;
+        }
         break;
       case 2:
-        color = 'green';
+        color = theme.color2 ? theme.color2 : 'blue';
         break;
       case 3:
-        color = 'red';
+        color = theme.color3 ? theme.color3 : 'green';
         break;
       case 4:
-        color = 'blue';
+        color = theme.color4 ? theme.color4 : 'red';
         break;
       default:
-        color = 'white';
+        color = theme.background;
         break;
     }
 
