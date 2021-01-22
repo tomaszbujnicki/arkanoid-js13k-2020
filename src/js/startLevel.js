@@ -8,6 +8,7 @@ export default function startLevel() {
   const level = game.level;
   let lastRender;
   window.requestAnimationFrame(gameLoop);
+  console.log(level);
 
   function gameLoop(timestamp) {
     let progress = timestamp - lastRender;

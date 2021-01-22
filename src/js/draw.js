@@ -5,23 +5,24 @@ const ctx = canvas.getContext('2d');
 
 export default function draw() {
   const colors = {
-    background: theme.background ? theme.background : themeList[0].background,
-    first: theme.first ? theme.first : themeList[0].first,
-    stroke: theme.stroke ? theme.stroke : themeList[0].stroke,
-    block1: theme.block1 ? theme.block1 : themeList[0].block1,
-    block2: theme.block2 ? theme.block2 : themeList[0].block2,
-    block3: theme.block3 ? theme.block3 : themeList[0].block3,
-    block4: theme.block4 ? theme.block4 : themeList[0].block4,
+    background: theme.background,
+    first: theme.first,
+    block1: theme.block1,
+    block2: theme.block2,
+    block3: theme.block3,
+    block4: theme.block4,
+    block5: theme.block5,
+    block6: theme.block6,
   };
   resizeCanvas();
   ctx.clearRect(0, 0, 1000, 700);
-  drawShape(this.playfield, 'transparent');
+  drawWalls(this.playfield, 'transparent');
   drawShape(this.paddle);
   this.ballArray.forEach((ball) => {
     drawShape(ball, theme.first, 'circle');
   });
   this.blockArray.forEach((block) => {
-    drawShape(block, getColor(block.power));
+    drawShape(block, colors['block' + block.power]);
   });
   this.powerArray.forEach((power) => {
     drawShape(power, power.color);
@@ -30,8 +31,6 @@ export default function draw() {
   function drawShape(object, color = theme.first, shape) {
     ctx.save();
     ctx.fillStyle = color;
-    ctx.strokeStyle = 'none';
-    ctx.lineWidth = 1;
     ctx.beginPath();
     if (!shape) {
       ctx.rect(object.left, object.top, object.width, object.height);
@@ -48,34 +47,17 @@ export default function draw() {
     }
     ctx.clip();
     ctx.fill();
-    ctx.stroke();
     ctx.restore();
   }
 
-  function getColor(power) {
-    let color = theme.background;
-
-    switch (power) {
-      case 1:
-        {
-          color = colors.block1;
-        }
-        break;
-      case 2:
-        color = theme.color2 ? theme.color2 : 'blue';
-        break;
-      case 3:
-        color = theme.color3 ? theme.color3 : 'green';
-        break;
-      case 4:
-        color = theme.color4 ? theme.color4 : 'red';
-        break;
-      default:
-        color = theme.background;
-        break;
-    }
-
-    return color;
+  function drawWalls(object, color = theme.first) {
+    ctx.save();
+    ctx.strokeStyle = 'red'; //color;
+    ctx.beginPath();
+    ctx.rect(object.left, object.top, object.width, object.height);
+    ctx.stroke();
+    ctx.clip();
+    ctx.restore();
   }
 }
 

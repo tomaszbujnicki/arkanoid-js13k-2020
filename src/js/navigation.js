@@ -1,12 +1,12 @@
 import { DOMelements, GAMESTATE, SVG } from './data';
 import { SOUND } from './sound';
 import fscreen from 'fscreen';
+import { theme } from './theme';
 
 export class Navigation {
   constructor(game) {
     this.game = game;
     this.listen();
-    this.theme();
 
     DOMelements.newGameBtn.focus();
   }
@@ -163,7 +163,9 @@ export class Navigation {
     DOMelements.muteBtn.innerHTML = isMuted ? SVG.soundOff : SVG.soundOn;
   }
 
-  theme() {}
+  theme() {
+    theme.next();
+  }
 
   moveFocus(step) {
     const focused = document.activeElement;
