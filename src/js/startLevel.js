@@ -19,7 +19,7 @@ export default function startLevel() {
       for (let i = 0; i < 2; i++) {
         level.update(progress);
         level.collisions(progress);
-        level.powers();
+        level.checkPowers();
       }
       if (level.isWon()) {
         game.nextLevel();

@@ -1,4 +1,5 @@
 import { random } from './functions';
+import Ball from './Ball';
 
 export default class Power {
   constructor(block) {
@@ -11,6 +12,7 @@ export default class Power {
     let index = pickPower();
     this.name = powers[index].name;
     this.color = powers[index].color;
+    this.action = powers[index].action;
   }
 
   move() {
@@ -31,36 +33,78 @@ const powers = [
     name: 'Wider Paddle',
     weight: 10,
     color: 'red',
+    action(level) {
+      level.paddle.width += 20;
+      level.paddle.left -= 10;
+    },
   },
   {
     id: 1,
     name: 'Faster Paddle',
-    weight: 10,
+    weight: 1,
     color: 'green',
+    action(level) {},
   },
   {
     id: 2,
     name: 'Sticky Paddle',
-    weight: 10,
+    weight: 1,
     color: 'blue',
+    action(level) {},
   },
   {
     id: 3,
     name: 'Shooting',
-    weight: 10,
-    color: 'yellow',
+    weight: 1,
+    color: 'blue',
+    action(level) {},
   },
   {
     id: 4,
     name: 'Balls slow down',
-    weight: 10,
-    color: 'pink',
+    weight: 1,
+    color: 'blue',
+    action(level) {},
   },
   {
     id: 5,
-    name: 'Balls slow down',
+    name: 'Triple balls',
+    weight: 50,
+    color: 'yellow',
+    action(level) {
+      const ball = level.ballArray[random(0, level.ballArray.length - 1)];
+      const preBall = {
+        speedX: -0.5 * ball.speedX - 0.866 * ball.speedY,
+        speedY: 0.866 * ball.speedX - 0.5 * ball.speedY,
+        size: ball.size,
+        top: ball.top,
+        left: ball.left,
+        maxSpeed: 20,
+      };
+      const newBall = new Ball(preBall);
+      newBall.isSticked = false;
+      level.ballArray.push(newBall);
+      const preBall2 = {
+        speedX: -0.5 * ball.speedX + 0.866 * ball.speedY,
+        speedY: -0.866 * ball.speedX - 0.5 * ball.speedY,
+        size: ball.size,
+        top: ball.top,
+        left: ball.left,
+        maxSpeed: 20,
+      };
+      const newBall2 = new Ball(preBall2);
+      newBall2.isSticked = false;
+      level.ballArray.push(newBall2);
+    },
+  },
+  {
+    id: 6,
+    name: 'Score Bonus',
     weight: 10,
     color: 'white',
+    action(level) {
+      level.game.updateScore(100);
+    },
   },
 ];
 

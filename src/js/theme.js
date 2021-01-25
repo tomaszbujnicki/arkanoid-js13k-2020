@@ -41,7 +41,6 @@ export const theme = {
       DOMelements.themeBtn.innerHTML = this.active.theme;
       DOMelements.fullscreenBtn.innerHTML = this.active.fullscreen;
     }
-    console.log(this);
   },
 };
 

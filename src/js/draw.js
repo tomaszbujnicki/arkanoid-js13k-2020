@@ -5,21 +5,21 @@ const ctx = canvas.getContext('2d');
 
 export default function draw() {
   const colors = {
-    background: theme.background,
-    first: theme.first,
-    block1: theme.block1,
-    block2: theme.block2,
-    block3: theme.block3,
-    block4: theme.block4,
-    block5: theme.block5,
-    block6: theme.block6,
+    background: theme.active.background,
+    first: theme.active.first,
+    block1: theme.active.block1,
+    block2: theme.active.block2,
+    block3: theme.active.block3,
+    block4: theme.active.block4,
+    block5: theme.active.block5,
+    block6: theme.active.block6,
   };
   resizeCanvas();
   ctx.clearRect(0, 0, 1000, 700);
   drawWalls(this.playfield, 'transparent');
   drawShape(this.paddle);
   this.ballArray.forEach((ball) => {
-    drawShape(ball, theme.first, 'circle');
+    drawShape(ball, colors.first, 'circle');
   });
   this.blockArray.forEach((block) => {
     drawShape(block, colors['block' + block.power]);
@@ -28,7 +28,7 @@ export default function draw() {
     drawShape(power, power.color);
   });
 
-  function drawShape(object, color = theme.first, shape) {
+  function drawShape(object, color = colors.first, shape) {
     ctx.save();
     ctx.fillStyle = color;
     ctx.beginPath();
@@ -50,7 +50,7 @@ export default function draw() {
     ctx.restore();
   }
 
-  function drawWalls(object, color = theme.first) {
+  function drawWalls(object, color = colors.first) {
     ctx.save();
     ctx.strokeStyle = 'red'; //color;
     ctx.beginPath();

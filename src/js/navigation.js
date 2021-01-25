@@ -12,7 +12,7 @@ export class Navigation {
   }
   listen() {
     document.addEventListener('keydown', (e) => {
-      if (this.game.state === GAMESTATE.MENU || /Key[FMP]/.test(e.code))
+      if (this.game.state === GAMESTATE.MENU || /Key[FMPT]/.test(e.code))
         this.action(e.code);
     });
 
@@ -115,6 +115,9 @@ export class Navigation {
           break;
         case 'KeyM':
           this.toggleMute();
+          break;
+        case 'KeyT':
+          this.theme();
           break;
         case 'KeyP':
           this.pause();

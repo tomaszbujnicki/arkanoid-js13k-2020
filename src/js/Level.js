@@ -7,7 +7,6 @@ import Ball from './Ball';
 import Block from './Block';
 import Paddle from './Paddle';
 import Playfield from './Playfield';
-import { powers } from './powers';
 
 export default class Level {
   constructor(level, game) {
@@ -21,7 +20,6 @@ export default class Level {
     this.hint = 'Press SPACEBAR to launch ball';
     this.seconds = 0;
     this.collisions = collisions;
-    this.powers = powers;
     this.draw = draw;
     this.drawInfo = drawInfo;
   }
@@ -65,6 +63,28 @@ export default class Level {
     });
   }
 
+  checkPowers() {
+    const playfield = this.playfield;
+    const paddle = this.paddle;
+    const powerArray = this.powerArray;
+    powerArray.forEach((power) => {
+      const isCaught =
+        power.top >= paddle.top - power.height &&
+        power.top <= paddle.top + paddle.height &&
+        power.left >= paddle.left - power.width &&
+        power.left <= paddle.left + paddle.width;
+
+      if (isCaught) {
+        power.action(this);
+        this.deletePower(power);
+      }
+
+      if (power.top > playfield.height + playfield.top) {
+        this.deletePower(power);
+      }
+    });
+  }
+
   movePaddle(p) {
     if (
       (isKeyPressed.right && isKeyPressed.left) ||
@@ -94,22 +114,6 @@ export default class Level {
       if (ball.isSticked) return true;
     }
     return false;
-  }
-
-  randomlyCreateNewBall() {
-    if (random(1, 100) <= 10) {
-      const item = {
-        speedX: 1.5,
-        speedY: -3,
-        size: random(5, 50),
-        top: random(0, this.playfield.height - 150),
-        left: random(0, this.playfield.width - 50),
-        maxSpeed: 20,
-      };
-      const ball = new Ball(item, this.playfield);
-      ball.isSticked = false;
-      this.ballArray.push(ball);
-    }
   }
 
   createPaddle(paddle) {
