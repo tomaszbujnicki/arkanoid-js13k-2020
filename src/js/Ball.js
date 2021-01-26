@@ -10,8 +10,8 @@ export default class Ball {
     this.left = ball.left;
     this.height = ball.size;
     this.width = ball.size;
-    this.isSticked = true;
-    if (this.maxSpeed >= 20) this.maxSpeed = 20;
+    this.isSticked = ball.isSticked;
+    if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 
   move(p) {
@@ -21,13 +21,15 @@ export default class Ball {
     }
   }
 
-  speedUp() {
-    const speed = Math.sqrt(
-      this.speedX * this.speedX + this.speedY * this.speedY
-    );
-    if (speed < this.maxSpeed) {
-      this.speedY *= 1.01;
-      this.speedX *= 1.01;
+  speedUp(p) {
+    this.abc++;
+    if (!this.isSticked) {
+      const speed = Math.sqrt(
+        this.speedX * this.speedX + this.speedY * this.speedY
+      );
+      if (speed < this.maxSpeed) {
+        this.speedY += this.speedY > 0 ? 0.001 * p : -0.001 * p;
+      }
     }
   }
 }

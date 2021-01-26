@@ -27,6 +27,7 @@ export default [
         top: 640,
         left: 300,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: 2,
@@ -35,6 +36,7 @@ export default [
         top: 620,
         left: 330,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: 3,
@@ -43,6 +45,7 @@ export default [
         top: 620,
         left: 270,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: 4,
@@ -51,6 +54,7 @@ export default [
         top: 630,
         left: 200,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: 2,
@@ -59,6 +63,7 @@ export default [
         top: 645,
         left: 400,
         maxSpeed: 20,
+        isSticked: true,
       },
     ],
     // prettier-ignore
@@ -99,6 +104,7 @@ export default [
         top: 620,
         left: 300,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: -2,
@@ -107,14 +113,16 @@ export default [
         top: 620,
         left: 300,
         maxSpeed: 20,
+        isSticked: true,
       },
       {
         speedX: 2,
         speedY: 5,
         size: 20,
-        top: 40,
-        left: 300,
+        top: 80,
+        left: 460,
         maxSpeed: 20,
+        isSticked: false,
       },
     ],
     // prettier-ignore

@@ -19,19 +19,16 @@ export default function collisions(progress) {
     if (ball.left > playfield.left + playfield.width - ball.size) {
       ball.left = playfield.left + playfield.width - ball.size;
       ball.speedX *= -1;
-      ball.speedUp();
     }
 
     if (ball.left < playfield.left) {
       ball.left = playfield.left;
       ball.speedX *= -1;
-      ball.speedUp();
     }
 
     if (ball.top < playfield.top) {
       ball.top = playfield.top;
       ball.speedY *= -1;
-      ball.speedUp();
     }
 
     if (ball.top > playfield.height + playfield.top) {
@@ -84,11 +81,9 @@ export default function collisions(progress) {
 
     if (walls.right || walls.left) {
       ball.speedX *= -1;
-      ball.speedUp();
     }
     if (walls.top || walls.bottom) {
       ball.speedY *= -1;
-      ball.speedUp();
     }
 
     function hitBlock(block) {
