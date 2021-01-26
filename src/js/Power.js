@@ -73,27 +73,15 @@ const powers = [
     color: 'yellow',
     action(level) {
       const ball = level.ballArray[random(0, level.ballArray.length - 1)];
-      const preBall = {
-        speedX: -0.5 * ball.speedX - 0.866 * ball.speedY,
-        speedY: 0.866 * ball.speedX - 0.5 * ball.speedY,
-        size: ball.size,
-        top: ball.top,
-        left: ball.left,
-        maxSpeed: 20,
-      };
-      const newBall = new Ball(preBall);
-      newBall.isSticked = false;
+
+      const newBall = new Ball(ball);
+      newBall.speedX = -0.5 * ball.speedX - 0.866 * ball.speedY;
+      newBall.speedY = 0.866 * ball.speedX - 0.5 * ball.speedY;
       level.ballArray.push(newBall);
-      const preBall2 = {
-        speedX: -0.5 * ball.speedX + 0.866 * ball.speedY,
-        speedY: -0.866 * ball.speedX - 0.5 * ball.speedY,
-        size: ball.size,
-        top: ball.top,
-        left: ball.left,
-        maxSpeed: 20,
-      };
-      const newBall2 = new Ball(preBall2);
-      newBall2.isSticked = false;
+
+      const newBall2 = new Ball(ball);
+      newBall2.speedX = -0.5 * ball.speedX + 0.866 * ball.speedY;
+      newBall2.speedY = -0.866 * ball.speedX - 0.5 * ball.speedY;
       level.ballArray.push(newBall2);
     },
   },
