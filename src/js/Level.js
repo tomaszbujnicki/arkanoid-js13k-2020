@@ -56,6 +56,7 @@ export default class Level {
     }
     this.movePaddle(p);
     this.ballArray.forEach((ball) => {
+      ball.changeSize();
       ball.speedUp(p);
       ball.move(p);
     });
