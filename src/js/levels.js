@@ -12,7 +12,7 @@ export default [
     },
 
     paddle: {
-      speedX: 10,
+      speedX: 1,
       height: 20,
       width: 200,
       top: 650,
@@ -89,7 +89,7 @@ export default [
     },
 
     paddle: {
-      speedX: 30,
+      speedX: 20,
       height: 10,
       width: 200,
       top: 650,
@@ -98,18 +98,18 @@ export default [
 
     balls: [
       {
-        speedX: 2,
-        speedY: -5,
-        size: 30,
+        speedX: 1,
+        speedY: -1,
+        size: 50,
         top: 620,
         left: 300,
         maxSpeed: 20,
         isSticked: true,
       },
       {
-        speedX: -2,
-        speedY: -5,
-        size: 20,
+        speedX: -1,
+        speedY: -1,
+        size: 25,
         top: 620,
         left: 300,
         maxSpeed: 20,
@@ -118,7 +118,7 @@ export default [
       {
         speedX: 2,
         speedY: 5,
-        size: 20,
+        size: 10,
         top: 80,
         left: 460,
         maxSpeed: 20,

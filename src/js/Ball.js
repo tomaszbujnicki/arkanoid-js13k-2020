@@ -22,7 +22,6 @@ export default class Ball {
   }
 
   speedUp(p) {
-    this.abc++;
     if (!this.isSticked) {
       const speed = Math.sqrt(
         this.speedX * this.speedX + this.speedY * this.speedY
@@ -31,6 +30,11 @@ export default class Ball {
         this.speedY += this.speedY > 0 ? 0.001 * p : -0.001 * p;
       }
     }
+  }
+
+  newSpeed(multiplier) {
+    this.speedY *= multiplier;
+    this.speedX *= multiplier;
   }
 }
 

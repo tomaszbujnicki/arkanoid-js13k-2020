@@ -1,5 +1,6 @@
 import { random } from './functions';
 import Ball from './Ball';
+import { SOUND } from './sound';
 
 export default class Power {
   constructor(block) {
@@ -30,8 +31,8 @@ const powers = [
   {
     id: 0,
     name: 'Wider Paddle',
-    weight: 1,
-    color: 'blue',
+    weight: 10,
+    color: 'white',
     action(level) {
       console.log(this.name);
       const playfield = level.playfield.width;
@@ -50,7 +51,7 @@ const powers = [
   {
     id: 1,
     name: 'Shorter Paddle',
-    weight: 1,
+    weight: 10,
     color: 'red',
     action(level) {
       console.log(this.name);
@@ -70,7 +71,7 @@ const powers = [
   {
     id: 2,
     name: 'Faster Paddle',
-    weight: 100,
+    weight: 10,
     color: 'green',
     action(level) {
       console.log(this.name);
@@ -89,7 +90,7 @@ const powers = [
   {
     id: 3,
     name: 'Slower Paddle',
-    weight: 100,
+    weight: 10,
     color: 'pink',
     action(level) {
       console.log(this.name);
@@ -104,13 +105,12 @@ const powers = [
       } else {
         level.game.updateScore(50);
       }
-      console.log(level.paddle.speedX);
     },
   },
   {
     id: 4,
     name: 'Triple balls',
-    weight: 50,
+    weight: 10,
     color: 'white',
     action(level) {
       const ball = level.ballArray[random(0, level.ballArray.length - 1)];
@@ -127,12 +127,74 @@ const powers = [
     },
   },
   {
+    id: 5,
+    name: 'Live +1',
+    weight: 10,
+    color: 'green',
+    action(level) {
+      level.game.lives++;
+    },
+  },
+  {
     id: 6,
     name: 'Score Bonus',
     weight: 10,
     color: 'gold',
     action(level) {
       level.game.updateScore(50);
+    },
+  },
+  {
+    id: 6,
+    name: 'Balls speed up',
+    weight: 10,
+    color: 'red',
+    action(level) {
+      level.ballArray.forEach((ball) => {
+        ball.newSpeed(1.5);
+        let speed = Math.sqrt(
+          ball.speedX * ball.speedX + ball.speedY * ball.speedY
+        );
+        if (speed > ball.maxSpeed) {
+          const difference = ball.maxSpeed / speed;
+          ball.speedX *= difference;
+          ball.speedY *= difference;
+        }
+      });
+    },
+  },
+  {
+    id: 7,
+    name: 'Balls slow down',
+    weight: 10,
+    color: 'white',
+    action(level) {
+      level.ballArray.forEach((ball) => {
+        ball.newSpeed(0.7);
+      });
+    },
+  },
+  {
+    id: 8,
+    name: 'Smaller Balls',
+    weight: 100,
+    color: 'blue',
+    action(level) {
+      level.ballArray.forEach((ball) => {
+        ball.size /= 2;
+
+        if (ball.size < 5) ball.size = 5;
+      });
+    },
+  },
+  {
+    id: 8,
+    name: 'Bigger Ball',
+    weight: 100,
+    color: 'blue',
+    action(level) {
+      const rand = random(0, level.ballArray.length - 1);
+      level.ballArray[rand].size = 50;
     },
   },
   /* {
