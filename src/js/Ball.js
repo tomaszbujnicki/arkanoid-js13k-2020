@@ -11,6 +11,7 @@ export default class Ball {
     this.height = ball.size;
     this.width = ball.size;
     this.isSticked = ball.isSticked;
+    this.remainingSize = 0;
     if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 
@@ -29,6 +30,17 @@ export default class Ball {
       if (speed < this.maxSpeed) {
         this.speedY += this.speedY > 0 ? 0.001 * p : -0.001 * p;
       }
+    }
+  }
+
+  changeSize() {
+    if (this.remainingSize > 0) {
+      this.size += 0.25;
+      this.remainingSize -= 0.25;
+    }
+    if (this.remainingSize < 0) {
+      this.size -= 0.25;
+      this.remainingSize += 0.25;
     }
   }
 

@@ -178,12 +178,12 @@ const powers = [
     id: 8,
     name: 'Smaller Balls',
     weight: 100,
-    color: 'blue',
+    color: 'red',
     action(level) {
       level.ballArray.forEach((ball) => {
-        ball.size /= 2;
-
-        if (ball.size < 5) ball.size = 5;
+        let reduce = ball.size / 2;
+        if (ball.size < 10) reduce = ball.size - 5;
+        ball.remainingSize -= reduce;
       });
     },
   },
@@ -194,7 +194,7 @@ const powers = [
     color: 'blue',
     action(level) {
       const rand = random(0, level.ballArray.length - 1);
-      level.ballArray[rand].size = 50;
+      level.ballArray[rand].remainingSize += 25;
     },
   },
   /* {
