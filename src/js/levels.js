@@ -12,9 +12,9 @@ export default [
     },
 
     paddle: {
-      speedX: 1,
+      speedX: 20,
       height: 20,
-      width: 200,
+      width: 600,
       top: 650,
       left: 200,
     },
@@ -99,7 +99,7 @@ export default [
     balls: [
       {
         speedX: 0,
-        speedY: 5,
+        speedY: 2,
         size: 80,
         top: 400,
         left: 300,

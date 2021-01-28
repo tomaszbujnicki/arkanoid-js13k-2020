@@ -47,21 +47,18 @@ export default class Level {
     return this.ballArray.length === 0;
   }
 
-  update(progress) {
-    let p = progress / 16;
-    if (!p) p = 1;
-    p /= 2;
+  update() {
     if (isKeyPressed.space) {
       this.unstickBalls();
     }
-    this.movePaddle(p);
+    this.movePaddle();
     this.ballArray.forEach((ball) => {
       ball.changeSize();
-      ball.speedUp(p);
-      ball.move(p);
+      ball.speedUp();
+      ball.move();
     });
     this.powerArray.forEach((power) => {
-      power.move(p);
+      power.move();
     });
   }
 
@@ -87,7 +84,7 @@ export default class Level {
     });
   }
 
-  movePaddle(p) {
+  movePaddle() {
     if (
       (isKeyPressed.right && isKeyPressed.left) ||
       (!isKeyPressed.right && !isKeyPressed.left)
@@ -98,10 +95,10 @@ export default class Level {
 
     if (isKeyPressed.left) {
       this.paddle.leftRange = this.playfield.left;
-      this.paddle.moveLeft(p);
+      this.paddle.moveLeft();
     } else {
       this.paddle.rightRange = this.playfield.left + this.playfield.width;
-      this.paddle.moveRight(p);
+      this.paddle.moveRight();
     }
     const shift = this.paddle.left - before;
     this.ballArray.forEach((ball) => {

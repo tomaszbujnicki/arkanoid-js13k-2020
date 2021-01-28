@@ -10,14 +10,12 @@ export default function startLevel() {
   window.requestAnimationFrame(gameLoop);
 
   function gameLoop(timestamp) {
-    let progress = timestamp - lastRender;
-
     if (game.state === GAMESTATE.ABORT) return;
 
     if (game.state === GAMESTATE.RUN) {
       for (let i = 0; i < 2; i++) {
-        level.update(progress);
-        level.collisions(progress);
+        level.update();
+        level.collisions();
         level.checkPowers();
       }
       if (level.isWon()) {

@@ -2,9 +2,7 @@ import { SOUND } from './sound';
 import { random } from './functions';
 import Power from './Power';
 
-export default function collisions(progress) {
-  let p = progress / 16;
-  if (!p) p = 1;
+export default function collisions() {
   const level = this;
   const playfield = level.playfield;
   const paddle = level.paddle;
@@ -156,15 +154,20 @@ export default function collisions(progress) {
           let distanceX, distanceY;
           if (walls.right)
             distanceX =
-              ball.posX - ball.speedX * p - (block.left + block.width);
+              ball.posX -
+              ball.radius -
+              ball.speedX -
+              (block.left + block.width);
           if (walls.left)
-            distanceX =
-              block.left - (ball.posX + ball.radius - ball.speedX * p);
+            distanceX = block.left - (ball.posX + ball.radius - ball.speedX);
           if (walls.top)
-            distanceY = block.top - (ball.posY + ball.radius - ball.speedY * p);
+            distanceY = block.top - (ball.posY + ball.radius - ball.speedY);
           if (walls.bottom)
             distanceY =
-              ball.posY - ball.speedY * p - (block.top + block.height);
+              ball.posY -
+              ball.radius -
+              ball.speedY -
+              (block.top + block.height);
 
           let firstAxisX = false;
           if (

@@ -13,21 +13,21 @@ export default class Ball {
     if (this.maxSpeed >= 25) this.maxSpeed = 25;
   }
 
-  move(p) {
+  move() {
     if (!this.isSticked) {
-      this.posX += this.speedX * p;
-      this.posY += this.speedY * p;
+      this.posX += this.speedX;
+      this.posY += this.speedY;
     }
   }
 
-  speedUp(p) {
+  speedUp() {
     if (!this.isSticked) {
       const speed = Math.sqrt(
         this.speedX * this.speedX + this.speedY * this.speedY
       );
       if (speed < this.maxSpeed) {
-        this.speedY += this.speedY > 0 ? 0.0005 * p : -0.0005 * p;
-        this.speedX += this.speedX > 0 ? 0.0005 * p : -0.0005 * p;
+        this.speedY += this.speedY > 0 ? 0.0005 : -0.0005;
+        this.speedX += this.speedX > 0 ? 0.0005 : -0.0005;
       }
       if (this.speedY < 0.5 && this.speedY > -0.5) {
         this.speedY = this.speedY > 0 ? 0.5 : -0.5;

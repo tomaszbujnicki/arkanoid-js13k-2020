@@ -11,15 +11,15 @@ export default class Paddle {
     if (this.speedX >= 50) this.speedX = 50;
   }
 
-  moveLeft(p) {
-    this.left -= this.speedX * p;
+  moveLeft() {
+    this.left -= this.speedX;
     if (this.left < this.leftRange) {
       this.left = this.leftRange;
     }
   }
 
-  moveRight(p) {
-    this.left += this.speedX * p;
+  moveRight() {
+    this.left += this.speedX;
     if (this.left + this.width > this.rightRange) {
       this.left = this.rightRange - this.width;
     }
