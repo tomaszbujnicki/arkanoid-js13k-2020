@@ -89,7 +89,7 @@ export default [
     },
 
     paddle: {
-      speedX: 20,
+      speedX: 5,
       height: 10,
       width: 200,
       top: 650,
@@ -98,10 +98,10 @@ export default [
 
     balls: [
       {
-        speedX: 5,
-        speedY: -5,
-        size: 100,
-        top: 500,
+        speedX: 0,
+        speedY: 5,
+        size: 80,
+        top: 400,
         left: 300,
         maxSpeed: 20,
         isSticked: true,

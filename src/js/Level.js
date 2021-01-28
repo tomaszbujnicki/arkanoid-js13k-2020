@@ -131,9 +131,9 @@ export default class Level {
     const ballArray = [];
     balls.forEach((item) => {
       const ball = new Ball(item, playfield);
-      if (this.canCreateObject(ball)) {
-        ballArray.push(ball);
-      }
+      //if (this.canCreateObject(ball)) {
+      ballArray.push(ball);
+      //}
     });
 
     return ballArray;

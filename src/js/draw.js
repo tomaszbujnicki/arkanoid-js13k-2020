@@ -36,15 +36,10 @@ export default function draw() {
       ctx.rect(object.left, object.top, object.width, object.height);
     } else {
       if ((shape = 'circle')) {
-        ctx.arc(
-          object.left + object.size / 2,
-          object.top + object.size / 2,
-          object.size / 2,
-          0,
-          2 * Math.PI
-        );
+        ctx.arc(object.posX, object.posY, object.radius, 0, 2 * Math.PI);
       }
     }
+
     ctx.clip();
     ctx.fill();
     ctx.restore();

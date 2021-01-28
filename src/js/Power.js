@@ -181,8 +181,11 @@ const powers = [
     color: 'red',
     action(level) {
       level.ballArray.forEach((ball) => {
-        let reduce = ball.size / 2;
-        if (ball.size < 10) reduce = ball.size - 5;
+        let reduce;
+        if (ball.radius <= 20) reduce = 5;
+        else if (ball.radius <= 40) reduce = 10;
+        else if (ball.radius <= 60) reduce = 20;
+        else reduce = 30;
         ball.remainingSize -= reduce;
       });
     },
@@ -194,7 +197,7 @@ const powers = [
     color: 'blue',
     action(level) {
       const rand = random(0, level.ballArray.length - 1);
-      level.ballArray[rand].remainingSize += 25;
+      level.ballArray[rand].remainingSize += 10;
     },
   },
   /* {
