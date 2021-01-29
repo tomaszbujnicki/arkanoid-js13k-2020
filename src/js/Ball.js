@@ -5,9 +5,9 @@ export default class Ball {
     this.speedX = ball.speedX;
     this.speedY = ball.speedY;
     this.maxSpeed = ball.maxSpeed;
-    this.radius = ball.size / 2;
-    this.posY = ball.top;
-    this.posX = ball.left;
+    this.radius = ball.radius;
+    this.posY = ball.posY;
+    this.posX = ball.posX;
     this.isSticked = ball.isSticked;
     this.remainingSize = 0;
     if (this.maxSpeed >= 25) this.maxSpeed = 25;

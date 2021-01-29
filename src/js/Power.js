@@ -110,7 +110,7 @@ const powers = [
   {
     id: 4,
     name: 'Triple balls',
-    weight: 10,
+    weight: 100,
     color: 'white',
     action(level) {
       const ball = level.ballArray[random(0, level.ballArray.length - 1)];
@@ -177,7 +177,7 @@ const powers = [
   {
     id: 8,
     name: 'Smaller Balls',
-    weight: 100,
+    weight: 10,
     color: 'red',
     action(level) {
       level.ballArray.forEach((ball) => {
@@ -193,7 +193,7 @@ const powers = [
   {
     id: 8,
     name: 'Bigger Ball',
-    weight: 100,
+    weight: 10,
     color: 'blue',
     action(level) {
       const rand = random(0, level.ballArray.length - 1);

@@ -74,7 +74,7 @@ export default function collisions() {
       block.damage();
       SOUND['hit_' + random(1, 3)].play();
       if (block.power <= 0) {
-        if (random(0, 100) < 5) {
+        if (random(0, 100) < 25) {
           level.powerArray.push(new Power(block));
         }
         level.deleteBlock(block);

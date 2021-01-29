@@ -25,8 +25,11 @@ export default class Level {
   }
 
   deleteBall(ball) {
+    console.log(ball);
+    console.log(this.ballArray);
     const index = this.ballArray.findIndex((e) => e === ball);
     this.ballArray.splice(index, 1);
+    console.log(this.ballArray);
   }
   deleteBlock(block) {
     const index = this.blockArray.findIndex((e) => e === block);
