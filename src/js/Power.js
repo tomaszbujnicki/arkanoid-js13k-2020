@@ -152,14 +152,6 @@ const powers = [
     action(level) {
       level.ballArray.forEach((ball) => {
         ball.newSpeed(1.5);
-        let speed = Math.sqrt(
-          ball.speedX * ball.speedX + ball.speedY * ball.speedY
-        );
-        if (speed > ball.maxSpeed) {
-          const difference = ball.maxSpeed / speed;
-          ball.speedX *= difference;
-          ball.speedY *= difference;
-        }
       });
     },
   },
