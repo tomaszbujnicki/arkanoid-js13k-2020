@@ -25,11 +25,8 @@ export default class Level {
   }
 
   deleteBall(ball) {
-    console.log(ball);
-    console.log(this.ballArray);
     const index = this.ballArray.findIndex((e) => e === ball);
     this.ballArray.splice(index, 1);
-    console.log(this.ballArray);
   }
   deleteBlock(block) {
     const index = this.blockArray.findIndex((e) => e === block);
@@ -88,27 +85,34 @@ export default class Level {
   }
 
   movePaddle() {
-    if (
-      (isKeyPressed.right && isKeyPressed.left) ||
-      (!isKeyPressed.right && !isKeyPressed.left)
-    ) {
-      return;
-    }
-    const before = this.paddle.left;
+    const paddle = this.paddle;
+    const playfield = this.playfield;
+    const before = paddle.left;
 
     if (isKeyPressed.left) {
-      this.paddle.leftRange = this.playfield.left;
-      this.paddle.moveLeft();
-    } else {
-      this.paddle.rightRange = this.playfield.left + this.playfield.width;
-      this.paddle.moveRight();
+      paddle.left -= paddle.speedX;
     }
+    if (isKeyPressed.right) {
+      paddle.left += paddle.speedX;
+    }
+
+    if (paddle.left < playfield.left) {
+      paddle.left = playfield.left;
+    }
+
+    if (paddle.left + paddle.width > playfield.left + playfield.width) {
+      paddle.left = playfield.left + playfield.width - paddle.width;
+    }
+
     const shift = this.paddle.left - before;
-    this.ballArray.forEach((ball) => {
-      if (ball.isSticked) {
-        ball.left += shift;
-      }
-    });
+    if (shift !== 0) {
+      this.ballArray.forEach((ball) => {
+        if (ball.isSticked) {
+          ball.left += shift;
+        }
+      });
+    }
+    console.log(paddle.speedX);
   }
 
   isAnyBallSticked() {
@@ -119,8 +123,7 @@ export default class Level {
   }
 
   createPaddle(paddle) {
-    const playfield = this.playfield;
-    let newPaddle = new Paddle(paddle, playfield);
+    let newPaddle = new Paddle(paddle);
     if (this.canCreateObject(newPaddle)) {
       return newPaddle;
     } else return false;

@@ -71,20 +71,15 @@ const powers = [
   {
     id: 2,
     name: 'Faster Paddle',
-    weight: 10,
-    color: 'green',
+    weight: 1000,
+    color: 'violet',
     action(level) {
       console.log(this.name);
       const playfield = level.playfield.width;
-      const speedX = level.paddle.speedX;
-      const unit = playfield / 200;
+      const unit = playfield / 500;
 
-      if (speedX < 10 * unit) {
-        level.paddle.speedX += unit;
-        if (level.paddle.speedX > 10 * unit) level.paddle.speedX = 10 * unit;
-      } else {
-        level.game.updateScore(50);
-      }
+      level.paddle.speedX += unit;
+      if (level.paddle.speedX > 10 * unit) level.paddle.speedX = 10 * unit;
     },
   },
   {
@@ -95,16 +90,10 @@ const powers = [
     action(level) {
       console.log(this.name);
       const playfield = level.playfield.width;
-      const speedX = level.paddle.speedX;
-      const unit = playfield / 200;
-      const min = unit / 2;
+      const unit = playfield / 500;
 
-      if (speedX > min) {
-        level.paddle.speedX -= unit;
-        if (level.paddle.speedX < min) level.paddle.speedX = min;
-      } else {
-        level.game.updateScore(50);
-      }
+      level.paddle.speedX -= unit;
+      if (level.paddle.speedX < unit) level.paddle.speedX = unit;
     },
   },
   {
