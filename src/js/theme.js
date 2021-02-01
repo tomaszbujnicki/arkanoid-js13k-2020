@@ -9,8 +9,8 @@ export const theme = {
   get() {
     if (localStorage.getItem('theme')) {
       this.id = parseInt(localStorage.getItem('theme'));
-      this.load();
     }
+    this.load();
   },
 
   save() {
