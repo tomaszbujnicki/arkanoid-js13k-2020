@@ -23,8 +23,9 @@ export const DOMelements = {
   themeBtn: document.getElementById('options__theme-button'),
   fullscreenBtn: document.getElementById('options__fullscreen-button'),
   endGameBtn: document.getElementById('endGame-button'),
-  // text input
+  // inputs
   playerNameInput: document.getElementById('playerName_Field'),
+  volumeInput: document.getElementById('options_volume-input'),
   // cards
   cards: document.querySelectorAll('#game div.game-card'),
   playgroundCard: document.getElementById('playground'),
@@ -39,7 +40,7 @@ export const DOMelements = {
 };
 
 export const SVG = {
-  fullscreenExit: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  fullscreenExit: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 215.4 215.4" xml:space="preserve">
 <g>
  <path class="fill" d="M146.7,204.3c4.1,0,7.5-3.4,7.5-7.5v-32l48.3,48.3c1.5,1.5,3.4,2.2,5.3,2.2c1.9,0,3.8-0.7,5.3-2.2
@@ -54,7 +55,7 @@ export const SVG = {
    C76.8,142.6,73.5,139.2,69.3,139.2z"/>
 </g>
 </svg>`,
-  fullscreen: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  fullscreen: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 215.35 215.35" style="enable-background:new 0 0 215.35 215.35;" xml:space="preserve">
 <g>
  <path class="fill" d="M7.5,65.088c4.143,0,7.5-3.358,7.5-7.5V25.61l48.305,48.295c1.465,1.464,3.384,2.196,5.303,2.196
@@ -71,7 +72,7 @@ export const SVG = {
    c0,4.142,3.357,7.5,7.5,7.5c4.143,0,7.5-3.358,7.5-7.5V7.502C215.35,3.359,211.992,0.002,207.85,0.002z"/>
 </g>
 </svg>`,
-  soundOn: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  soundOn: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
  <g>
    <path class="fill" d="m424.962 97.1c-5.857 5.858-5.856 15.356.003 21.213 36.78 36.77 57.035 85.666 57.035 137.682 0 52.015-20.255 100.912-57.035 137.682-9.38 9.377-2.771 25.613 10.605 25.613 4.225 0 8.042-1.748 10.768-4.56 42.345-42.419 65.662-98.782 65.662-158.735 0-60.031-23.377-116.461-65.825-158.898-5.858-5.857-15.356-5.855-21.213.003z"/>
@@ -81,14 +82,14 @@ export const SVG = {
    <path class="fill" d="m303.81 78.589v354.82c0 21.57-23.12 35.24-42.01 24.83l-156.8-86.32v-231.84l156.8-86.32c18.9-10.41 42.01 3.27 42.01 24.83z"/>
  </g>
 </svg>`,
-  soundOff: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  soundOff: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
  <g>
    <path class="fill" d="m15 146.429h60v219.14h-60c-8.28 0-15-6.71-15-15v-189.14c0-8.29 6.72-15 15-15z"/>
    <path class="fill" d="m303.81 78.589v354.82c0 21.57-23.12 35.24-42.01 24.83l-156.8-86.32v-231.84l156.8-86.32c18.9-10.41 42.01 3.27 42.01 24.83z"/>
  </g>
 </svg>`,
-  language: `<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  language: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
  <g>
    <path class="fill" d="m207.386 280.048c0-4.142-3.358-7.5-7.5-7.5h-168.338c-9.125 0-16.548-7.423-16.548-16.548v-224.452c0-9.125 7.423-16.548 16.548-16.548h224.452c9.125 0 16.548 7.423 16.548 16.548v168.338c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-168.338c0-17.396-14.152-31.548-31.548-31.548h-224.452c-17.396 0-31.548 14.152-31.548 31.548v224.452c0 17.396 14.152 31.548 31.548 31.548h168.338c4.142 0 7.5-3.358 7.5-7.5z"/>

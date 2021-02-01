@@ -31,6 +31,9 @@ export class Navigation {
       button.addEventListener('click', () => this.menu())
     );
     DOMelements.muteBtn.addEventListener('click', () => this.toggleMute());
+    DOMelements.volumeInput.addEventListener('input', () =>
+      this.changeVolume()
+    );
     DOMelements.fullscreenBtn.addEventListener('click', () =>
       this.toggleFullscreen()
     );
@@ -162,8 +165,13 @@ export class Navigation {
   }
 
   toggleMute() {
-    const isMuted = SOUND.toggleMute();
-    DOMelements.muteBtn.innerHTML = isMuted ? SVG.soundOff : SVG.soundOn;
+    SOUND.toggleMute();
+    DOMelements.muteBtn.innerHTML = SOUND.isMuted ? SVG.soundOff : SVG.soundOn;
+  }
+
+  changeVolume() {
+    const volume = DOMelements.volumeInput.value;
+    SOUND.changeVolume(volume);
   }
 
   theme() {
