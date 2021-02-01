@@ -112,7 +112,6 @@ export default class Level {
         }
       });
     }
-    console.log(paddle.speedX);
   }
 
   isAnyBallSticked() {
@@ -134,9 +133,9 @@ export default class Level {
     const ballArray = [];
     balls.forEach((item) => {
       const ball = new Ball(item, playfield);
-      //if (this.canCreateObject(ball)) {
-      ballArray.push(ball);
-      //}
+      if (this.canCreateBall) {
+        ballArray.push(ball);
+      }
     });
 
     return ballArray;
@@ -164,6 +163,21 @@ export default class Level {
       item.left + item.width <= playfield.left + playfield.width &&
       item.top >= playfield.top &&
       item.top + item.height <= playfield.top + playfield.height
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  canCreateBall(ball) {
+    const playfield = this.playfield;
+    if (
+      ball.radius > 0 &&
+      ball.posX - ball.radius >= playfield.left &&
+      ball.posX + ball.radius <= playfield.left + playfield.width &&
+      ball.posY + ball.radius >= playfield.top &&
+      ball.posY + ball.radius <= playfield.top + playfield.height
     ) {
       return true;
     } else {
