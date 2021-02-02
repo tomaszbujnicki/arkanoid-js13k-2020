@@ -1,4 +1,4 @@
-export default [
+export const levels = [
   {
     name: 'Black Hole',
 
@@ -12,9 +12,9 @@ export default [
     },
 
     paddle: {
-      speedX: 20,
+      speedX: 8,
       height: 20,
-      width: 600,
+      width: 200,
       top: 650,
       left: 200,
     },
@@ -22,7 +22,7 @@ export default [
     balls: [
       {
         speedX: -2,
-        speedY: -2.7,
+        speedY: -1,
         radius: 10,
         posY: 640,
         posX: 300,
@@ -31,7 +31,7 @@ export default [
       },
       {
         speedX: 2,
-        speedY: -3,
+        speedY: -1.2,
         radius: 30,
         posY: 620,
         posX: 330,
@@ -39,8 +39,8 @@ export default [
         isSticked: true,
       },
       {
-        speedX: 3,
-        speedY: -4,
+        speedX: 1.5,
+        speedY: -2,
         radius: 30,
         posY: 620,
         posX: 270,
@@ -48,8 +48,8 @@ export default [
         isSticked: true,
       },
       {
-        speedX: 4,
-        speedY: -5,
+        speedX: 2,
+        speedY: -2.5,
         radius: 20,
         posY: 630,
         posX: 200,
@@ -58,7 +58,7 @@ export default [
       },
       {
         speedX: 2,
-        speedY: -5,
+        speedY: -2,
         radius: 5,
         posY: 645,
         posX: 400,
@@ -89,7 +89,7 @@ export default [
     },
 
     paddle: {
-      speedX: 5,
+      speedX: 25,
       height: 10,
       width: 200,
       top: 650,
@@ -99,31 +99,13 @@ export default [
     balls: [
       {
         speedX: 0,
-        speedY: 2,
-        radius: 80,
-        posY: 400,
-        posX: 300,
-        maxSpeed: 20,
-        isSticked: true,
-      },
-      /*      {
-        speedX: -1,
-        speedY: -1,
-        radius: 25,
-        posY: 620,
-        posX: 300,
-        maxSpeed: 20,
-        isSticked: true,
-      },
-      {
-        speedX: 2,
-        speedY: 5,
+        speedY: 0.25,
         radius: 10,
         posY: 80,
-        posX: 460,
+        posX: 470,
         maxSpeed: 20,
-        isSticked: false,
-      }, */
+        isSticked: true,
+      },
     ],
     // prettier-ignore
     blocks: [

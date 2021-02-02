@@ -25,19 +25,16 @@ export default class Ball {
       const speed = Math.sqrt(
         this.speedX * this.speedX + this.speedY * this.speedY
       );
-      //console.log(speed);
       if (speed < this.maxSpeed) {
         this.speedY *= 1.00005;
         this.speedX *= 1.00005;
       }
-      //console.log(speed);
 
       if (speed > this.maxSpeed) {
         const difference = this.maxSpeed / speed;
         this.speedX *= difference;
         this.speedY *= difference;
       }
-      //console.log(speed);
 
       if (this.speedY < this.minSpeedY && this.speedY > -this.minSpeedY) {
         this.speedY = this.speedY > 0 ? this.minSpeedY : -this.minSpeedY;
