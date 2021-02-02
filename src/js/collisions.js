@@ -30,7 +30,7 @@ export default function collisions() {
     }
 
     if (ball.posY - ball.radius > playfield.top + playfield.height) {
-      level.deleteBall(ball);
+      level.delete(ball);
       SOUND.ballLost.play();
     }
   }
@@ -90,7 +90,7 @@ export default function collisions() {
         if (random(0, 100) < 100) {
           level.powerArray.push(new Power(block));
         }
-        level.deleteBlock(block);
+        level.delete(block);
         level.game.updateScore(25);
       } else {
         level.game.updateScore(5);

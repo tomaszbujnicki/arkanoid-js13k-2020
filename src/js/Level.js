@@ -15,6 +15,7 @@ export default class Level {
     this.ballArray = this.createBallArray(level.balls);
     this.blockArray = this.createBlockArray(level.blocks);
     this.powerArray = [];
+    this.bulletArray = [];
     this.name = level.name;
     this.game = game;
     this.hint = 'Press SPACEBAR to launch ball';
@@ -23,18 +24,10 @@ export default class Level {
     this.draw = draw;
     this.drawInfo = drawInfo;
   }
-
-  deleteBall(ball) {
-    const index = this.ballArray.findIndex((e) => e === ball);
-    this.ballArray.splice(index, 1);
-  }
-  deleteBlock(block) {
-    const index = this.blockArray.findIndex((e) => e === block);
-    this.blockArray.splice(index, 1);
-  }
-  deletePower(power) {
-    const index = this.powerArray.findIndex((e) => e === power);
-    this.powerArray.splice(index, 1);
+  delete(object) {
+    const arr = object.type + 'Array';
+    const index = this[arr].findIndex((e) => e === object);
+    this[arr].splice(index, 1);
   }
   unstickBalls() {
     this.ballArray.forEach((ball) => (ball.isSticked = false));
@@ -50,6 +43,7 @@ export default class Level {
   update() {
     if (isKeyPressed.space) {
       this.unstickBalls();
+      this.paddle.shoot();
     }
     this.movePaddle();
     this.paddle.reduceDuration();
@@ -76,11 +70,11 @@ export default class Level {
 
       if (isCaught) {
         power.action(this);
-        this.deletePower(power);
+        this.delete(power);
       }
 
       if (power.top > playfield.height + playfield.top) {
-        this.deletePower(power);
+        this.delete(power);
       }
     });
   }
