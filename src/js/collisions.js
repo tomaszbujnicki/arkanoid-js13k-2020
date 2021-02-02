@@ -76,6 +76,7 @@ export default function collisions() {
           ball.speedX = speed * offset;
           ball.speedY =
             -1 * Math.sqrt(speed * speed - ball.speedX * ball.speedX);
+          if (paddle.isSticky) ball.isSticked = true;
         }
       }
     }
@@ -120,7 +121,6 @@ export default function collisions() {
       const distance = Math.sqrt(distX * distX + distY * distY);
 
       if (distance <= ball.radius) {
-        console.log('HIT');
         // which edge
         const walls = {};
 
@@ -159,7 +159,6 @@ export default function collisions() {
             walls.right = true;
           }
         }
-        console.log(walls);
 
         // if more then one wall - select first
         if (Object.keys(walls).length > 1) {
@@ -207,11 +206,9 @@ export default function collisions() {
     }
     if (bounce.y === true) {
       ball.speedY *= -1;
-      console.log('Y');
     }
     if (bounce.x === true) {
       ball.speedX *= -1;
-      console.log('X');
     }
   }
 }

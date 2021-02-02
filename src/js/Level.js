@@ -52,6 +52,7 @@ export default class Level {
       this.unstickBalls();
     }
     this.movePaddle();
+    this.paddle.reduceDuration();
     this.ballArray.forEach((ball) => {
       ball.changeSize();
       ball.speedUp();
@@ -108,7 +109,7 @@ export default class Level {
     if (shift !== 0) {
       this.ballArray.forEach((ball) => {
         if (ball.isSticked) {
-          ball.left += shift;
+          ball.posX += shift;
         }
       });
     }

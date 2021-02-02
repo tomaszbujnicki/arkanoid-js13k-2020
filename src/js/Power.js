@@ -23,7 +23,8 @@ export default class Power {
 
 function pickPower() {
   const rand = random(0, weightRange - 1);
-  const index = powersArray.findIndex((e) => e > rand);
+  const index = weights.findIndex((e) => e > rand);
+  console.log(powers[index].name);
   return index;
 }
 
@@ -32,9 +33,8 @@ const powers = [
     id: 0,
     name: 'Wider Paddle',
     weight: 10,
-    color: 'white',
+    color: 'blue',
     action(level) {
-      console.log(this.name);
       const playfield = level.playfield.width;
       const width = level.paddle.width;
       let unit = playfield / 20;
@@ -54,7 +54,6 @@ const powers = [
     weight: 10,
     color: 'red',
     action(level) {
-      console.log(this.name);
       const playfield = level.playfield.width;
       const width = level.paddle.width;
       let unit = playfield / 20;
@@ -71,10 +70,9 @@ const powers = [
   {
     id: 2,
     name: 'Faster Paddle',
-    weight: 1000,
+    weight: 10,
     color: 'violet',
     action(level) {
-      console.log(this.name);
       const playfield = level.playfield.width;
       const unit = playfield / 500;
 
@@ -88,7 +86,6 @@ const powers = [
     weight: 10,
     color: 'pink',
     action(level) {
-      console.log(this.name);
       const playfield = level.playfield.width;
       const unit = playfield / 500;
 
@@ -99,8 +96,8 @@ const powers = [
   {
     id: 4,
     name: 'Triple balls',
-    weight: 100,
-    color: 'white',
+    weight: 10,
+    color: 'blue',
     action(level) {
       const ball = level.ballArray[random(0, level.ballArray.length - 1)];
 
@@ -134,7 +131,7 @@ const powers = [
     },
   },
   {
-    id: 6,
+    id: 7,
     name: 'Balls speed up',
     weight: 10,
     color: 'red',
@@ -145,10 +142,10 @@ const powers = [
     },
   },
   {
-    id: 7,
+    id: 8,
     name: 'Balls slow down',
     weight: 10,
-    color: 'white',
+    color: 'green',
     action(level) {
       level.ballArray.forEach((ball) => {
         ball.newSpeed(0.7);
@@ -156,7 +153,7 @@ const powers = [
     },
   },
   {
-    id: 8,
+    id: 9,
     name: 'Smaller Balls',
     weight: 10,
     color: 'red',
@@ -172,7 +169,7 @@ const powers = [
     },
   },
   {
-    id: 8,
+    id: 10,
     name: 'Bigger Ball',
     weight: 10,
     color: 'blue',
@@ -181,37 +178,32 @@ const powers = [
       level.ballArray[rand].remainingSize += 10;
     },
   },
-  /* {
-    id: 2,
+  {
+    id: 11,
     name: 'Sticky Paddle',
-    weight: 1,
-    color: 'blue',
-    action(level) {},
+    weight: 100,
+    color: 'white',
+    action(level) {
+      level.paddle.isSticky += 1200;
+    },
   },
   {
-    id: 3,
+    id: 12,
     name: 'Shooting',
-    weight: 1,
+    weight: 10,
     color: 'blue',
-    action(level) {},
+    action(level) {
+      level.paddle.canShoot += 1200;
+    },
   },
-  {
-    id: 4,
-    name: 'Balls slow down',
-    weight: 1,
-    color: 'blue',
-    action(level) {},
-  },
-
-*/
 ];
 
 const weightRange = powers.reduce((a, b) => a + (b['weight'] || 0), 0);
-const powersArray = [0];
+const weights = [0];
 for (let item of powers) {
-  powersArray.push(item.weight + powersArray[powersArray.length - 1]);
+  weights.push(item.weight + weights[weights.length - 1]);
 }
-powersArray.splice(0, 1);
+weights.splice(0, 1);
 
 let IdCounter = 0;
 function uniqueId() {
