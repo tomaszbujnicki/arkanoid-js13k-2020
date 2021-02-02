@@ -2,7 +2,7 @@ import drawPanel from './drawPanel';
 import { SOUND } from './sound';
 import startLevel from './startLevel';
 import { GAMESTATE } from './data';
-import levelArray from './levels';
+import { levels } from './levels';
 import { highscore } from './highscore';
 
 export default class Game {
@@ -14,14 +14,14 @@ export default class Game {
     this.playerName;
     this.countdownId;
     this.state = GAMESTATE.MENU;
-    this.levels = levelArray;
+    this.levels = levels;
     this.startLevel = startLevel;
     this.drawPanel = drawPanel;
   }
 
   startNewGame(playerName, callback) {
-    this.lives = 0;
-    this.levelNumber = 1;
+    this.lives = 3;
+    this.levelNumber = 0;
     this.score = 0;
     this.level = null;
     this.playerName = playerName;
@@ -44,9 +44,6 @@ export default class Game {
     if (this.lives >= 0 && this.state === GAMESTATE.MENU) {
       this.state = GAMESTATE.WAIT;
       this.level.seconds = 3;
-      if (this.level.isAnyBallSticked()) {
-        this.level.hint = 'Press SPACEBAR to launch ball';
-      }
       this.countdownId = setInterval(() => {
         this.level.seconds--;
         if (this.level.seconds <= 0) {
@@ -85,6 +82,8 @@ export default class Game {
         this.levels[this.levelNumber].paddle,
         level.playfield
       );
+      level.powerArray = [];
+      level.bulletArray = [];
       level.hint = 'Press SPACEBAR to launch ball';
     } else {
       this.state = GAMESTATE.ABORT;

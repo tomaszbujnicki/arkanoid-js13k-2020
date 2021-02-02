@@ -182,7 +182,7 @@ const powers = [
     id: 11,
     name: 'Sticky Paddle',
     weight: 100,
-    color: 'white',
+    color: 'blue',
     action(level) {
       level.paddle.isSticky += 1200;
     },
@@ -190,10 +190,10 @@ const powers = [
   {
     id: 12,
     name: 'Shooting',
-    weight: 10,
-    color: 'blue',
+    weight: 100,
+    color: 'white',
     action(level) {
-      level.paddle.canShoot += 1200;
+      level.paddle.ammo += 10;
     },
   },
 ];

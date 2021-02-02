@@ -43,7 +43,11 @@ export default class Level {
   update() {
     if (isKeyPressed.space) {
       this.unstickBalls();
-      this.paddle.shoot();
+      const bullet = this.paddle.shoot();
+      if (bullet) {
+        this.bulletArray.push(bullet);
+        console.log(this.bulletArray);
+      }
     }
     this.movePaddle();
     this.paddle.reduceDuration();
@@ -107,13 +111,6 @@ export default class Level {
         }
       });
     }
-  }
-
-  isAnyBallSticked() {
-    for (const ball of this.ballArray) {
-      if (ball.isSticked) return true;
-    }
-    return false;
   }
 
   createPaddle(paddle) {
