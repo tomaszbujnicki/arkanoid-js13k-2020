@@ -22,7 +22,7 @@ export default function draw() {
     drawShape(ball, colors.first, 'circle');
   });
   this.blockArray.forEach((block) => {
-    drawShape(block, colors['block' + block.power]);
+    drawShape(block, colors['block' + block.hitpoints]);
   });
   this.powerArray.forEach((power) => {
     drawShape(power, power.color);

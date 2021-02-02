@@ -8,13 +8,13 @@ export default class Block {
     this.top = this.row * playfield.rowHeight;
     this.width = playfield.columnWidth;
     this.height = playfield.rowHeight;
-    this.power = block[2];
-    if (this.power <= 0) this.power = 1;
-    if (this.power > 9) this.power = 9;
+    this.hitpoints = block[2];
+    if (this.hitpoints <= 0) this.hitpoints = 1;
+    if (this.hitpoints > 9) this.hitpoints = 9;
   }
 
   damage() {
-    this.power--;
+    this.hitpoints--;
   }
 }
 

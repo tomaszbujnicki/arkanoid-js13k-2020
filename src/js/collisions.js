@@ -86,7 +86,7 @@ export default function collisions() {
     function hitBlock(block) {
       block.damage();
       SOUND['hit_' + random(1, 3)].play();
-      if (block.power <= 0) {
+      if (block.hitpoints <= 0) {
         if (random(0, 100) < 100) {
           level.powerArray.push(new Power(block));
         }
