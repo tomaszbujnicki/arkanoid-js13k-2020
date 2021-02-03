@@ -21,6 +21,7 @@ export default class Power {
     this.top++;
   }
   makeSound() {
+    this.sound.currentTime = 0;
     this.sound.play();
   }
 }

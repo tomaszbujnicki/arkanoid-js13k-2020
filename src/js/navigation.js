@@ -17,7 +17,10 @@ export class Navigation {
     });
 
     DOMelements.buttons.forEach((button) =>
-      button.addEventListener('click', () => SOUND.mouseClick.play())
+      button.addEventListener('click', () => {
+        SOUND.mouseClick.currentTime = 0;
+        SOUND.mouseClick.play();
+      })
     );
     DOMelements.newGameBtn.addEventListener('click', () => this.newGame());
     DOMelements.startGameBtn.addEventListener('click', () => this.startGame());

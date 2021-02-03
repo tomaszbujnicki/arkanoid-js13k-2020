@@ -11,7 +11,7 @@ export default class Paddle {
     this.speedX = paddle.speedX;
     this.isSticky = 0;
     this.shootDelay = 0;
-    this.ammo = 0;
+    this.ammo = 100;
   }
   reduceDuration() {
     if (this.isSticky > 0) this.isSticky -= 1;
@@ -20,7 +20,8 @@ export default class Paddle {
   shoot() {
     if (this.shootDelay === 0 && this.ammo > 0) {
       this.ammo--;
-      this.shootDelay = 100;
+      this.shootDelay = 30;
+      SOUND.fire.currentTime = 0;
       SOUND.fire.play();
       return new Bullet(this);
     } else {

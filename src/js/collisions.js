@@ -33,6 +33,7 @@ export default function collisions() {
   function ballVsLimit(ball) {
     if (ball.posY - ball.radius > playfield.height + playfield.top) {
       level.delete(ball);
+      SOUND.ballLost.currentTime = 0;
       SOUND.ballLost.play();
     }
   }
@@ -257,10 +258,13 @@ export default function collisions() {
     const hasSurvived = block.damage();
     if (hasSurvived) {
       level.game.updateScore(5);
-      SOUND['hit_' + random(1, 2)].play();
+      const hitSound = SOUND['hit_' + random(1, 2)];
+      hitSound.currentTime = 0;
+      hitSound.play();
     } else {
       level.delete(block);
       level.game.updateScore(25);
+      SOUND.hit_3.currentTime = 0;
       SOUND.hit_3.play();
       const newPower = block.createPower();
       if (newPower) {
