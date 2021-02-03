@@ -44,10 +44,10 @@ export default class Level {
     if (isKeyPressed.space) {
       this.unstickBalls();
       const newBullet = this.paddle.shoot();
-      if (newBullet) {
-        this.bulletArray.push(newBullet);
-      }
+      if (newBullet) this.bulletArray.push(newBullet);
     }
+    if (isKeyPressed.up) this.paddle.moveBarrel('right');
+    if (isKeyPressed.down) this.paddle.moveBarrel('left');
     this.movePaddle();
     this.paddle.reduceDuration();
     this.ballArray.forEach((ball) => {
