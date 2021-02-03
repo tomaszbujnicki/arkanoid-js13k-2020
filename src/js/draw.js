@@ -7,6 +7,7 @@ export default function draw() {
   const colors = {
     background: theme.active.background,
     first: theme.active.first,
+    second: theme.active.second,
     block1: theme.active.block1,
     block2: theme.active.block2,
     block3: theme.active.block3,
@@ -26,6 +27,9 @@ export default function draw() {
   });
   this.powerArray.forEach((power) => {
     drawShape(power, power.color);
+  });
+  this.bulletArray.forEach((bullet) => {
+    drawShape(bullet, colors.second);
   });
 
   function drawShape(object, color = colors.first, shape) {
