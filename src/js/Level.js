@@ -43,10 +43,9 @@ export default class Level {
   update() {
     if (isKeyPressed.space) {
       this.unstickBalls();
-      const bullet = this.paddle.shoot();
-      if (bullet) {
-        this.bulletArray.push(bullet);
-        console.log(this.bulletArray);
+      const newBullet = this.paddle.shoot();
+      if (newBullet) {
+        this.bulletArray.push(newBullet);
       }
     }
     this.movePaddle();
@@ -59,27 +58,8 @@ export default class Level {
     this.powerArray.forEach((power) => {
       power.move();
     });
-  }
-
-  checkPowers() {
-    const playfield = this.playfield;
-    const paddle = this.paddle;
-    const powerArray = this.powerArray;
-    powerArray.forEach((power) => {
-      const isCaught =
-        power.top >= paddle.top - power.height &&
-        power.top <= paddle.top + paddle.height &&
-        power.left >= paddle.left - power.width &&
-        power.left <= paddle.left + paddle.width;
-
-      if (isCaught) {
-        power.action(this);
-        this.delete(power);
-      }
-
-      if (power.top > playfield.height + playfield.top) {
-        this.delete(power);
-      }
+    this.bulletArray.forEach((bullet) => {
+      bullet.move();
     });
   }
 

@@ -1,19 +1,77 @@
 import { SOUND } from './sound';
 import { random } from './functions';
-import Power from './Power';
 
 export default function collisions() {
   const level = this;
   const playfield = level.playfield;
   const paddle = level.paddle;
+  const ballArray = level.ballArray;
   const blockArray = level.blockArray;
-  level.ballArray.forEach((ball) => {
-    wallsCollisions(ball);
-    paddleCollisions(ball);
-    blockCollisions(ball);
+  const bulletArray = level.bulletArray;
+  const powerArray = level.powerArray;
+
+  ballArray.forEach((ball) => {
+    ballVsWalls(ball);
+    ballVsPaddle(ball);
+    ballVsBlocks(ball);
+    ballVsLimit(ball);
+  });
+  bulletArray.forEach((bullet) => {
+    bulletVsBlocks(bullet);
+    bulletVsLimit(bullet);
+  });
+  powerArray.forEach((power) => {
+    powerVsPaddle(power);
+    powerVsLimit(power);
   });
 
-  function wallsCollisions(ball) {
+  function powerVsLimit(power) {
+    if (power.top > playfield.height + playfield.top) {
+      level.delete(power);
+    }
+  }
+  function ballVsLimit(ball) {
+    if (ball.posY - ball.radius > playfield.height + playfield.top) {
+      level.delete(ball);
+      SOUND.ballLost.play();
+    }
+  }
+  function bulletVsLimit(bullet) {
+    if (bullet.top < 0) {
+      level.delete(bullet);
+    }
+  }
+
+  function bulletVsBlocks(bullet) {
+    let isHit = false;
+    for (const block of blockArray) {
+      if (
+        bullet.top < block.top + block.height &&
+        bullet.left < block.left + block.width &&
+        bullet.left + bullet.width > block.left
+      ) {
+        hitBlock(block);
+        isHit = true;
+      }
+    }
+    if (isHit) level.delete(bullet);
+  }
+
+  function powerVsPaddle(power) {
+    if (
+      power.top >= paddle.top - power.height &&
+      power.top <= paddle.top + paddle.height &&
+      power.left >= paddle.left - power.width &&
+      power.left <= paddle.left + paddle.width
+    ) {
+      console.log(power);
+      power.action(level);
+      power.makeSound();
+      level.delete(power);
+    }
+  }
+
+  function ballVsWalls(ball) {
     if (ball.posX + ball.radius > playfield.left + playfield.width) {
       ball.posX = playfield.left + playfield.width - ball.radius;
       ball.speedX *= -1;
@@ -28,14 +86,10 @@ export default function collisions() {
       ball.posY = playfield.top + ball.radius;
       ball.speedY *= -1;
     }
-
-    if (ball.posY - ball.radius > playfield.top + playfield.height) {
-      level.delete(ball);
-      SOUND.ballLost.play();
-    }
   }
 
-  function paddleCollisions(ball) {
+  function ballVsPaddle(ball) {
+    // ! add condition
     if (ball.speedY > 0) {
       let testX = ball.posX;
       let testY = ball.posY;
@@ -82,20 +136,7 @@ export default function collisions() {
     }
   }
 
-  function blockCollisions(ball) {
-    function hitBlock(block) {
-      block.damage();
-      SOUND['hit_' + random(1, 3)].play();
-      if (block.hitpoints <= 0) {
-        if (random(0, 100) < 100) {
-          level.powerArray.push(new Power(block));
-        }
-        level.delete(block);
-        level.game.updateScore(25);
-      } else {
-        level.game.updateScore(5);
-      }
-    }
+  function ballVsBlocks(ball) {
     const hitArray = [];
     const bounce = {
       x: false,
@@ -209,6 +250,22 @@ export default function collisions() {
     }
     if (bounce.x === true) {
       ball.speedX *= -1;
+    }
+  }
+
+  function hitBlock(block) {
+    const hasSurvived = block.damage();
+    if (hasSurvived) {
+      level.game.updateScore(5);
+      SOUND['hit_' + random(1, 2)].play();
+    } else {
+      level.delete(block);
+      level.game.updateScore(25);
+      SOUND.hit_3.play();
+      const newPower = block.createPower();
+      if (newPower) {
+        powerArray.push(newPower);
+      }
     }
   }
 }
