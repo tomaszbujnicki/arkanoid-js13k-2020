@@ -1,3 +1,6 @@
+import { random } from './functions';
+import Power from './Power';
+
 export default class Block {
   constructor(block, playfield) {
     this.id = uniqueId();
@@ -10,11 +13,16 @@ export default class Block {
     this.height = playfield.rowHeight;
     this.hitpoints = block[2];
     if (this.hitpoints <= 0) this.hitpoints = 1;
-    if (this.hitpoints > 9) this.hitpoints = 9;
+    if (this.hitpoints > 6) this.hitpoints = 6;
+    this.createChance = 50;
   }
 
   damage() {
     this.hitpoints--;
+    return this.hitpoints > 0;
+  }
+  createPower() {
+    return random(0, 100) < this.createChance ? new Power(this) : false;
   }
 }
 
