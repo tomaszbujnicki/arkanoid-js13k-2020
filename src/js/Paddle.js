@@ -1,4 +1,5 @@
 import Bullet from './Bullet';
+import { SOUND } from './sound';
 
 export default class Paddle {
   constructor(paddle) {
@@ -19,9 +20,11 @@ export default class Paddle {
   shoot() {
     if (this.shootDelay === 0 && this.ammo > 0) {
       this.ammo--;
-      this.shootDelay = 240;
-      console.log(this.ammo);
+      this.shootDelay = 100;
+      SOUND.fire.play();
       return new Bullet(this);
+    } else {
+      return false;
     }
   }
 }
