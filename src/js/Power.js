@@ -13,11 +13,15 @@ export default class Power {
     let index = pickPower();
     this.name = powers[index].name;
     this.color = powers[index].color;
+    this.sound = powers[index].sound;
     this.action = powers[index].action;
   }
 
   move() {
     this.top++;
+  }
+  makeSound() {
+    this.sound.play();
   }
 }
 
@@ -34,6 +38,8 @@ const powers = [
     name: 'Wider Paddle',
     weight: 10,
     color: 'blue',
+    sound: SOUND.powerUp_2,
+
     action(level) {
       const playfield = level.playfield.width;
       const width = level.paddle.width;
@@ -53,6 +59,8 @@ const powers = [
     name: 'Shorter Paddle',
     weight: 10,
     color: 'red',
+    sound: SOUND.powerDown,
+
     action(level) {
       const playfield = level.playfield.width;
       const width = level.paddle.width;
@@ -72,6 +80,8 @@ const powers = [
     name: 'Faster Paddle',
     weight: 10,
     color: 'violet',
+    sound: SOUND.powerUp_2,
+
     action(level) {
       const playfield = level.playfield.width;
       const unit = playfield / 500;
@@ -85,6 +95,8 @@ const powers = [
     name: 'Slower Paddle',
     weight: 10,
     color: 'pink',
+    sound: SOUND.powerDown,
+
     action(level) {
       const playfield = level.playfield.width;
       const unit = playfield / 500;
@@ -98,6 +110,8 @@ const powers = [
     name: 'Triple balls',
     weight: 10,
     color: 'blue',
+    sound: SOUND.powerUp_1,
+
     action(level) {
       const ball = level.ballArray[random(0, level.ballArray.length - 1)];
 
@@ -117,6 +131,8 @@ const powers = [
     name: 'Live +1',
     weight: 10,
     color: 'green',
+    sound: SOUND.powerUp_3,
+
     action(level) {
       level.game.lives++;
     },
@@ -126,6 +142,8 @@ const powers = [
     name: 'Score Bonus',
     weight: 10,
     color: 'gold',
+    sound: SOUND.coin,
+
     action(level) {
       level.game.updateScore(50);
     },
@@ -135,6 +153,8 @@ const powers = [
     name: 'Balls speed up',
     weight: 10,
     color: 'red',
+    sound: SOUND.powerDown,
+
     action(level) {
       level.ballArray.forEach((ball) => {
         ball.newSpeed(1.5);
@@ -146,6 +166,8 @@ const powers = [
     name: 'Balls slow down',
     weight: 10,
     color: 'green',
+    sound: SOUND.powerUp_1,
+
     action(level) {
       level.ballArray.forEach((ball) => {
         ball.newSpeed(0.7);
@@ -157,6 +179,8 @@ const powers = [
     name: 'Smaller Balls',
     weight: 10,
     color: 'red',
+    sound: SOUND.powerDown,
+
     action(level) {
       level.ballArray.forEach((ball) => {
         let reduce;
@@ -173,6 +197,8 @@ const powers = [
     name: 'Bigger Ball',
     weight: 10,
     color: 'blue',
+    sound: SOUND.powerUp_2,
+
     action(level) {
       const rand = random(0, level.ballArray.length - 1);
       level.ballArray[rand].remainingSize += 10;
@@ -183,6 +209,8 @@ const powers = [
     name: 'Sticky Paddle',
     weight: 100,
     color: 'blue',
+    sound: SOUND.powerUp_3,
+
     action(level) {
       level.paddle.isSticky += 1200;
     },
@@ -192,6 +220,8 @@ const powers = [
     name: 'Shooting',
     weight: 100,
     color: 'white',
+    sound: SOUND.powerUp_3,
+
     action(level) {
       level.paddle.ammo += 10;
     },
