@@ -3,10 +3,9 @@ export default class Bullet {
     this.id = uniqueId();
     this.type = 'bullet';
     this.height = 36;
-    this.width = 12;
+    this.width = paddle.barrel.width;
     this.top = paddle.top - this.height;
-    this.left =
-      paddle.left + (paddle.width - this.width) * paddle.barrelPosition;
+    this.left = paddle.barrel.left;
     this.speedY = 3;
   }
   move() {

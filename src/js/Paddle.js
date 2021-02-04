@@ -13,6 +13,12 @@ export default class Paddle {
     this.shootDelay = 0;
     this.ammo = 100;
     this.barrelPosition = 0.5;
+    this.barrel = {
+      top: this.top - 10,
+      width: 12,
+      height: this.height + 10,
+      left: this.left,
+    };
   }
   reduceDuration() {
     if (this.isSticky > 0) this.isSticky -= 1;
@@ -30,7 +36,6 @@ export default class Paddle {
     }
   }
   moveBarrel(direction) {
-    console.log('GIZMO');
     if (direction === 'left') {
       this.barrelPosition -= 0.01;
       if (this.barrelPosition < 0) this.barrelPosition = 0;

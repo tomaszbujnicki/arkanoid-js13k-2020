@@ -19,6 +19,7 @@ export default function draw() {
   ctx.clearRect(0, 0, 1000, 700);
   drawWalls(this.playfield, 'transparent');
   drawShape(this.paddle);
+  drawShape(this.paddle.barrel, colors.second);
   this.ballArray.forEach((ball) => {
     drawShape(ball, colors.first, 'circle');
   });

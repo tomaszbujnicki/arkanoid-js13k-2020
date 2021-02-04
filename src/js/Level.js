@@ -91,6 +91,9 @@ export default class Level {
         }
       });
     }
+    paddle.barrel.left =
+      paddle.left +
+      (paddle.width - paddle.barrel.width) * paddle.barrelPosition;
   }
 
   createPaddle(paddle) {
